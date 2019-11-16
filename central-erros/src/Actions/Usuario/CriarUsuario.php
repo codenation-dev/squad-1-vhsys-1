@@ -34,13 +34,7 @@ class CriarUsuario
 
             $Usuario->email = $params->email;
             $Usuario->senha = $params->senha;
-
-            $tok = $centralToken->ObterToken(
-                $Usuario->email,
-                $Usuario->senha
-            );
-
-            $Usuario->token = $tok;
+            $Usuario->token = $centralToken->ObterToken();;
 
             //dd($params, $Usuario);
 

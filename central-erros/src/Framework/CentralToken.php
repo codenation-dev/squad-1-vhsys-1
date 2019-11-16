@@ -14,13 +14,15 @@ use function MongoDB\BSON\toJSON;
 class CentralToken
 {
 
-    public function ObterToken(string $email, string $senha): string
+    public function ObterToken(): string
     {
+
+        $time = time();
         $key = new Key('olarMundao');
         $signer = new Sha256;
         $token = new Builder();
         $token->expiresAt('+1 year');
-        $token->identifiedBy($email.$senha);
+        $token->issuedAt($time);
         return $token->getToken($signer, $key)->__toString();;
     }
 }
