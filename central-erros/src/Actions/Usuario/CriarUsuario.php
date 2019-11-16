@@ -25,7 +25,7 @@ class CriarUsuario
     {
         $response = new Response();
         try{
-            $data = $request->getBody()->getContents(); //file_get_contents('php://memory'); //$request->getBody();//
+            $data = $request->getBody()->getContents(); // file_get_contents('php://memory'); //$request->getBody();//
             $params = json_decode($data);
 
             $Usuario = new Usuario();
