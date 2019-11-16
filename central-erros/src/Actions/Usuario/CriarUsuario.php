@@ -25,7 +25,7 @@ class CriarUsuario
     {
         $response = new Response();
         try{
-            $data = $request->getBody()->getContents(); //file_get_contents('php://memory'); //$request->getBody();//
+            $data = $request->getBody()->getContents(); // file_get_contents('php://memory'); //$request->getBody();//
             $params = json_decode($data);
 
             $Usuario = new Usuario();
@@ -34,13 +34,7 @@ class CriarUsuario
 
             $Usuario->email = $params->email;
             $Usuario->senha = $params->senha;
-
-            $tok = $centralToken->ObterToken(
-                $Usuario->email,
-                $Usuario->senha
-            );
-
-            $Usuario->token = $tok;
+            $Usuario->token = $centralToken->ObterToken();;
 
             //dd($params, $Usuario);
 
