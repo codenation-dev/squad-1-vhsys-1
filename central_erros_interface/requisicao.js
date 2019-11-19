@@ -53,12 +53,17 @@ var Requisicao = {
 		"application/json"
 	  );
 
+	  xmlhttp.setRequestHeader(
+		"Authorization",
+		"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84"
+	  );
+
 	  xmlhttp.onreadystatechange = function () {
-		if (xmlhttp.readyState == 4) {
+		//if (xmlhttp.readyState == 4) {
 		  //if (xmlhttp.status == 200) {
 			  funcaoOnReadyStateChange(xmlhttp.responseText);
 		  //}
-		}
+		//}
 	  };
 
 	  xmlhttp.send(parametrosSend);

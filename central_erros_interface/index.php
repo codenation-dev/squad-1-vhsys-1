@@ -14,8 +14,37 @@
     <input type="password" name="senha" id="senha" placeholder="password">
     <input type="submit" value="Enviar">
 </form>
+
+<br>
+<br>
+<input type="button" id="cons" value="Consultar">
+
 <script src="./requisicao.js"></script>
 <script type="text/javascript">
+
+
+    function Consultar(){
+        Requisicao.ExecutarGet(
+            "http://localhost:8080/central/erro",
+            '',
+            false,
+            function (TextoResposta) {
+                try {
+                    console.log(TextoResposta);
+                }
+                catch (err) {
+                    console.log("Falha ao ler retorno: " + err.message)
+                }
+            }
+        );
+    }
+
+    var btnCons = document.getElementById("cons"); 
+
+    btnCons.addEventListener("click", function(event){
+        event.preventDefault();		    
+        Consultar();
+    });
 
 
     var form = document.getElementById("form");
@@ -31,6 +60,8 @@
         var inputSenha = document.getElementById("senha");
 
         var url = "http://localhost:8080/central/criar_usuario";
+        
+        /*
         $.ajax({
             url: url,
             crossDomain: true,
@@ -41,7 +72,6 @@
             },
             type: 'POST'
         });
-        /*
         Requisicao.ExecutarPost(
             "http://127.0.0.1:8080/central/criar_usuario",
             '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}',
@@ -56,6 +86,20 @@
             }
         );
         */
+        Requisicao.ExecutarGet(
+            "http://localhost:8080/central/erro",
+            '',
+            false,
+            function (TextoResposta) {
+                try {
+                    console.log(TextoResposta);
+                }
+                catch (err) {
+                    console.log("Falha ao ler retorno: " + err.message)
+                }
+            }
+        );
+        
     }    
 
 
