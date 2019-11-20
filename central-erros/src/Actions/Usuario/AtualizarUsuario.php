@@ -24,20 +24,15 @@ class AtualizarUsuario
     {
         $response = new Response();
         try {
-
             $Usuario = $this->entityManager->find(\Central\Entity\Usuario::class, $args['id']);
 
             if ($Usuario === null) {
-                return $response->withStatus(404);
+                return $response->withStatus(404, 'usuário não encontrado');
             }
 
-            $data = $request->getBody()->getContents();//file_get_contents('php://input');
+            $data = $request->getBody()->getContents();
             $params = json_decode($data);
-
-
-            $Usuario->titulo = $params->titulo;
-
-
+            $Usuario->email = $params->email;
             $this->entityManager->persist($Usuario);
             $this->entityManager->flush();
 

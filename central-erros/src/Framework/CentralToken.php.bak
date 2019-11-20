@@ -14,6 +14,17 @@ use function MongoDB\BSON\toJSON;
 class CentralToken
 {
 
+    public static function obterToken(): string
+    {
+        $time = time();
+        $key = new Key('olarMundao');
+        $signer = new Sha256;
+        $token = new Builder();
+        $token->expiresAt('+1 year');
+        $token->issuedAt($time);
+        return $token->getToken($signer, $key)->__toString();;
+    }
+/*
     public function ObterToken(): string
     {
 
@@ -25,4 +36,5 @@ class CentralToken
         $token->issuedAt($time);
         return $token->getToken($signer, $key)->__toString();;
     }
+*/
 }

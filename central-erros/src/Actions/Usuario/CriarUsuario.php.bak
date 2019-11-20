@@ -42,18 +42,28 @@ class CriarUsuario
         try{
             $params = json_decode($request->getBody()->getContents());
 
+            if ($params->email == "") {
+                return $response->withStatus(500, "email em branco");
+            }
+
+            if ($params->senha == "") {
+                return $response->withStatus(500, "senha em branco");
+            }
+
             if ($this->existeUsuario($params->email)) {
                 return $response->withStatus(500, "ja existe usuario com este email");
             }
-
+            /*
+            */
             $Usuario = Usuario::factory(
                 CentralToken::obterToken(),
                 $params->email,
                 $params->email);
+
             $this->entityManager->persist($Usuario);
             $this->entityManager->flush();
 
-            return $response->withStatus(200, "usuario cadastrado com sucesso");
+            return $response->withStatus(201, 'usuario cadastrado com sucesso');
 
             /*
             $data = $request->getBody()->getContents();

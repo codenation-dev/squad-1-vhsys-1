@@ -15,12 +15,7 @@ $config = Setup::createAnnotationMetadataConfiguration(
     $cache,
     $useSimpleAnnotationReader
 );
-/*
-$conn = [
-    'driver' => 'pdo_sqlite',
-    'path' =>  __DIR__ . '/../db.sqlite',
-];
-*/
+
 $conn = [
     'driver' => 'pdo_mysql',
     'host' => '127.0.0.1',

@@ -16,6 +16,8 @@ $router->middleware(new \Central\Middleware\Auth);
 $router->get('/central/usuario', \Central\Actions\Usuario\RecuperarTodosUsuarios::class);
 $router->post('/central/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
 
+$router->post('/central/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
+
 $router->get('/central/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
 $router->get('/central/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
 $router->post('/central/erro', \Central\Actions\Erro\CriarErro::class);

@@ -43,15 +43,6 @@ App::getContainer()->add(\Central\Actions\Erro\DeletarErro::class, function () {
 
 
 
-
-/*
-App::getContainer()->add(\Central\Actions\Usuario\RecuperarTodosUsuarios::class, function () {
-    return new \Central\Actions\Usuario\RecuperarTodosUsuarios(
-        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
-    );
-});
-*/
-
 App::getContainer()->add(\Central\Actions\Usuario\RecuperarTodosUsuarios::class, function () {
     return new \Central\Actions\Usuario\RecuperarTodosUsuarios(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
@@ -84,6 +75,12 @@ App::getContainer()->add(\Central\Actions\Usuario\AtualizarUsuario::class, funct
 
 App::getContainer()->add(\Central\Actions\Usuario\DeletarUsuario::class, function () {
     return new \Central\Actions\Usuario\DeletarUsuario(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
+
+App::getContainer()->add(\Central\Actions\Usuario\EsqueceuSenha::class, function () {
+    return new \Central\Actions\Usuario\EsqueceuSenha(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
     );
 });
