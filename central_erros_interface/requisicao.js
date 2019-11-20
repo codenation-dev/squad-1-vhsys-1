@@ -47,7 +47,8 @@ var Requisicao = {
 	  var xmlhttp = this.ObterXMLHTTP();
 
 	
-	  xmlhttp.open(metodo, theURL, assincrono);
+	  xmlhttp.open(metodo, theURL, true);
+	 //xmlhttp.withCredentials = true;
 	  xmlhttp.setRequestHeader(
 		"Content-type",
 		"application/json"

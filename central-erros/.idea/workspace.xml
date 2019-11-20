@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0df5fca7-ef32-4552-94ac-64f462d81b69" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../central_erros_interface/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/../central_erros_interface/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../central_erros_interface/requisicao.js" beforeDir="false" afterPath="$PROJECT_DIR$/../central_erros_interface/requisicao.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +91,10 @@
       <option name="presentableId" value="Default" />
       <updated>1573920362491</updated>
       <workItem from="1573920363756" duration="11953000" />
-      <workItem from="1574204443897" duration="697000" />
+      <workItem from="1574204443897" duration="1284000" />
+      <workItem from="1574206828987" duration="498000" />
+      <workItem from="1574208101605" duration="1002000" />
+      <workItem from="1574209168835" duration="298000" />
     </task>
     <servers />
   </component>
@@ -102,5 +106,9 @@
       <screen x="0" y="0" width="1299" height="629" />
     </state>
     <state x="411" y="128" key="NewPhpClassDialog/0.0.1299.629@0.0.1299.629" timestamp="1573930300122" />
+    <state x="415" y="216" key="com.intellij.ide.util.TipDialog" timestamp="1574209466169">
+      <screen x="0" y="0" width="1440" height="788" />
+    </state>
+    <state x="415" y="216" key="com.intellij.ide.util.TipDialog/0.0.1440.788@0.0.1440.788" timestamp="1574209466169" />
   </component>
 </project>
