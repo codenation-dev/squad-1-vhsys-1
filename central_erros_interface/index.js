@@ -113,13 +113,66 @@ btnCons.addEventListener("click", function(event){
 });
 
 
-var form = document.getElementById("forme");
+var form = document.getElementById("formess");
 
 form.addEventListener("submit", function(event){
     event.preventDefault();		    
-    EnviarCadastro();
+    //EnviarCadastro();
+    Login();
 });
 
+
+function Login(){
+    
+    LimparMensagens();
+    var inputemail = document.getElementById("email");
+    var inputSenha = document.getElementById("senha");
+    var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
+    var url = "http://localhost/central/login";
+
+ 
+    //alert(url);
+    
+    $.ajax({
+        url: url,
+        type: "POST",
+        beforeSend: function(request) {
+          request.setRequestHeader(
+            "Authorization",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84");
+        }, 
+       // dataType: 'json',
+       // contentType : 'application/json',
+        data : dados, 
+        success : function(data, textStatus, jqXHR ){
+
+            ExibirMensagemSucesso(jqXHR.statusText);
+
+            if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+            } else {
+                session_destroy();
+                session_start();
+            }
+            $_SESSION['token'] = jqXHR.statusText;
+
+            header('Location:./tabelaErros.php');
+
+        },
+       
+        
+        error: function(xhr, resp, text) {
+            console.dir(xhr);//"xhr: " + 
+
+            ExibirMensagemFalha(xhr.statusText);
+
+            
+            console.dir("respXXX: " + resp);
+            console.dir("textXXX: " + text);
+        }
+        
+    });
+}
 
 function EnviarCadastro(){
     LimparMensagens();
@@ -179,7 +232,7 @@ linkEsqueceuSenha.addEventListener("click", function(event){
 function EsqueceuSenha(){
     LimparMensagens();
     var inputemail = document.getElementById("email");
-    //var inputSenha = document.getElementById("senha");
+    var inputSenha = document.getElementById("senhaS");
     var dados = '{"email":"'+inputemail.value+'"}';
     var url = "http://localhost/central/usuario/esqueceu_senha";
 
@@ -199,23 +252,30 @@ function EsqueceuSenha(){
         data : dados, 
         success : function(data, textStatus, jqXHR ){
 
-            //console.log("kkkkkkkkkkkkkkkkkkk: "  +result);
-            console.dir(data);
-            console.dir(textStatus);
-            console.dir(jqXHR.statusText);
+            inputSenha.value = jqXHR.statusText;
             ExibirMensagemSucesso(jqXHR.statusText);
+
+
+           
         },
        
         
         error: function(xhr, resp, text) {
             console.dir(xhr);//"xhr: " + 
 
+            inputSenha.value = xhr.statusText;
             ExibirMensagemFalha(xhr.statusText);
 
             
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
+
+            //<?php header('Location:./tabelaErros.php'); ?>
+
+            //window.location.href = "./tabelaErros.php";
         }
         
     });
+
+    return false;
 }    

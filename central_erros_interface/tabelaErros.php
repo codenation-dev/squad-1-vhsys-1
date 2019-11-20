@@ -1,11 +1,13 @@
 <?php
+
+session_start();
 ?>
 
 <!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <title>Login</title>
+    <title>Home</title>
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
@@ -16,7 +18,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style type="text/css">
-	  .msg-erro{ color: red; background-color: white; }
+		  .msg-erro{ color: red; background-color: white; }
       .msg-alerta{ background-color: yellow; }
       .msg-exito{ color: green; background-color: white; }
       .msg-processando{ color: DodgerBlue; background-color: white; }
@@ -25,6 +27,8 @@
   <body>
     <div class="container-fluid">
 
+        <span class="text-muted">bem vindo chupa cabras: <?php echo $_SESSION['token']; ?>.</span>
+
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
       <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
@@ -32,14 +36,7 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <h1>Login</h1>
-      <form action="" method="post" id="formess" name="form">
-          <input type="email" name="email" id="email" placeholder="e-mail"><br>
-          <input type="password" name="senha" id="senhaS" placeholder="password">
-          <input type="submit" value="Enviar">
-        </form>
-        <br>
-        <a href="#" id="linkEsqueceuSenha">Esqueceu a Senha</a>
+      <h1>HOMMMMME</h1>
 
       <br>
       <br>

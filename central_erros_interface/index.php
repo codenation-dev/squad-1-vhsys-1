@@ -5,7 +5,7 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
-    <title>Cadastro!</title>
+    <title>Cadastro</title>
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
