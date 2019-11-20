@@ -54,9 +54,4 @@ class Usuario
             $senha,
             $email);
     }
-
-    public function __toString()
-    {
-        return json_encode($this);
-    }
 }
