@@ -32,16 +32,15 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <h1>Cadastro usuario</h1>
+      <h1 class="text-center">Cadastro usuario</h1>
       <form action="" method="post" id="forme" name="form">
-          <input type="email" name="email" id="email" placeholder="e-mail"><br>
-          <input type="password" name="senha" id="senha" placeholder="password">
-          <input type="submit" value="Enviar">
+          <div class="form-group">
+              <input type="email" name="email" id="email" class="form-control" placeholder="e-mail"><br>
+              <input type="password" name="senha" id="senha" class="form-control" placeholder="password">
+          </div>
       </form>
-
-      <br>
-      <br>
-      <input type="button" id="cons" value="Consultar">	
+        <input type="submit"  class="btn btn-primary" value="Enviar">
+        <input type="button" id="cons" class="btn btn-primary" value="Consultar">
 
     </div>
 
