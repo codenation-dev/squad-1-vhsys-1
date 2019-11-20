@@ -1,0 +1,11 @@
+
+
+
+- Alterar propriedades da classe Erro para que os campos representem corretamente os dados de um log de Erro
+- Garantir que o tráfego seja sempre JSON
+- Criar arquivo com constantes formatáveis para mensagens
+- Criar objeto para retorno padrão
+- Alterar chave para geração de token
+- Mudar local de todas as funções que envolvem token para a mesma classe
+
+
