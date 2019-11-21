@@ -27,7 +27,7 @@
     </style>
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="login-clean">
 
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
@@ -42,9 +42,10 @@
               <input type="email" name="email" id="email" class="form-control" placeholder="e-mail"><br>
               <input type="password" name="senha" id="senha" class="form-control" placeholder="password">
           </div>
+
+        <input type="submit"  class="btn btn-primary btn-block" value="Enviar">
+        <input type="button" id="cons" class="btn btn-primary btn-block" value="Consultar">
       </form>
-        <input type="submit"  class="btn btn-primary" value="Enviar">
-        <input type="button" id="cons" class="btn btn-primary" value="Consultar">
 
     </div>
 

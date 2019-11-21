@@ -12,6 +12,10 @@
     <meta name="author" content="Edgar Brasil Sovinski">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Form CSS -->
+    <link rel="stylesheet" href="css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="css/styles.css">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -23,7 +27,7 @@
     </style>
   </head>
   <body>
-    <div class="container">
+    <div class="login-clean">
 
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
@@ -38,13 +42,11 @@
               <input type="email" name="email" id="email" class="form-control"  placeholder="e-mail"><br>
               <input type="password" name="senha" id="senha" class="form-control"  placeholder="password">
           </div>
-          <input type="submit" class="btn btn-primary"  value="Enviar">
-        </form>
-        <br>
-        <a href="#" id="linkEsqueceuSenha">Esqueceu a Senha</a>
-        <br><br>
-      <input type="button" id="cons" class="btn btn-primary" value="Consultar">
-
+          <input type="submit" class="btn btn-primary btn-block"  value="Enviar">
+          <input type="button" id="cons" class="btn btn-primary btn-block" value="Consultar">
+          <br>
+          <a href="#" id="linkEsqueceuSenha">Esqueceu a Senha</a>
+      </form>
     </div>
 
 
