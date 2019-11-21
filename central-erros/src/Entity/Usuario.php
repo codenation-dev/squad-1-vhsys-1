@@ -30,6 +30,22 @@ class Usuario
      */
     public $email;
 
+    /**
+     * @return string
+     */
+    public function getSenha(): string
+    {
+        return $this->senha;
+    }
+
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
     private static $container;
 
     public function __construct(

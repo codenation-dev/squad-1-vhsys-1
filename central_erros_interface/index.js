@@ -3,53 +3,6 @@ var parametros = {
     senha: ""
 }
 
-function ExibirMensagemFalha(mensagem) {
-	ExibirMensagem('falha', mensagem);
-}
-		
-function ExibirMensagemAlerta(mensagem) {
-	ExibirMensagem('warning', mensagem);
-}
-		
-function ExibirMensagemSucesso(mensagem) {
-	ExibirMensagem('sucesso', mensagem);
-}
-
-
-function ExibirMensagem(id, mensagem) {
-    
-    console.log("mensagem " + mensagem);
-
-	LimparMensagens(id);
-	
-	var span_msg = document.querySelector('.msg-'+id);	
-
-	if (span_msg) {
-		span_msg.innerHTML = mensagem;
-		span_msg.style.display = 'block';	
-	}
-}
-
-function LimparMensagens(id) {
-	
-	LimparMensagem('falha');
-	LimparMensagem('warning');
-	LimparMensagem('sucesso');
-}
-
-function LimparMensagem(id) {
-	
-	var span_msg = document.querySelector('.msg-'+id);	
-
-	if (span_msg) {
-		span_msg.innerHTML = "";
-		span_msg.style.display = 'none';	
-	}
-}
-
-
-
-
 
 LimparMensagens();
 
@@ -179,7 +132,7 @@ linkEsqueceuSenha.addEventListener("click", function(event){
 function EsqueceuSenha(){
     LimparMensagens();
     var inputemail = document.getElementById("email");
-    //var inputSenha = document.getElementById("senha");
+    var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'"}';
     var url = "http://localhost/central/usuario/esqueceu_senha";
 
@@ -199,23 +152,30 @@ function EsqueceuSenha(){
         data : dados, 
         success : function(data, textStatus, jqXHR ){
 
-            //console.log("kkkkkkkkkkkkkkkkkkk: "  +result);
-            console.dir(data);
-            console.dir(textStatus);
-            console.dir(jqXHR.statusText);
+            inputSenha.value = jqXHR.statusText;
             ExibirMensagemSucesso(jqXHR.statusText);
+
+
+           
         },
        
         
         error: function(xhr, resp, text) {
             console.dir(xhr);//"xhr: " + 
 
+            inputSenha.value = xhr.statusText;
             ExibirMensagemFalha(xhr.statusText);
 
             
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
+
+            //<?php header('Location:./tabelaErros.php'); ?>
+
+            //window.location.href = "./tabelaErros.php";
         }
         
     });
+
+    return false;
 }    
