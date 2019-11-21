@@ -2,7 +2,7 @@
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <!-- Required meta tags -->
     <title>Cadastro!</title>
@@ -11,6 +11,10 @@
     <meta name="description" content="Projeto Final Squad 1.">
     <meta name="author" content="Edgar Brasil Sovinski">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Form CSS -->
+    <link rel="stylesheet" href="css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="css/styles.css">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
