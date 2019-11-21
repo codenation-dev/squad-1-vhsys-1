@@ -1,2 +1,9 @@
 *.bak
 /.idea
+
+
+*_REMOTE_*
+*_BACKUP_*
+*_BASE_*
+*_LOCAL_*
+*.orig
