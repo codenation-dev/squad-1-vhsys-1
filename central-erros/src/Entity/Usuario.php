@@ -38,6 +38,14 @@ class Usuario
         return $this->senha;
     }
 
+    /**
+     * @return string
+     */
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
     private static $container;
 
     public function __construct(

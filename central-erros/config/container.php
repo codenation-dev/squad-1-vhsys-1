@@ -84,3 +84,9 @@ App::getContainer()->add(\Central\Actions\Usuario\EsqueceuSenha::class, function
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
     );
 });
+
+App::getContainer()->add(\Central\Actions\Usuario\Login::class, function () {
+    return new \Central\Actions\Usuario\Login(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});

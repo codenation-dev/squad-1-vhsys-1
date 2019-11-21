@@ -19,8 +19,13 @@ class Auth implements  MiddlewareInterface
     {
         // TODO: Implement process() method.
 
+        /*
+         * Eu acho que esse tratamento é gambiarrrrrra, verificar melhor forma de tratar requisições que não enviam o tóquem
+         */
         if (($request->getUri()->getPath() === "/central/criar_usuario") ||
-            ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha")) {
+            ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha") ||
+            ($request->getUri()->getPath() === "/central/usuario/login") ||
+            ($request->getUri()->getPath() === "/central/")) {
             return $handler->handle($request);
         }
 
