@@ -2,7 +2,9 @@
 <html lang="pt-br">
 <?php 
 	
-	session_start();	
+  session_start();	
+  
+  $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
 ?>
 <head>
     <!-- Required meta tags -->
@@ -13,6 +15,10 @@
     <meta name="author" content="Edgar Brasil Sovinski">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <script type="text/javascript">
+     var token_session='<?php echo $session_value;?>';     
+    </script>
+
     <!-- Form CSS -->
     <link rel="stylesheet" href="css/Login-Form-Clean.css">
     <link rel="stylesheet" href="css/styles.css">
@@ -22,9 +28,20 @@
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+    <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+
 
     <style type="text/css">
-	  .msg-erro{ color: red; background-color: white; }
+	    .msg-erro{ color: red; background-color: white; }
       .msg-alerta{ background-color: yellow; }
       .msg-exito{ color: green; background-color: white; }
       .msg-processando{ color: DodgerBlue; background-color: white; }
@@ -41,6 +58,8 @@
       <span class='msg-alerta msg-warning'></span>
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
+
+      <input type="hidden" name="token" id="token" >
 
       <h1 class="text-center">Listar logs</h1>
 
@@ -78,11 +97,24 @@
         data-show-refresh="true" >			
       </table>
 
+      <table id="table">
+        <thead>
+          <tr>
+          <th data-field="codigo">codigo</th>
+            <th data-field="token">token</th>
+            <th data-field="nivel">nivel</th>
+            <th data-field="ip">ip</th>
+            <th data-field="data_hora">data_hora</th>
+            <th data-field="titulo">titulo</th>
+            <th data-field="detalhe">detalhe</th>
+            <th data-field="status">status</th>
+            <th data-field="ambiente">ambiente</th>
+            <th data-field="origem">origem</th>
+          </tr>
+        </thead>
+      </table>      
     </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>  
     <script src="./script/requisicao.js"></script>
     <script src="./script/requisicaoAjax.js"></script>
     <script src="./script/comum.js"></script>
