@@ -10,11 +10,14 @@ $router->get('/central/', function ($request){
     return $response;
 });
 
-
 $router->middleware(new \Central\Middleware\Auth);
 
 $router->get('/central/usuario', \Central\Actions\Usuario\RecuperarTodosUsuarios::class);
+$router->get('/central/usuario/{id}', \Central\Actions\Usuario\RecuperarUsuario::class);
 $router->post('/central/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
+$router->put('/central/usuario[/{id}]', \Central\Actions\Usuario\CriarOuAtualizarUsuario::class);
+$router->patch('/central/usuario/{id}', \Central\Actions\Usuario\AtualizarUsuario::class);
+$router->delete('/central/usuario/{id}', \Central\Actions\Usuario\DeletarUsuario::class);
 
 $router->post('/central/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
 $router->post('/central/usuario/login', \Central\Actions\Usuario\Login::class);

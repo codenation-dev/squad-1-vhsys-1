@@ -46,7 +46,7 @@
         <input type="submit" class="btn btn-primary btn-block"  value="Enviar">
         <!-- <input type="button" id="cons" class="btn btn-primary btn-block" value="Consultar"> -->
         <br>
-        <a href="#" id="linkEsqueceuSenha">Esqueceu a Senha</a>
+        <a href="#" class="text-center" id="linkEsqueceuSenha">Esqueceu a Senha</a>
       </form>
     </div>
 

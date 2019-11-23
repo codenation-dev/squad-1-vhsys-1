@@ -6,11 +6,9 @@ namespace Central\Actions\Usuario;
 use Central\Framework\CentralToken;
 use Doctrine\ORM\EntityManager;
 use Central\Entity\Usuario;
-use Lcobucci\JWT\Parser;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\Request;
 
 class CriarUsuario
 {
@@ -47,8 +45,8 @@ class CriarUsuario
 
             $Usuario = Usuario::factory(
                 CentralToken::obterToken(),
-                $params->email,
-                $params->senha);
+                $params->senha,
+                $params->email);
 
             $this->entityManager->persist($Usuario);
             $this->entityManager->flush();

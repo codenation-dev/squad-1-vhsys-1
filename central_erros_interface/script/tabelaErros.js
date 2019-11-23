@@ -1,7 +1,7 @@
 window.onload = function() {
     var url = 'http://localhost/central/erro';
-    /*var myvar = '<?php echo $session_value;?>';*/
-    alert(token_session);
+    /*var myvar = '<?php echo $session_value;?>';
+    alert(token_session);*/
 
     $.ajax({
         url: url,
@@ -16,14 +16,20 @@ window.onload = function() {
             console.dir(data);
             //ExibirMensagemSucesso(result);
 
-            var $table = $('#table')
-            $table.bootstrapTable({data: data})
+            var $table = $('#table');
+            $table.bootstrapTable({data: data});
+
+            
+            $table.show();
+
         },
         error: function(xhr, resp, text) {
 
             ExibirMensagemFalha(text);
 
             console.log(xhr, resp, text);
+
+            $('#table').hide();
         }
     });
 };

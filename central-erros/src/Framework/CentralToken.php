@@ -18,7 +18,7 @@ class CentralToken
         $key = new Key('Codenation');
         $signer = new Sha256;
         $token = new Builder();
-        $token->expiresAt('+1 year');
+        $token->expiresAt($time + 360000);
         $token->issuedAt($time);
         return $token->getToken($signer, $key)->__toString();;
     }

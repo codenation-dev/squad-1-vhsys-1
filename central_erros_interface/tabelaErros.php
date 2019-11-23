@@ -94,7 +94,10 @@
         id="tabelaResultado"
         data-classes="table table-striped table-condensed" 
         data-show-columns="true"
-        data-show-refresh="true" >			
+        data-show-refresh="true"
+
+        style="display: none;"
+       >			
       </table>
 
       <table id="table">
