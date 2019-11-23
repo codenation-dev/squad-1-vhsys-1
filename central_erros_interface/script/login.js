@@ -1,7 +1,6 @@
-
 $('#formLogin').submit(function (e){
-    Login();
     e.preventDefault();
+    Login();
 })
 
 $('#linkEsqueceuSenha').click(function (e){
@@ -100,30 +99,19 @@ function EsqueceuSenha(){
         data : dados, 
 
         success : function(data, textStatus, jqXHR ){
-
             inputSenha.value = jqXHR.statusText;
-            ExibirMensagemSucesso(
-                "A senha: " + jqXHR.statusText + " deveria ter sido enviada para o e-mail cadastrado mas eu joguei ela direto para o campo Passsvord.");
-
-
-           
+            ExibirMensagemSucesso("A senha: " + jqXHR.statusText + " deveria ter sido enviada para o e-mail cadastrado mas eu joguei ela direto para o campo Passsvord.");
         },
         
         error: function(xhr, resp, text) {
-            console.dir(xhr);//"xhr: " + 
+            console.dir(xhr);
 
             inputSenha.value = xhr.statusText;
             ExibirMensagemFalha(xhr.statusText);
 
-            
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
-
-            //<?php header('Location:./tabelaErros.php'); ?>
-
-            //window.location.href = "./tabelaErros.php";
-        }
-        
+        }        
     });
 
     return false;

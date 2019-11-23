@@ -1,0 +1,25 @@
+url
+http://localhost/central/erro
+
+headers
+Authorization
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84
+
+Content-Type
+application/json
+
+
+bode / raw /jsão
+
+{
+"codigo":"a",
+"token":"w",
+"nivel":"error",
+"ip":"127.0.0.1",
+"data_hora":"24/05/2019 10:15",
+"titulo":"accelerationService.AddCandidate: <forbidden>",
+"detalhe":"muitos detalhes pra digitar por aqui",
+"status":"d",
+"ambiente":"s",
+"origem":"z"
+}
