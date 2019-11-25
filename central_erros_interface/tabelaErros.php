@@ -1,10 +1,12 @@
 <!doctype html>
 <html lang="pt-br">
-<?php 
-	
+<?php 	
   session_start();	
   
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
+  $p_buscarPor= (isset($_GET['buscarPor']))?$_GET['buscarPor']:''; 
+  $p_valor= (isset($_GET['valor']))?$_GET['valor']:''; 
+  $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:''; 
 ?>
 <head>
     <!-- Required meta tags -->
@@ -12,11 +14,14 @@
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
-    <meta name="author" content="Edgar Brasil Sovinski">
+    <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <script type="text/javascript">
-     var token_session='<?php echo $session_value;?>';     
+      var token_session='<?php echo $session_value;?>';
+      var pbuscarPor='<?php echo $p_buscarPor;?>';
+      var pvalor='<?php echo $p_valor;?>';
+      var pordenarPor='<?php echo $p_ordenarPor;?>';
     </script>
 
     <!-- Form CSS -->
@@ -96,6 +101,7 @@
         data-show-refresh="true" >			
         <thead>
           <tr id="linhaCabecalho">
+            <th data-checkbox="true"></th>
             <th data-field="codigo">codigo</th>
             <th data-field="token">token</th>
             <th data-field="nivel">nivel</th>

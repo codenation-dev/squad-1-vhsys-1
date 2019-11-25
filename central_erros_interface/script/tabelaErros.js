@@ -3,11 +3,8 @@ function LimparTabelaResultado() {
     
     var tabela = document.getElementById("tabelaResultado");
     var qtd = tabela.rows.length;
-    
-    //alert(qtd);
 	
 	while (qtd > 1) {		
-        //alert(tabela.rows[qtd-1].getAttribute("id"));
 		if (tabela.rows[qtd-1].getAttribute("id") != "linhaCabecalho") {
 			tabela.deleteRow(qtd-1);
 		}
@@ -28,6 +25,11 @@ function ControlarVisibilidadeGrid() {
 window.onload = function() {
     var url = 'http://localhost/central/erro';
 
+    if ((pbuscarPor !== "buscarPor") &&
+        (pbuscarPor !== "")){
+        url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
+    } 
+    
     $.ajax({
         url: url,
         type : "GET",
@@ -39,12 +41,10 @@ window.onload = function() {
         success : function(result) {
             data = JSON.parse(result);
             console.dir(data);
-            //ExibirMensagemSucesso(result);
-
+            
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: data});
             
-            //$table.show();
             ControlarVisibilidadeGrid();
         },
         error: function(xhr, resp, text) {
@@ -52,7 +52,6 @@ window.onload = function() {
 
             console.log(xhr, resp, text);
 
-            //$('#table').hide();
             ControlarVisibilidadeGrid();
         }
     });
@@ -68,57 +67,25 @@ function Consultar(){
     
     var selectBuscarPor = document.getElementById("buscarPor");
     var inputValor = document.getElementById("valor");
-    var selectOrdenarPor = document.getElementById("ordenarPor");
-
-    var urlBase = 'http://localhost/central/erro/';
-
+    var selectOrdenarPor = document.getElementById("ordenarPor"); 
     var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
     var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
-    var url = urlBase + buscarPor + '/' + 
-                        inputValor.value + '/' + 
-                        ordenarPor;
+    /*
+    var urlBase = 'http://localhost/central/erro/';
+    var url = urlBase + buscarPor + '/' + inputValor.value + '/' + ordenarPor;
+    var dados = '{"buscarPor":"'+buscarPor+'","valor":"'+inputValor.value+'","ordenarPor":"'+ordenarPor+'"}';
+    */
 
-    //alert(url);
-    LimparTabelaResultado();
-/*
-    var minhaRequisicao = execAjax(
-        url, 
-        '', 
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84",
-        'GET');*/
-
+    var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + inputValor.value + "&ordenarPor=" + ordenarPor;
+        
     $.ajax({
         url: url,
-        type : "GET",
-        //async: false,
-        beforeSend: function(request) {
-          request.setRequestHeader(
-            "Authorization",
-            token_session);
-        }, 
-        success : function(result) {
-            console.dir(result);
-            datas = JSON.parse(result);
-            console.dir(datas);
-            //alert(datas);
-            //ExibirMensagemSucesso(result);
-
-            var $table = $('#tabelaResultado');
-
-            $table.bootstrapTable({data: datas});
-            //$table.bootstrapTable('refresh');
-            
-            //$table.show();
-            ControlarVisibilidadeGrid();
-        },
-        error: function(xhr, resp, text) {
-            ExibirMensagemFalha(text);
-
-            console.log(xhr, resp, text);
-
-            //$('#table').hide();
-            
-           // LimparTabelaResultado();
+        type: "GET",
+        //data: dados,
+        complete:
+        function () {
+            //window.location = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + inputValor.value + "&ordenarPor=" + ordenarPor
+            window.location = url;
         }
     });
 }

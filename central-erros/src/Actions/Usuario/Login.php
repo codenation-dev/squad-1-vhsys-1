@@ -3,7 +3,6 @@
 
 namespace Central\Actions\Usuario;
 
-
 use Central\Entity\Usuario;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;

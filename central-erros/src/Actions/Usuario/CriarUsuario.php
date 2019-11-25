@@ -53,7 +53,7 @@ class CriarUsuario
 
             return $response->withStatus(201, 'usuario cadastrado com sucesso');
         }catch (\Throwable $exception){
-            return $response->withStatus(501, "falha ao cadastrar sucesso. $exception->getMessage()");
+            return $response->withStatus(501, "falha ao cadastrar usuario. $exception->getMessage()");
         }
     }
 }

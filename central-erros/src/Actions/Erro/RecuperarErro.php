@@ -28,6 +28,6 @@ class RecuperarErro
         $response->getBody()->write(
             json_encode($Erro)
         );
-        return $response->withStatus(200);
+        return $response->withStatus(200, 'Erro obtido!');
     }
 }
