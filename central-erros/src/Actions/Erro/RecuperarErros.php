@@ -23,13 +23,10 @@ class RecuperarErros
     {
         $response = new Response();
         try {
-
+            $tokenUsuario = $request->getHeaderLine('Authorization');
             $buscarPor = $args['buscarPor'];
             $valor = $args['valor'];
             $ordenarPor = $args['ordenarPor'];
-
-            //return $response->withStatus(500, "$buscarPor - $valor - $ordenarPor");
-            //return $response->withStatus(500, $buscarPor + ' - ' +$valor+ ' - ' +$ordenarPor);
 
             $query = $this->entityManager->createQueryBuilder();
 
@@ -44,7 +41,9 @@ class RecuperarErros
                 $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
             }
 
-            $query->from(Erro::class, 'e');
+            $query->from(Erro::class, 'e')
+                  ->where('e.token = :token')
+                  ->setParameter('token', $tokenUsuario);
 
             //haduken!!! dois if's aninhados
             if ($buscarPor !== "buscarPor") {
@@ -55,9 +54,11 @@ class RecuperarErros
                 $campoBuscar = $buscarPor;
                 if ($buscarPor == "level") {
                     $campoBuscar = "nivel";
+                } else if ($buscarPor == "descricao") {
+                    $campoBuscar = "titulo";
                 }
 
-                $query->where("e.$campoBuscar = :buscarPor")
+                $query->andWhere("e.$campoBuscar = :buscarPor")
                     ->setParameter('buscarPor', $valor);
 
             }
