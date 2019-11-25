@@ -103,7 +103,6 @@
           <tr id="linhaCabecalho">
             <th data-checkbox="true"></th>
             <th data-field="codigo">codigo</th>
-            <th data-field="token">token</th>
             <th data-field="nivel">nivel</th>
             <th data-field="ip">ip</th>
             <th data-field="data_hora">data_hora</th>
@@ -112,6 +111,8 @@
             <th data-field="status">status</th>
             <th data-field="ambiente">ambiente</th>
             <th data-field="origem">origem</th>
+            <th data-field="token">token</th>
+            <th data-field="quantidade">quantidade</th>
           </tr>
         </thead>
       </table>

@@ -32,8 +32,19 @@ class RecuperarErros
             //return $response->withStatus(500, $buscarPor + ' - ' +$valor+ ' - ' +$ordenarPor);
 
             $query = $this->entityManager->createQueryBuilder();
-            $query->select('e')
-                ->from(Erro::class, 'e');
+
+            if ($ordenarPor !== "ordenarPor") {
+                if ($ordenarPor == "level") {
+                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
+
+                } else {
+                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as quantidade');
+                }
+            } else {
+                $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
+            }
+
+            $query->from(Erro::class, 'e');
 
             //haduken!!! dois if's aninhados
             if ($buscarPor !== "buscarPor") {
@@ -56,12 +67,15 @@ class RecuperarErros
                 $campoOrdenar = $ordenarPor;
                 if ($ordenarPor == "level") {
                     $campoOrdenar = "nivel";
+                    $query->orderBy("e.$campoOrdenar", 'ASC');
+                } else {
+                    $campoOrdenar = "quantidade";
+                    $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token')
+                          ->orderBy("$campoOrdenar", 'DESC');
                 }
-
-                $query->orderBy("e.$campoOrdenar", 'ASC');
-                //return $response->withStatus(500, "aaaaaaaaaaaaaaa");
-                //return $response->withStatus(500, "Ordenar Por não implementado ainda.");
             }
+
+
             //
             // ->setMaxResults( 4 );
 
