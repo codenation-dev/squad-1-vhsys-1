@@ -23,15 +23,14 @@ class CriarErro
     {
         $response = new Response();
         try{
-            $data = $request->getBody()->getContents(); //file_get_contents('php://memory'); //$request->getBody();//
+            $data = $request->getBody()->getContents();
+            $token = $request->getHeaderLine('Authorization');
             $params = json_decode($data);
-
-
 
             $Erro = new Erro();
             $Erro->codigo = $params->codigo;
-            $Erro->token = $params->token;
             $Erro->nivel = $params->nivel;
+            $Erro->token = $token;
             $Erro->ip = $params->ip;
             $Erro->data_hora = $params->data_hora;
             $Erro->titulo = $params->titulo;
@@ -43,9 +42,7 @@ class CriarErro
             $this->entityManager->persist($Erro);
             $this->entityManager->flush();
 
-            //dd($params, $Erro);
-
-            return $response->withStatus(201, 'erro cadastrado com sucesso');
+            return $response->withStatus(201, 'Erro cadastrado!');
         }catch (\Throwable $exception){
             return $response->withStatus(501, $exception->getMessage());
         }

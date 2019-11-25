@@ -1,5 +1,6 @@
 *.bak
 /.idea
+/vendor
 
 
 *_REMOTE_*

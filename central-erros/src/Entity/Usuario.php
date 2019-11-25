@@ -18,7 +18,7 @@ class Usuario
      */
     public $id;
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", unique=true)
      */
     public $token;
     /**
@@ -29,7 +29,6 @@ class Usuario
      * @ORM\Column(type="string", unique=true)
      */
     public $email;
-
     /**
      * @return string
      */

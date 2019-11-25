@@ -23,14 +23,17 @@ class RecuperarTodosErros
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
+        $tokenUsuario = $request->getHeaderLine('Authorization');
         $query = $this->entityManager->createQueryBuilder();
         $query->select('f')
-            ->from(Erro::class, 'f');
+            ->from(Erro::class, 'f')
+            ->where('f.token = :token')
+            ->setParameter('token', $tokenUsuario);
 
         $response = new Response();
         $response->getBody()->write(
             json_encode($query->getQuery()->getResult())
         );
-        return $response->withStatus(200, 'obtemos Erros');
+        return $response->withStatus(200, 'Erros obtidos!');
     }
 }
