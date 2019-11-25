@@ -25,8 +25,10 @@ function ControlarVisibilidadeGrid() {
 window.onload = function() {
     var url = 'http://localhost/central/erro';
 
-    if ((pbuscarPor !== "buscarPor") &&
-        (pbuscarPor !== "")){
+    if (((pbuscarPor !== "buscarPor") &&
+         (pbuscarPor !== "")) ||
+        ((pordenarPor !== "pordenarPor") &&
+         (pordenarPor !== ""))) {
         url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
     } 
     
@@ -76,7 +78,11 @@ function Consultar(){
     var dados = '{"buscarPor":"'+buscarPor+'","valor":"'+inputValor.value+'","ordenarPor":"'+ordenarPor+'"}';
     */
 
-    var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + inputValor.value + "&ordenarPor=" + ordenarPor;
+    var valor = inputValor.value;
+    if (valor === "") {
+        valor = "valor";
+    }
+    var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
         
     $.ajax({
         url: url,

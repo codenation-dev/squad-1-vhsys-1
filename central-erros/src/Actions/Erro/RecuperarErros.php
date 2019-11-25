@@ -41,10 +41,9 @@ class RecuperarErros
                     return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
                 }
 
+                $campoBuscar = $buscarPor;
                 if ($buscarPor == "level") {
                     $campoBuscar = "nivel";
-                } else {
-                    $campoBuscar = $buscarPor;
                 }
 
                 $query->where("e.$campoBuscar = :buscarPor")
@@ -53,10 +52,17 @@ class RecuperarErros
             }
 
             if ($ordenarPor !== "ordenarPor") {
-                //$query->orderBy('e.'+$ordenarPor, 'ASC');
-                return $response->withStatus(500, "Ordenar Por não implementado ainda.");
+
+                $campoOrdenar = $ordenarPor;
+                if ($ordenarPor == "level") {
+                    $campoOrdenar = "nivel";
+                }
+
+                $query->orderBy("e.$campoOrdenar", 'ASC');
+                //return $response->withStatus(500, "aaaaaaaaaaaaaaa");
+                //return $response->withStatus(500, "Ordenar Por não implementado ainda.");
             }
-            //return $response->withStatus(500, "aaaaaaaaaaaaaaa");
+            //
             // ->setMaxResults( 4 );
 
             $response->getBody()->write(
