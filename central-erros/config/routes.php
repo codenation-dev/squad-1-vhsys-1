@@ -24,6 +24,7 @@ $router->post('/central/usuario/login', \Central\Actions\Usuario\Login::class);
 
 $router->get('/central/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
 $router->get('/central/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
+$router->get('/central/erro/{buscarPor}/{valor}/{ordenarPor}', \Central\Actions\Erro\RecuperarErros::class);
 $router->post('/central/erro', \Central\Actions\Erro\CriarErro::class);
 $router->put('/central/erro[/{id}]', \Central\Actions\Erro\CriarOuAtualizarErro::class);
 $router->patch('/central/erro/{id}', \Central\Actions\Erro\AtualizarErro::class);

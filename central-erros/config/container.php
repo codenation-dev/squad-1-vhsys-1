@@ -17,6 +17,12 @@ App::getContainer()->add(\Central\Actions\Erro\RecuperarErro::class, function ()
     );
 });
 
+App::getContainer()->add(\Central\Actions\Erro\RecuperarErros::class, function () {
+    return new \Central\Actions\Erro\RecuperarErros(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
+
 App::getContainer()->add(\Central\Actions\Erro\CriarErro::class, function () {
     return new \Central\Actions\Erro\CriarErro(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)

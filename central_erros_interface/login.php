@@ -10,7 +10,7 @@
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
-    <meta name="author" content="Edgar Brasil Sovinski">
+    <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Form CSS -->
