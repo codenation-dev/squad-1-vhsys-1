@@ -30,18 +30,22 @@ class RecuperarErros
 
             $query = $this->entityManager->createQueryBuilder();
 
+
+
+            /*
             if ($ordenarPor !== "ordenarPor") {
-                if ($ordenarPor == "level") {
+                if ($ordenarPor == "nivel") {
                     $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
 
                 } else {
-                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as quantidade');
+                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as frequencia');
                 }
             } else {
                 $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
             }
-
-            $query->from(Erro::class, 'e')
+            */
+            $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as frequencia')
+                  ->from(Erro::class, 'e')
                   ->where('e.token = :token')
                   ->setParameter('token', $tokenUsuario);
 
@@ -51,31 +55,19 @@ class RecuperarErros
                     return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
                 }
 
-                $campoBuscar = $buscarPor;
-                if ($buscarPor == "level") {
-                    $campoBuscar = "nivel";
-                } else if ($buscarPor == "descricao") {
-                    $campoBuscar = "titulo";
-                }
-
-                $query->andWhere("e.$campoBuscar = :buscarPor")
+                $query->andWhere("e.$buscarPor = :buscarPor")
                     ->setParameter('buscarPor', $valor);
-
             }
+
+            $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
 
             if ($ordenarPor !== "ordenarPor") {
-
-                $campoOrdenar = $ordenarPor;
-                if ($ordenarPor == "level") {
-                    $campoOrdenar = "nivel";
-                    $query->orderBy("e.$campoOrdenar", 'ASC');
+                if ($ordenarPor == "nivel") {
+                    $query->orderBy("e.$ordenarPor", 'ASC');
                 } else {
-                    $campoOrdenar = "quantidade";
-                    $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token')
-                          ->orderBy("$campoOrdenar", 'DESC');
+                    $query->orderBy("$ordenarPor", 'DESC');
                 }
             }
-
 
             //
             // ->setMaxResults( 4 );

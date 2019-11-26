@@ -1,4 +1,13 @@
-
+window.actionEvents = {	
+    'click .callB': function (e, value, row, index) {        
+        /*
+        alert(e);
+        alert(value);
+        alert(row);
+        alert(index);
+        */
+    }
+};	
 function LimparTabelaResultado() {
     
     var tabela = document.getElementById("tabelaResultado");
@@ -32,6 +41,8 @@ window.onload = function() {
         url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
     } 
     
+    //alert(url);
+
     $.ajax({
         url: url,
         type : "GET",
@@ -42,10 +53,47 @@ window.onload = function() {
         }, 
         success : function(result) {
             data = JSON.parse(result);
-            console.dir(data);
+            //console.dir(data);
             
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: data});
+            $table.on('click-row.bs.table', function(e, value, row, index) {
+
+                
+                //alert(JSON.stringify(value));
+
+                var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
+                window.location = urlDetalhe;    
+                /*
+                $.ajax({
+                    url: urlDetalhe,
+                    type: "POST", 
+                    data : JSON.stringify(value), 
+                    success : function(data, textStatus, jqXHR ){
+                        console.dir(data);
+                        console.dir(textStatus);
+                        console.dir(jqXHR);
+                        ExibirMensagemSucesso(jqXHR.statusText);
+                    },                   
+                    
+                    error: function(xhr, resp, text) {
+                        console.dir(xhr);
+            
+                        ExibirMensagemFalha(xhr.statusText);
+            
+                        
+                        console.dir("respXXX: " + resp);
+                        console.dir("textXXX: " + text);
+                    }
+                });
+                */
+                
+                /*
+                JSON.stringify(value)
+                alert(JSON.stringify(row));
+                alert(index);*/
+                // ...
+              })
             
             ControlarVisibilidadeGrid();
         },
@@ -79,11 +127,20 @@ function Consultar(){
     */
 
     var valor = inputValor.value;
+    if (buscarPor === "") {
+        buscarPor = "buscarPor";
+    }
     if (valor === "") {
         valor = "valor";
     }
+    if (ordenarPor === "") {
+        ordenarPor = "ordenarPor";
+    }
     var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
-        
+    //alert(url);
+    window.location = url;    
+
+    /*
     $.ajax({
         url: url,
         type: "GET",
@@ -94,4 +151,5 @@ function Consultar(){
             window.location = url;
         }
     });
+    */
 }

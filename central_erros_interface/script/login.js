@@ -1,12 +1,12 @@
 $('#formLogin').submit(function (e){
     e.preventDefault();
     Login();
-})
+});
 
 $('#linkEsqueceuSenha').click(function (e){
     e.preventDefault();
     EsqueceuSenha();
-})
+});
 
 function Login(){
     

@@ -74,15 +74,15 @@
       </select>
 
       <select id="ordenarPor">
-        <option value="ordenarPor">Ordenar por</option>
-        <option value="level">Level</option>
+        <option value="">Ordenar por</option>
+        <option value="nivel">Level</option>
         <option value="frequencia">Frequência</option>
       </select>
 
       <select id="buscarPor">
-        <option value="buscarPor">Buscar por</option>
-        <option value="level">Level</option>
-        <option value="descricao">Descrição</option>
+        <option value="">Buscar por</option>
+        <option value="nivel">Level</option>
+        <option value="titulo">Descrição</option>
         <option value="origem">Origem</option>
       </select>
 
@@ -100,42 +100,22 @@
         data-show-columns="true"
         data-show-refresh="true" >			
         <thead>
-          <tr id="linhaCabecalho">
-            <th data-checkbox="true"></th>
-            <th data-field="codigo">codigo</th>
-            <th data-field="nivel">nivel</th>
-            <th data-field="ip">ip</th>
-            <th data-field="data_hora">data_hora</th>
-            <th data-field="titulo">titulo</th>
-            <th data-field="detalhe">detalhe</th>
-            <th data-field="status">status</th>
-            <th data-field="ambiente">ambiente</th>
-            <th data-field="origem">origem</th>
-            <th data-field="token">token</th>
-            <th data-field="quantidade">quantidade</th>
+          <tr id="linhaCabecalho" class="callB">
+            <th data-checkbox="true" class="callB"></th>
+            <th data-field="codigo" class="callB">codigo</th>
+            <th data-field="nivel" class="callB">nivel</th>
+            <th data-field="ip" class="callB">ip</th>
+            <th data-field="data_hora" class="callB">data_hora</th>
+            <th data-field="titulo" class="callB">titulo</th>
+            <th data-field="detalhe" class="callB">detalhe</th>
+            <th data-field="status" class="callB">status</th>
+            <th data-field="ambiente" class="callB">ambiente</th>
+            <th data-field="origem" class="callB">origem</th>
+            <th data-field="token" class="callB">token</th>
+            <th data-field="quantidade" class="callB">quantidade</th>
           </tr>
         </thead>
       </table>
-    
-<!--
-      <table id="table">
-      id="tabelaResultado"
-        <thead>
-          <tr id="linhaCabecalho">
-            <th data-field="codigo">codigo</th>
-            <th data-field="token">token</th>
-            <th data-field="nivel">nivel</th>
-            <th data-field="ip">ip</th>
-            <th data-field="data_hora">data_hora</th>
-            <th data-field="titulo">titulo</th>
-            <th data-field="detalhe">detalhe</th>
-            <th data-field="status">status</th>
-            <th data-field="ambiente">ambiente</th>
-            <th data-field="origem">origem</th>
-          </tr>
-        </thead>
-      </table>      
--->
     </div>
 
     <script src="./script/requisicao.js"></script>

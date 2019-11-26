@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="pt-br">
-<?php 
-	
-	session_start();	
+<?php 	
+  session_start();	
+  
+  $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
+  $p_json= (isset($_GET['json']))?$_GET['json']:''; 
 ?>
 <head>
     <!-- Required meta tags -->
@@ -10,8 +12,13 @@
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
-    <meta name="author" content="Edgar Brasil Sovinski">
+    <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript">
+      var token_session='<?php echo $session_value;?>';
+      var pjson='<?php echo $p_json;?>';
+    </script>
 
     <!-- Form CSS -->
     <link rel="stylesheet" href="css/Login-Form-Clean.css">
@@ -43,16 +50,16 @@
       <span class='msg-exito msg-sucesso'></span>
 
       
-      <input type="button" id="cons" class="btn btn-primary btn-block" value="Voltar">
+      <input type="button" id="voltar" class="btn btn-primary btn-block" value="Voltar">
 
-      <h1 class="text-center">Erro no "IP" em "DATA"</h1>
+      <h1 class="text-center" id="ip_data"></h1>
 
       <h2 class="text-center">Título</h1>
-      <h3 class="text-center">"TITULO"</h1>
+      <h3 class="text-center" id="titulo">"TITULO"</h1>
       <br>
       <br>
       <h2 class="text-center">Detalhes</h1>
-      <h3 class="text-center">"DETALHES"</h1>
+      <h3 class="text-center" id="detalhe">"DETALHES"</h1>
       <br>
       <br>
 
