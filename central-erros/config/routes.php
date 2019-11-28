@@ -4,30 +4,25 @@ $strategy = (new League\Route\Strategy\ApplicationStrategy)
     ->setContainer(\Central\Framework\App::getContainer());
 $router   = (new League\Route\Router)->setStrategy($strategy);
 
-$router->get('/central/', function ($request){
-    $response = new Zend\Diactoros\Response();
-    $response->getBody()->write('hommer');
-    return $response;
-});
-
-$router->middleware(new \Central\Middleware\Auth);
-
-$router->get('/central/usuario', \Central\Actions\Usuario\RecuperarTodosUsuarios::class);
-$router->get('/central/usuario/{id}', \Central\Actions\Usuario\RecuperarUsuario::class);
 $router->post('/central/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
-$router->put('/central/usuario[/{id}]', \Central\Actions\Usuario\CriarOuAtualizarUsuario::class);
-$router->patch('/central/usuario/{id}', \Central\Actions\Usuario\AtualizarUsuario::class);
-$router->delete('/central/usuario/{id}', \Central\Actions\Usuario\DeletarUsuario::class);
 
-$router->post('/central/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
-$router->post('/central/usuario/login', \Central\Actions\Usuario\Login::class);
+$router->group('/central', function ($router) {
+    $router->map('GET', '/usuario', \Central\Actions\Usuario\RecuperarTodosUsuarios::class);
+    $router->map('GET', '/usuario/{id}', \Central\Actions\Usuario\RecuperarUsuario::class);
+    $router->map('PUT', '/usuario/[{id}]', \Central\Actions\Usuario\CriarOuAtualizarUsuario::class);
+    $router->map('PATCH', '/usuario/{id}', \Central\Actions\Usuario\AtualizarUsuario::class);
+    $router->map('DELETE', '/usuario/{id}', \Central\Actions\Usuario\DeletarUsuario::class);
+    $router->map('POST', '/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
+    $router->map('POST', '/usuario/login', \Central\Actions\Usuario\Login::class);
 
-$router->get('/central/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
-$router->get('/central/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
-$router->get('/central/erro/{buscarPor}/{valor}/{ordenarPor}', \Central\Actions\Erro\RecuperarErros::class);
-$router->post('/central/erro', \Central\Actions\Erro\CriarErro::class);
-$router->put('/central/erro[/{id}]', \Central\Actions\Erro\CriarOuAtualizarErro::class);
-$router->patch('/central/erro/{id}', \Central\Actions\Erro\AtualizarErro::class);
-$router->delete('/central/erro/{id}', \Central\Actions\Erro\DeletarErro::class);
+    $router->map('GET', '/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
+    $router->map('GET', '/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
+    $router->map('POST', '/erro', \Central\Actions\Erro\CriarErro::class);
+    $router->map('PUT', '/erro/[{id}]', \Central\Actions\Erro\CriarOuAtualizarErro::class);
+    $router->map('PATCH', '/erro/{id}', \Central\Actions\Erro\AtualizarErro::class);
+    $router->map('DELETE', '/erro/{id}', \Central\Actions\Erro\DeletarErro::class);
+
+    $router->middleware(new \Central\Middleware\Auth);
+});
 
 return $router;
