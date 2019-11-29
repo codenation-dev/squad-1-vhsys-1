@@ -43,7 +43,7 @@ class Auth implements  MiddlewareInterface
                 return (new Response)->withStatus(402, 'autorização inválida');
                 break;
             case 403:
-                return (new Response)->withStatus(402, 'expirado, por favor atualize seu cadastro');
+                return (new Response)->withStatus(403, 'expirado, por favor atualize seu cadastro');
                 break;
             case 404:
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');
