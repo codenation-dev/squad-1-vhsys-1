@@ -103,7 +103,6 @@ window.onload = function() {
         }, 
         success : function(result) {
             data = JSON.parse(result);
-            //console.dir(data);
             
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: data});

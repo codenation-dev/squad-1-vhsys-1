@@ -37,6 +37,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link href="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
@@ -50,14 +52,24 @@
 
 
     <style type="text/css">
+		body {
+			font-family: Arial,sans-serif;
+			font-size: 12px;
+			overflow: hidden;
+		}
+		html, body {
+			min-height: 100%;
+			height: 100%;
+		}
 	    .msg-erro{ color: red; background-color: white; }
       .msg-alerta{ background-color: yellow; }
       .msg-exito{ color: green; background-color: white; }
       .msg-processando{ color: DodgerBlue; background-color: white; }
     </style>
   </head>
-  <body>    
-    <div class="container-fluid" style="background-color:#CAE1FF; height: 100%;padding-top: 15px; overflow: hidden;">
+  <body>
+      <div class="container-fluid" style="height: 100%; overflow: auto;">
+      
 
       <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
       <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, O Chupa-Cabras proprietário do token: <?php echo $_SESSION['token']; ?>.</span>
@@ -93,7 +105,9 @@
       </select>
 
       <input type="text" name="pesq" id="valor" placeholder="search">
-      <button type="button" class="btn btn-default" id="consultar">    <span class="glyphicon glyphicon-search"></span> </button>
+      <button type="button" class="btn btn-default" id="consultar">    
+        <span class="glyphicon glyphicon-search"></span> 
+      </button>
       
 
       <br>
