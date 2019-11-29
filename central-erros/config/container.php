@@ -41,6 +41,12 @@ App::getContainer()->add(\Central\Actions\Erro\AtualizarErro::class, function ()
     );
 });
 
+App::getContainer()->add(\Central\Actions\Erro\ArquivarErro::class, function () {
+    return new \Central\Actions\Erro\ArquivarErro(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
+
 App::getContainer()->add(\Central\Actions\Erro\DeletarErro::class, function () {
     return new \Central\Actions\Erro\DeletarErro(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)

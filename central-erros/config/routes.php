@@ -15,10 +15,12 @@ $router->group('/central', function ($router) {
     $router->map('POST', '/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
     $router->map('POST', '/usuario/login', \Central\Actions\Usuario\Login::class);
 
+    $router->map('GET', '/erro/{buscarPor}/{valor}/{ordenarPor}', \Central\Actions\Erro\RecuperarErros::class);
     $router->map('GET', '/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
     $router->map('GET', '/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
     $router->map('POST', '/erro', \Central\Actions\Erro\CriarErro::class);
     $router->map('PUT', '/erro/[{id}]', \Central\Actions\Erro\CriarOuAtualizarErro::class);
+    $router->map('PUT', '/erro/arquivar/{id}', \Central\Actions\Erro\ArquivarErro::class);
     $router->map('PATCH', '/erro/{id}', \Central\Actions\Erro\AtualizarErro::class);
     $router->map('DELETE', '/erro/{id}', \Central\Actions\Erro\DeletarErro::class);
 
