@@ -34,10 +34,6 @@ class AtualizarErro
             $data = $request->getBody()->getContents();//file_get_contents('php://input');
             $params = json_decode($data);
 
-
-            $Erro->titulo = $params->titulo;
-
-
             $this->entityManager->persist($Erro);
             $this->entityManager->flush();
 

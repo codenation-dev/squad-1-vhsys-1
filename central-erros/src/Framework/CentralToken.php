@@ -14,8 +14,10 @@ class CentralToken
     public static function obterToken(): string
     {
         $time = time();
+
         //$key = new Key('olarMundao');
         $key = new Key('Codenation');
+
         $signer = new Sha256;
         $token = new Builder();
         $token->expiresAt($time + 360000);

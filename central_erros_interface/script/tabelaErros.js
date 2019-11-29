@@ -1,29 +1,33 @@
 
+
+
 var $table = $('#tabelaResultado');
   var $arquivar = $('#arquivar');
   var $apagar = $('#apagar');
 
   $(function() {
     $arquivar.click(function () {
-        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
-        var url = 'http://localhost/central/erro/arquivar/';
-        var id_erro = objLinha[0].id;
-        url = url + id_erro;
-        ExecutarAcaoApagarArquivar(url, "PUT");
+        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));
+        var url = 'http://localhost/central/erro_arquivar';
+        ExecutarAcaoApagarArquivar(url, "PUT", objLinha);        
     })
   })
 
   $(function() {
     $apagar.click(function () {
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
-        var url = 'http://localhost/central/erro/';
-        var id_erro = objLinha[0].id;
-        url = url + id_erro;
-        ExecutarAcaoApagarArquivar(url, "DELETE");
+        //console.dir(token_session);
+        var url = 'http://localhost/central/erro/apagar';
+        ExecutarAcaoApagarArquivar(url, "DELETE", objLinha);
     })
   })
 
-  function ExecutarAcaoApagarArquivar(url, metodo){
+  function ExecutarAcaoApagarArquivar(url, metodo, dados){
+    /*
+    console.dir(dados);
+    console.dir(JSON.stringify(dados));
+    */
+   //console.dir(JSON.stringify(dados));
     LimparMensagens();
 
     $.ajax({
@@ -33,37 +37,26 @@ var $table = $('#tabelaResultado');
           request.setRequestHeader(
             "Authorization",
             token_session);
-        },         
+        },     
+        data: JSON.stringify(dados),    
         success : function(data, textStatus, jqXHR ){
             //console.log("kkkkkkkkkkkkkkkkkkk: "  +result);
-            //console.dir(data);
-            //console.dir(textStatus);
-            //console.dir(jqXHR.statusText);
+            console.dir(data);
+            console.dir(textStatus);
+            console.dir(jqXHR.statusText);
             ExibirMensagemSucesso(jqXHR.statusText);
+            //location.reload();
         },
         error: function(xhr, resp, text) {
             console.dir(xhr);//"xhr: " + 
 
             ExibirMensagemFalha(xhr.statusText);
 
-            
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
         }
     });
 }
-
-window.actionEvents = {	
-    'click .callB': function (e, value, row, index) {        
-        /*
-        alert(e);
-        alert(value);
-        alert(row);
-        alert(index);
-        */
-    }
-};	
-
 
 function LimparTabelaResultado() {
     

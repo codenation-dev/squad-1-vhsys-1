@@ -1,3 +1,24 @@
+$('#sair').click(function (e){
+    e.preventDefault();
+    Sair();
+});
+
+function Sair(){
+	$.ajax({
+		url: './session_remove.php',
+		type : "GET",		
+		success : function(result) {
+			ExibirMensagemSucesso(result);
+
+            window.location.href = "./index.php";
+		},
+		error: function(xhr, resp, text) {
+			ExibirMensagemFalha(text);
+
+            window.location.href = "./index.php";
+		}
+	});
+}
 
 function ExibirMensagemFalha(mensagem) {
 	ExibirMensagem('falha', mensagem);

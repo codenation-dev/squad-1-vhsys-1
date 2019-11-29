@@ -19,6 +19,11 @@
 
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
+
+      if (token_session === "") {
+        window.location.href = "./index.php";
+      }
+
       var pbuscarPor='<?php echo $p_buscarPor;?>';
       var pvalor='<?php echo $p_valor;?>';
       var pordenarPor='<?php echo $p_ordenarPor;?>';
@@ -51,9 +56,10 @@
       .msg-processando{ color: DodgerBlue; background-color: white; }
     </style>
   </head>
-  <body>
-    <div class="container-fluid">
+  <body>    
+    <div class="container-fluid" style="background-color:#CAE1FF; height: 100%;padding-top: 15px; overflow: hidden;">
 
+      <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
       <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, O Chupa-Cabras proprietário do token: <?php echo $_SESSION['token']; ?>.</span>
 
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
@@ -101,6 +107,7 @@
         data-show-refresh="true" >			
         <thead>
           <tr id="linhaCabecalho" class="callB">
+
             <th data-checkbox="true" class="callB"></th>
             <th data-field="codigo" class="callB">codigo</th>
             <th data-field="nivel" class="callB">nivel</th>
@@ -113,6 +120,8 @@
             <th data-field="origem" class="callB">origem</th>
             <th data-field="token" class="callB">token</th>
             <th data-field="quantidade" class="callB">quantidade</th>
+            <th data-field="id" class="callB">id</th>
+            <th data-field="arquivado" class="callB">arquivado</th>
           </tr>
         </thead>
       </table>

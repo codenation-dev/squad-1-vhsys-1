@@ -53,6 +53,11 @@ App::getContainer()->add(\Central\Actions\Erro\DeletarErro::class, function () {
     );
 });
 
+App::getContainer()->add(\Central\Actions\Erro\DeletarErros::class, function () {
+    return new \Central\Actions\Erro\DeletarErros(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
 
 
 App::getContainer()->add(\Central\Actions\Usuario\RecuperarTodosUsuarios::class, function () {

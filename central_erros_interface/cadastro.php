@@ -6,7 +6,7 @@
 
 <head>
     <!-- Required meta tags -->
-    <title>Inicio</title>
+    <title>Cadastro</title>
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
@@ -37,8 +37,23 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar"><br>
-      <input type="button" id="login" class="btn btn-primary btn-block" value="Login">
+      <h1 class="text-center">Cadastro usuario</h1>
+      <form action="" method="post" id="forme" name="form">
+          <div class="form-group">
+              <input type="email" name="email" id="email" class="form-control" placeholder="e-mail"><br>
+              <input type="password" name="senha" id="senha" class="form-control" placeholder="password">
+          </div>
+
+        <input type="submit"  class="btn btn-primary btn-block" value="Enviar">
+        <input type="button" id="cons" class="btn btn-primary btn-block" value="Consultar">
+      </form>
+
+      <br>
+      <br>
+      <!-- 
+      <input type="button" id="cons" class="btn btn-primary btn-block" value="Consultar">
+      <input type="button" id="cons" value="Consultar">
+      -->
 
     </div>
 
@@ -48,7 +63,7 @@
     <script src="./script/requisicao.js"></script>
     <script src="./script/requisicaoAjax.js"></script>    
     <script src="./script/comum.js"></script>
-    <script src="./script/index.js"></script>
+    <script src="./script/cadastro.js"></script>
   </body>
 </html>
 
