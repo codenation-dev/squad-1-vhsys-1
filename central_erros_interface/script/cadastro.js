@@ -25,8 +25,7 @@ function EnviarCadastro(){
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
     var url = "http://localhost/central/criar_usuario";
 
-    if (atualziar === true) {      
-        //dados = '{"email":"'+pemail+'", "senha":"'+psenha+'"}';
+    if (atualziar === true) {              
         url = "http://localhost/central/atualizar_token_usuario";
     }
  

@@ -102,6 +102,7 @@ window.onload = function() {
           request.setRequestHeader(
             "Authorization",
             token_session)
+            //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzUzNjI2MTgsImlhdCI6MTU3NTAwMjYxOH0.nJ9dDArq43Yk6NSfBGOvAOHzUquUV3vZVWIs1i87rqM")//token_session)
         }, 
         success : function(result) {
             data = JSON.parse(result);
