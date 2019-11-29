@@ -1,3 +1,58 @@
+
+var $table = $('#tabelaResultado');
+  var $arquivar = $('#arquivar');
+  var $apagar = $('#apagar');
+
+  $(function() {
+    $arquivar.click(function () {
+        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
+        var url = 'http://localhost/central/erro/arquivar/';
+        var id_erro = objLinha[0].id;
+        url = url + id_erro;
+        ExecutarAcaoApagarArquivar(url, "PUT");
+    })
+  })
+
+  $(function() {
+    $apagar.click(function () {
+        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
+        var url = 'http://localhost/central/erro/';
+        var id_erro = objLinha[0].id;
+        url = url + id_erro;
+        ExecutarAcaoApagarArquivar(url, "DELETE");
+    })
+  })
+
+  function ExecutarAcaoApagarArquivar(url, metodo){
+    LimparMensagens();
+
+    $.ajax({
+        url: url,
+        type: metodo,
+        beforeSend: function(request) {
+          request.setRequestHeader(
+            "Authorization",
+            token_session);
+        },         
+        success : function(data, textStatus, jqXHR ){
+            //console.log("kkkkkkkkkkkkkkkkkkk: "  +result);
+            //console.dir(data);
+            //console.dir(textStatus);
+            //console.dir(jqXHR.statusText);
+            ExibirMensagemSucesso(jqXHR.statusText);
+        },
+        error: function(xhr, resp, text) {
+            console.dir(xhr);//"xhr: " + 
+
+            ExibirMensagemFalha(xhr.statusText);
+
+            
+            console.dir("respXXX: " + resp);
+            console.dir("textXXX: " + text);
+        }
+    });
+}
+
 window.actionEvents = {	
     'click .callB': function (e, value, row, index) {        
         /*
@@ -8,6 +63,8 @@ window.actionEvents = {
         */
     }
 };	
+
+
 function LimparTabelaResultado() {
     
     var tabela = document.getElementById("tabelaResultado");
@@ -59,40 +116,8 @@ window.onload = function() {
             $table.bootstrapTable({data: data});
             $table.on('click-row.bs.table', function(e, value, row, index) {
 
-                
-                //alert(JSON.stringify(value));
-
                 var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
                 window.location = urlDetalhe;    
-                /*
-                $.ajax({
-                    url: urlDetalhe,
-                    type: "POST", 
-                    data : JSON.stringify(value), 
-                    success : function(data, textStatus, jqXHR ){
-                        console.dir(data);
-                        console.dir(textStatus);
-                        console.dir(jqXHR);
-                        ExibirMensagemSucesso(jqXHR.statusText);
-                    },                   
-                    
-                    error: function(xhr, resp, text) {
-                        console.dir(xhr);
-            
-                        ExibirMensagemFalha(xhr.statusText);
-            
-                        
-                        console.dir("respXXX: " + resp);
-                        console.dir("textXXX: " + text);
-                    }
-                });
-                */
-                
-                /*
-                JSON.stringify(value)
-                alert(JSON.stringify(row));
-                alert(index);*/
-                // ...
               })
             
             ControlarVisibilidadeGrid();
@@ -137,19 +162,6 @@ function Consultar(){
         ordenarPor = "ordenarPor";
     }
     var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
-    //alert(url);
-    window.location = url;    
 
-    /*
-    $.ajax({
-        url: url,
-        type: "GET",
-        //data: dados,
-        complete:
-        function () {
-            //window.location = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + inputValor.value + "&ordenarPor=" + ordenarPor
-            window.location = url;
-        }
-    });
-    */
+    window.location = url;    
 }

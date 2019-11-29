@@ -47,7 +47,9 @@ class RecuperarErros
             $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as frequencia')
                   ->from(Erro::class, 'e')
                   ->where('e.token = :token')
-                  ->setParameter('token', $tokenUsuario);
+                  ->setParameter('token', $tokenUsuario)
+                  ->andWhere("e.arquivado = :arquivado")
+                  ->setParameter('arquivado', false);
 
             //haduken!!! dois if's aninhados
             if ($buscarPor !== "buscarPor") {
@@ -60,6 +62,7 @@ class RecuperarErros
             }
 
             $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
+
 
             if ($ordenarPor !== "ordenarPor") {
                 if ($ordenarPor == "nivel") {

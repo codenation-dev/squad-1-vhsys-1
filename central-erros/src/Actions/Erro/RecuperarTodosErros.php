@@ -30,7 +30,9 @@ class RecuperarTodosErros
             $query->select('f')
                 ->from(Erro::class, 'f')
                 ->where('f.token = :token')
-                ->setParameter('token', $tokenUsuario);
+                ->setParameter('token', $tokenUsuario)
+                ->andWhere("f.arquivado = :arquivado")
+                ->setParameter('arquivado', false);
 
             $response->getBody()->write(
                 json_encode($query->getQuery()->getResult())

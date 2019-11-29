@@ -4,14 +4,13 @@
 namespace Central\Actions\Erro;
 
 
-use Doctrine\ORM\EntityManager;
 use Central\Entity\Erro;
+use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
-class DeletarErro
+class ArquivarErro
 {
     private $entityManager;
 
@@ -24,15 +23,18 @@ class DeletarErro
     {
         $response = new Response();
         try {
-            $Erro = $this->entityManager->find(Erro::class, $args['id']);
+            $Erro = $this->entityManager->find(\Central\Entity\Erro::class, $args['id']);
 
             if ($Erro === null) {
-                return $response->withStatus(404);
+                return $response->withStatus(404, 'Registro nÃ£o encontrado');
             }
-            $this->entityManager->remove($Erro);
+
+            $Erro->arquivado = true;
+
+            $this->entityManager->persist($Erro);
             $this->entityManager->flush();
 
-            return $response->withStatus(200, 'Erro excluído com sucesso');
+            return $response->withStatus(200, 'Erro arquivado com sucesso.');
         }catch (\Throwable $exception){
             return $response->withStatus(500, $exception->getMessage());
         }

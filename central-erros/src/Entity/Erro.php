@@ -58,5 +58,9 @@ class Erro
      * @ORM\Column(type="string")
      */
     public $origem;
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    public $arquivado;
 }
 

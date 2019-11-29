@@ -91,8 +91,8 @@
       
 
       <br>
-      <input type="button" id="cons" class="btn btn-primary btn-block" value="Arquivar">
-      <input type="button" id="cons" class="btn btn-primary btn-block" value="Apagar">
+      <input type="button" id="arquivar" class="btn btn-primary btn-block" value="Arquivar">
+      <input type="button" id="apagar" class="btn btn-primary btn-block" value="Apagar">
 
       <table 
         id="tabelaResultado"
