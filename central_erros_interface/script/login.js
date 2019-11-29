@@ -16,7 +16,7 @@ function Login(){
     var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
     var url = "http://localhost/central/usuario/login";
-
+    var paramAtualiza = '?email='+inputemail.value+'&senha='+inputSenha.value;
  
     //alert(url);
     
@@ -27,10 +27,10 @@ function Login(){
         data : dados, 
         success : function(data, textStatus, jqXHR ){
             /*
+            */
             console.dir(data);
             console.dir(textStatus);
             console.dir(jqXHR);
-            */
 
             var user = JSON.parse(jqXHR.statusText);
             //console.dir(user);
@@ -47,10 +47,12 @@ function Login(){
                 success : function(result) {
                     //console.log(result);
                     ExibirMensagemSucesso(result);
+                    window.location.href = "./tabelaErros.php";
                 },
                 error: function(xhr, resp, text) {
                     //console.log(xhr, resp, text);
                     ExibirMensagemFalha(text);
+                    
                 }
             });
 
@@ -58,7 +60,7 @@ function Login(){
 
             //header('Location:./tabelaErros.php');
 
-            window.location.href = "./tabelaErros.php";
+            
         },       
         
         error: function(xhr, resp, text) {
@@ -69,6 +71,10 @@ function Login(){
             
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
+
+            if (xhr.status === 402) {
+                window.location.href = "./cadastro.php"+paramAtualiza;
+            }
         }
         
     });

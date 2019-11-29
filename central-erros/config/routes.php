@@ -15,6 +15,7 @@ $router->group('/central', function ($router) {
     $router->map('POST', '/usuario/esqueceu_senha', \Central\Actions\Usuario\EsqueceuSenha::class);
     $router->map('POST', '/usuario/login', \Central\Actions\Usuario\Login::class);
     $router->map('POST', '/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
+    $router->map('POST', '/atualizar_token_usuario', \Central\Actions\Usuario\AtualizarTokenUsuario::class);
 
     $router->map('GET', '/erro/{buscarPor}/{valor}/{ordenarPor}', \Central\Actions\Erro\RecuperarErros::class);
     $router->map('GET', '/erro', \Central\Actions\Erro\RecuperarTodosErros::class);

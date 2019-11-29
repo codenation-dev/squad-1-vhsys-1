@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 	session_start();	
+  $p_email= (isset($_GET['email']))?$_GET['email']:''; 
+  $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
 
 <head>
@@ -12,6 +14,13 @@
     <meta name="description" content="Projeto Final Squad 1.">
     <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script type="text/javascript">
+      var pemail='<?php echo $p_email;?>';
+      var psenha='<?php echo $p_senha;?>';
+      var atualziar = (pemail !== "");
+
+    </script>
 
     <!-- Form CSS -->
     <link rel="stylesheet" href="css/Login-Form-Clean.css">
@@ -37,7 +46,7 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <h1 class="text-center">Cadastro usuario</h1>
+      <h1 class="text-center" id="tit">Cadastro usuario</h1>
       <form action="" method="post" id="forme" name="form">
           <div class="form-group">
               <input type="email" name="email" id="email" class="form-control" placeholder="e-mail"><br>

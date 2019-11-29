@@ -82,7 +82,9 @@ function ControlarVisibilidadeGrid() {
 }
 
 window.onload = function() {
+    ControlarVisibilidadeGrid();
     var url = 'http://localhost/central/erro';
+    var paramAtualiza = '?email='+email_usuario;//+'&senha=';
 
     if (((pbuscarPor !== "buscarPor") &&
          (pbuscarPor !== "")) ||
@@ -120,6 +122,10 @@ window.onload = function() {
             console.log(xhr, resp, text);
 
             ControlarVisibilidadeGrid();
+
+            if (xhr.status === 403) {
+                window.location.href = "./cadastro.php"+paramAtualiza;
+            }
         }
     });
 };

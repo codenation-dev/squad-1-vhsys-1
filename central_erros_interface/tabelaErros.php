@@ -4,9 +4,11 @@
   session_start();	
   
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
+  $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
+
   $p_buscarPor= (isset($_GET['buscarPor']))?$_GET['buscarPor']:''; 
   $p_valor= (isset($_GET['valor']))?$_GET['valor']:''; 
-  $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:''; 
+  $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:'';
 ?>
 <head>
     <!-- Required meta tags -->
@@ -19,7 +21,7 @@
 
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
-
+      var email_usuario='<?php echo $email_usu;?>';
       if (token_session === "") {
         window.location.href = "./index.php";
       }
