@@ -4,6 +4,7 @@
 namespace Central\Middleware;
 
 
+use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -11,6 +12,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 use Zend\Diactoros\Response;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Parser;
+use \Central\Framework\App;
+use Central\Framework\CentralToken;
 
 class Auth implements  MiddlewareInterface
 {
@@ -23,6 +26,7 @@ class Auth implements  MiddlewareInterface
          * Eu acho que esse tratamento é gambiarrrrrra, verificar melhor forma de tratar requisições que não enviam o tóquem
          */
         if (($request->getUri()->getPath() === "/central/criar_usuario") ||
+            ($request->getUri()->getPath() === "/central/atualizar_token_usuario") ||
             ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha") ||
             ($request->getUri()->getPath() === "/central/usuario/login") ||
             ($request->getUri()->getPath() === "/central/")) {
@@ -32,22 +36,19 @@ class Auth implements  MiddlewareInterface
         if (!$request->hasHeader('Authorization')){
             return (new Response)->withStatus(401);
         }
-
         $token = $request->getHeaderLine('Authorization');
-        $chave = 'Codenation';
-        //$chave = 'olarMundao';
-        $parser = new Parser();
-        $tokenParsed = $parser->parse($token);
-        $signer = new Sha256();
-
-        if (!$tokenParsed->verify($signer, $chave)) {
-            return (new Response)->withStatus(403, 'não verificado');
+        $ret = CentralToken::validarToken($token);
+        switch ($ret) {
+            case 402:
+                return (new Response)->withStatus(402, 'autorização inválida');
+                break;
+            case 403:
+                return (new Response)->withStatus(403, 'expirado, por favor atualize seu cadastro');
+                break;
+            case 404:
+                return (new Response)->withStatus(404, 'nenhum usuário encontrado');
+                break;
         }
-
-        if ($tokenParsed->isExpired()) {
-            return (new Response)->withStatus(403, 'expirrado');
-        }
-
         return $handler->handle($request);
     }
 }

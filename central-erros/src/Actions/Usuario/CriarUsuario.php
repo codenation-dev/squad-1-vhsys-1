@@ -3,6 +3,7 @@
 
 namespace Central\Actions\Usuario;
 
+use Central\Actions\ActionBase;
 use Central\Framework\CentralToken;
 use Doctrine\ORM\EntityManager;
 use Central\Entity\Usuario;
@@ -10,15 +11,8 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class CriarUsuario
+class CriarUsuario extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function existeUsuario(string $emails): bool
     {
         $u = $this->entityManager->getRepository(Usuario::class)->findOneBy(array('email' => $emails));

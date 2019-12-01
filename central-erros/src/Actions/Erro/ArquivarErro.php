@@ -4,21 +4,15 @@
 namespace Central\Actions\Erro;
 
 
+use Central\Actions\ActionBase;
 use Central\Entity\Erro;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class ArquivarErro
+class ArquivarErro extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $ids_nao_encontrados = [];
@@ -34,8 +28,7 @@ class ArquivarErro
                     continue;
                 }
                 $Erro->arquivado = true;
-                $this->entityManager->persist($Erro);
-                $this->entityManager->flush();
+                $this->persistir($Erro);
             }
 
             if (count($ids_nao_encontrados) > 0) {

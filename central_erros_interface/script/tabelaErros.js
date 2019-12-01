@@ -82,7 +82,9 @@ function ControlarVisibilidadeGrid() {
 }
 
 window.onload = function() {
+    ControlarVisibilidadeGrid();
     var url = 'http://localhost/central/erro';
+    var paramAtualiza = '?email='+email_usuario;//+'&senha=';
 
     if (((pbuscarPor !== "buscarPor") &&
          (pbuscarPor !== "")) ||
@@ -103,10 +105,12 @@ window.onload = function() {
         }, 
         success : function(result) {
             data = JSON.parse(result);
+            console.dir(data);
             
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: data});
-            $table.on('click-row.bs.table', function(e, value, row, index) {
+            console.dir($table);
+            $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
                 var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
                 window.location = urlDetalhe;    
@@ -120,6 +124,10 @@ window.onload = function() {
             console.log(xhr, resp, text);
 
             ControlarVisibilidadeGrid();
+
+            if (xhr.status === 403) {
+                window.location.href = "./cadastro.php"+paramAtualiza;
+            }
         }
     });
 };

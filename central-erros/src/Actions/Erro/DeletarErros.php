@@ -4,21 +4,14 @@
 namespace Central\Actions\Erro;
 
 
-use Central\Entity\Erro;
+use Central\Actions\ActionBase;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class DeletarErros
+class DeletarErros extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $ids_nao_encontrados = [];
@@ -34,8 +27,7 @@ class DeletarErros
                     array_push($ids_nao_encontrados, $id->id);
                     continue;
                 }
-                $this->entityManager->remove($Erro);
-                $this->entityManager->flush();
+                $this->remover($Erro);
             }
 
             if (count($ids_nao_encontrados) > 0) {

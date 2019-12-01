@@ -4,21 +4,14 @@
 namespace Central\Actions\Erro;
 
 
+use Central\Actions\ActionBase;
 use Central\Entity\Erro;
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class RecuperarErros
+class RecuperarErros extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $response = new Response();
@@ -30,20 +23,6 @@ class RecuperarErros
 
             $query = $this->entityManager->createQueryBuilder();
 
-
-
-            /*
-            if ($ordenarPor !== "ordenarPor") {
-                if ($ordenarPor == "nivel") {
-                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
-
-                } else {
-                    $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as frequencia');
-                }
-            } else {
-                $query->select('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
-            }
-            */
             $query->select('e.codigo,e.arquivado,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token, count(e.id) as frequencia')
                   ->from(Erro::class, 'e')
                   ->where('e.token = :token')
@@ -51,7 +30,6 @@ class RecuperarErros
                   ->andWhere("e.arquivado = :arquivado")
                   ->setParameter('arquivado', false);
 
-            //haduken!!! dois if's aninhados
             if ($buscarPor !== "buscarPor") {
                 if ($valor === "") {
                     return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
@@ -63,7 +41,6 @@ class RecuperarErros
 
             $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');
 
-
             if ($ordenarPor !== "ordenarPor") {
                 if ($ordenarPor == "nivel") {
                     $query->orderBy("e.$ordenarPor", 'ASC');
@@ -71,9 +48,6 @@ class RecuperarErros
                     $query->orderBy("$ordenarPor", 'DESC');
                 }
             }
-
-            //
-            // ->setMaxResults( 4 );
 
             $response->getBody()->write(
                 json_encode($query->getQuery()->getResult())

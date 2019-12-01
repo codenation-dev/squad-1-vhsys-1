@@ -14,4 +14,6 @@
 
 - Arquivar e Apagar erros recebendo json com id's para poder apagar/arquivar o grid inteiro na interface
 
+- Verificar combo Produção/Homologação/Dev
 
+- Atualizar os toquens dos erros ao atualizar usuario

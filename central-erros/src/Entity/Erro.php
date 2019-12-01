@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="erro")
  */
-class Erro
+class Erro extends EntidadeBase
 {
     /**
      * @ORM\Id

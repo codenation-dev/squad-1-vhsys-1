@@ -4,22 +4,14 @@
 namespace Central\Actions\Usuario;
 
 
-use Doctrine\ORM\EntityManager;
+use Central\Actions\ActionBase;
 use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
-class DeletarUsuario
+class DeletarUsuario extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $response = new Response();
@@ -29,8 +21,7 @@ class DeletarUsuario
             if ($Usuario === null) {
                 return $response->withStatus(404);
             }
-            $this->entityManager->remove($Usuario);
-            $this->entityManager->flush();
+            $this->remover($Usuario);
 
             return $response->withStatus(204);
         }catch (\Throwable $exception){

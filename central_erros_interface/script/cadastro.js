@@ -1,6 +1,17 @@
 window.onload = function() {
     LimparMensagens();
 
+    if (atualziar === true) {
+      var inputemail = document.getElementById("email");
+      var inputSenha = document.getElementById("senha");
+      inputemail.value = pemail;
+      inputSenha.value = psenha;
+
+      var titulo = document.getElementById("tit");
+      titulo.innerText = "Atualziar Usuário";
+    }
+    
+
     $('#forme').submit(function (e){
         e.preventDefault();
         EnviarCadastro();
@@ -14,6 +25,9 @@ function EnviarCadastro(){
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
     var url = "http://localhost/central/criar_usuario";
 
+    if (atualziar === true) {              
+        url = "http://localhost/central/atualizar_token_usuario";
+    }
  
     $.ajax({
         url: url,

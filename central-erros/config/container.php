@@ -90,6 +90,12 @@ App::getContainer()->add(\Central\Actions\Usuario\AtualizarUsuario::class, funct
     );
 });
 
+App::getContainer()->add(\Central\Actions\Usuario\AtualizarTokenUsuario::class, function () {
+    return new \Central\Actions\Usuario\AtualizarTokenUsuario(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
+
 App::getContainer()->add(\Central\Actions\Usuario\DeletarUsuario::class, function () {
     return new \Central\Actions\Usuario\DeletarUsuario(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
