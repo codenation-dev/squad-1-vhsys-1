@@ -49,28 +49,6 @@ class Auth implements  MiddlewareInterface
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');
                 break;
         }
-        /*
-
-        $chave = 'Codenation';
-        //$chave = 'olarMundao';
-        $parser = new Parser();
-        $tokenParsed = $parser->parse($token);
-        $signer = new Sha256();
-
-        if (!$tokenParsed->verify($signer, $chave)) {
-            return (new Response)->withStatus(402, 'autorização inválida');
-        }
-
-        if ($tokenParsed->isExpired()) {
-            return (new Response)->withStatus(402, 'expirado, por favor atualize seu cadastro');
-        }
-
-        $em = App::getContainer()->get(\Doctrine\ORM\EntityManager::class);
-        $Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
-        if ($Usuario === null) {
-            return (new Response)->withStatus(404, 'nenhum usuário encontrado');
-        }
-        */
         return $handler->handle($request);
     }
 }

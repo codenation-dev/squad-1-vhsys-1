@@ -4,6 +4,7 @@
 namespace Central\Actions\Erro;
 
 
+use Central\Actions\ActionBase;
 use Doctrine\ORM\EntityManager;
 use Central\Entity\Erro;
 use Psr\Http\Message\ResponseInterface;
@@ -11,15 +12,8 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
-class AtualizarErro
+class AtualizarErro extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $response = new Response();
@@ -34,8 +28,7 @@ class AtualizarErro
             $data = $request->getBody()->getContents();//file_get_contents('php://input');
             $params = json_decode($data);
 
-            $this->entityManager->persist($Erro);
-            $this->entityManager->flush();
+            $this->persistir($Erro);
 
             return $response->withStatus(204);
         }catch (\Throwable $exception){

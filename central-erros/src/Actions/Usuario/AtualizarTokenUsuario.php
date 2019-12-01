@@ -4,22 +4,16 @@
 namespace Central\Actions\Usuario;
 
 
+use Central\Actions\ActionBase;
+use Central\Entity\Erro;
 use Central\Entity\Usuario;
 use Central\Framework\CentralToken;
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class AtualizarTokenUsuario
+class AtualizarTokenUsuario extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();
@@ -31,8 +25,25 @@ class AtualizarTokenUsuario
                 return $response->withStatus(404, 'usuário não encontrado');
             }
 
+            $tokenAtual = $Usuario->token;
+            $tokenNovo = CentralToken::obterToken();
+
+            /*
+             * atualizar token nos erros
+             *
+             */
+            $queryBuilder = $this->entityManager->getRepository(Erro::class)->createQueryBuilder('e');
+            $queryBuilder->update()
+                ->set('e.token', $tokenNovo)
+                ->where('e.token = :old_token')
+                ->setParameter('old_token', $tokenAtual)
+                ->getQuery()
+                ->execute();
+            /*
+             * aqui termina o trecho de codigo que deve ir para outra classe
+             */
             $Usuario->senha = $params->senha;
-            $Usuario->token = CentralToken::obterToken();
+            $Usuario->token = $tokenNovo;
             $this->entityManager->persist($Usuario);
             $this->entityManager->flush();
 

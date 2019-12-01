@@ -4,21 +4,14 @@
 namespace Central\Actions\Usuario;
 
 
+use Central\Actions\ActionBase;
 use Central\Entity\Usuario;
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class EsqueceuSenha
+class EsqueceuSenha extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $response = new Response();

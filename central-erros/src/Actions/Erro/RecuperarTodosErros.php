@@ -4,23 +4,14 @@
 namespace Central\Actions\Erro;
 
 
-use Doctrine\ORM\EntityManager;
+use Central\Actions\ActionBase;
 use Central\Entity\Erro;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 
-class RecuperarTodosErros
+class RecuperarTodosErros extends ActionBase
 {
-    //private $entityManager;
-
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();

@@ -42,6 +42,7 @@ class CentralToken
             return 404;
             //return (new Response)->withStatus(404, 'nenhum usuário encontrado');
         }
+        return 200;
     }
     public static function obterToken(): string
     {

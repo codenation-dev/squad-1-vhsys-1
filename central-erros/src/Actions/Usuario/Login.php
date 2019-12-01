@@ -3,21 +3,13 @@
 
 namespace Central\Actions\Usuario;
 
-use Central\Entity\Usuario;
-use Doctrine\ORM\EntityManager;
+use Central\Actions\ActionBase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class Login
+class Login extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $response = new Response();

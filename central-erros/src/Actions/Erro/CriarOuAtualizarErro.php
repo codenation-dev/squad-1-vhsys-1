@@ -3,26 +3,16 @@
 
 namespace Central\Actions\Erro;
 
-
-use Doctrine\ORM\EntityManager;
+use Central\Actions\ActionBase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Request;
 use Zend\Diactoros\Response;
 use Central\Entity\Erro;
 
-class CriarOuAtualizarErro
+class CriarOuAtualizarErro extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
-
         $response = new Response();
         try {
             $Erro = $this->entityManager->find(Erro::class, $args['id']);
@@ -30,9 +20,8 @@ class CriarOuAtualizarErro
             $data = $request->getBody()->getContents();//file_get_contents('php://input');
             $params = json_decode($data);
 
-            $Erro->titulo = $params->titulo;
-            $this->entityManager->persist($Erro);
-            $this->entityManager->flush();
+            //$Erro->titulo = $params->titulo;
+            $this->persistir($Erro);
 
             return $response->withStatus(204);
         }catch (\Throwable $exception){

@@ -3,22 +3,14 @@
 
 namespace Central\Actions\Erro;
 
-use Doctrine\ORM\EntityManager;
+use Central\Actions\ActionBase;
 use Central\Entity\Erro;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
-use Zend\Diactoros\Request;
 
-class CriarErro
+class CriarErro extends ActionBase
 {
-    private $entityManager;
-
-    public function __construct(EntityManager $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
-
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();
@@ -39,12 +31,11 @@ class CriarErro
             $Erro->ambiente = $params->ambiente;
             $Erro->origem = $params->origem;
 
-            $this->entityManager->persist($Erro);
-            $this->entityManager->flush();
+            $this->persistir($Erro);
 
-            return $response->withStatus(201, 'Erro cadastrado!');
+            return $response->withStatus(200, 'Erro cadastrado!');
         }catch (\Throwable $exception){
-            return $response->withStatus(501, $exception->getMessage());
+            return $response->withStatus(500, $exception->getMessage());
         }
     }
 }
