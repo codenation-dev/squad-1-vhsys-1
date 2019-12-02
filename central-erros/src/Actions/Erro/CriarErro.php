@@ -30,9 +30,15 @@ class CriarErro extends ActionBase
             $Erro->status = $params->status;
             $Erro->ambiente = $params->ambiente;
             $Erro->origem = $params->origem;
+            $Erro->arquivado = false;
+
+            /*
+            $this->entityManager->persist($Erro);
+            $this->entityManager->flush();
+            */
+            //dd($Erro);
 
             $this->persistir($Erro);
-
             return $response->withStatus(200, 'Erro cadastrado!');
         }catch (\Throwable $exception){
             return $response->withStatus(500, $exception->getMessage());
