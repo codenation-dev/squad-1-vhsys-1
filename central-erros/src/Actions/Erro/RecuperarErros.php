@@ -31,12 +31,11 @@ class RecuperarErros extends ActionBase
                   ->setParameter('arquivado', false);
 
             if ($buscarPor !== "buscarPor") {
-                if ($valor === "") {
+                if ($valor === "valor") {
                     return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
                 }
-
-                $query->andWhere("e.$buscarPor = :buscarPor")
-                    ->setParameter('buscarPor', $valor);
+                $query->andWhere("e.$buscarPor LIKE :buscarPor")
+                      ->setParameter('buscarPor', '%'.$valor.'%');
             }
 
             $query->groupby('e.codigo,e.nivel,e.ip,e.data_hora,e.titulo,e.detalhe,e.status,e.ambiente,e.origem,e.token');

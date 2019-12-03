@@ -18,8 +18,6 @@
     <script type="text/javascript">
       var pemail='<?php echo $p_email;?>';
       var psenha='<?php echo $p_senha;?>';
-      var atualziar = (pemail !== "");
-
     </script>
 
     <!-- Form CSS -->

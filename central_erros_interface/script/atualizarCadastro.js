@@ -1,29 +1,23 @@
 window.onload = function() {
     LimparMensagens();
-
-    if (atualziar === true) {
-      var inputemail = document.getElementById("email");
-      var inputSenha = document.getElementById("senha");
-      inputemail.value = pemail;
-      inputSenha.value = psenha;
-
-      var titulo = document.getElementById("tit");
-      titulo.innerText = "Atualziar Usuário";
-    }
     
-
+    var inputemail = document.getElementById("email");
+    var inputSenha = document.getElementById("senha");
+    inputemail.value = pemail;
+    inputSenha.value = psenha;      
+    
     $('#forme').submit(function (e){
         e.preventDefault();
-        EnviarCadastro();
+        AtualizaCadastro();
     });
 };
 
-function EnviarCadastro(){
+function AtualizaCadastro(){
     LimparMensagens();
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
-    var url = "http://localhost/central/criar_usuario";
+    url = "http://localhost/central/atualizar_token_usuario";
  
     $.ajax({
         url: url,
@@ -46,18 +40,3 @@ function EnviarCadastro(){
     });
 }    
 
-
-/*
-
-var parametros = {
-    email: "",
-    senha: ""
-}
-
-var form = document.getElementById("forme");
-
-form.addEventListener("submit", function(event){
-    event.preventDefault();		    
-    EnviarCadastro();
-});
-*/

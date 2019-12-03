@@ -74,7 +74,7 @@
       
 
       <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
-      <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, O Chupa-Cabras proprietário do token: <?php echo $_SESSION['token']; ?>.</span>
+      <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, proprietário do token: <?php echo $_SESSION['token']; ?>.</span>
 
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
@@ -109,6 +109,8 @@
       <input type="text" name="pesq" id="valor" placeholder="search">
       <button type="button" class="btn btn-default" id="consultar">    
         <span class="glyphicon glyphicon-search"></span> 
+      </button>
+      <button type="button" class="btn btn-default" id="limparPesquisa">Limpar pesquisa
       </button>
       
 

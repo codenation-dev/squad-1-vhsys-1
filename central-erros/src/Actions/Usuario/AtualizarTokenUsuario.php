@@ -34,7 +34,8 @@ class AtualizarTokenUsuario extends ActionBase
              */
             $queryBuilder = $this->entityManager->getRepository(Erro::class)->createQueryBuilder('e');
             $queryBuilder->update()
-                ->set('e.token', $tokenNovo)
+                ->set('e.token', ':tokenNovo')
+                ->setParameter('tokenNovo', $tokenNovo)
                 ->where('e.token = :old_token')
                 ->setParameter('old_token', $tokenAtual)
                 ->getQuery()

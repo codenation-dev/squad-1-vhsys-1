@@ -1,5 +1,7 @@
-
-
+var $limparPesquisa = $('#limparPesquisa');
+$limparPesquisa.click(function () {
+    window.location.href = "./tabelaErros.php";
+});
 
 var $table = $('#tabelaResultado');
   var $arquivar = $('#arquivar');
@@ -126,7 +128,8 @@ window.onload = function() {
             ControlarVisibilidadeGrid();
 
             if (xhr.status === 403) {
-                window.location.href = "./cadastro.php"+paramAtualiza;
+                alert("Por favor, atualize seu cadastro.")
+                window.location.href = "./atualizarCadastro.php"+paramAtualiza;
             }
         }
     });

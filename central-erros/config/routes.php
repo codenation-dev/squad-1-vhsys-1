@@ -4,8 +4,6 @@ $strategy = (new League\Route\Strategy\ApplicationStrategy)
     ->setContainer(\Central\Framework\App::getContainer());
 $router   = (new League\Route\Router)->setStrategy($strategy);
 
-//$router->post('/central/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
-
 $router->group('/central', function ($router) {
     $router->map('GET', '/usuario', \Central\Actions\Usuario\RecuperarTodosUsuarios::class);
     $router->map('GET', '/usuario/{id}', \Central\Actions\Usuario\RecuperarUsuario::class);

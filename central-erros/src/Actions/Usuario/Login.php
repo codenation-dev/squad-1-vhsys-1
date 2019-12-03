@@ -4,6 +4,7 @@
 namespace Central\Actions\Usuario;
 
 use Central\Actions\ActionBase;
+use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
