@@ -1,25 +1,19 @@
-url
-http://localhost/central/erro
+para enviar o erro:
 
-headers
-Authorization
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84
+headers:
+Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU5NDYxNDIsImlhdCI6MTU3NTU4NjE0Mn0.qHmtUOHVkkVJLT3gFIHOHeMNJTIjemBIpRT87r2zFc0
+Content-Type: [{"key":"Content-Type","name":"Content-Type","value":"application/json","description":"","type":"text"}]
 
-Content-Type
-application/json
+url: http://localhost/central/erro
 
-
-bode / raw /jsão
-
+body:
 {
-"codigo":"a",
-"token":"w",
-"nivel":"error",
+"titulo":"PHP Fatal error:  Uncaught",
+"nivel":"teste",
 "ip":"127.0.0.1",
-"data_hora":"24/05/2019 10:15",
-"titulo":"accelerationService.AddCandidate: <forbidden>",
-"detalhe":"muitos detalhes pra digitar por aqui",
-"status":"d",
-"ambiente":"s",
-"origem":"z"
+"data_hora":"05/12/2019 19:47:57",
+"detalhe":"Function name must be a string in C:\\xampp\\htdocs\\semana_2\\index.php:12\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\semana_2\\index.php on line 12",
+"ambiente":"h",
+"origem":"não sei"
+}
 }
