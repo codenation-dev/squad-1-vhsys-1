@@ -2,7 +2,7 @@
 ini_set('max_execution_time', 300);
 $newHashedFile = null;
 $numeroAntigo = -1;
-$url = "localhost/central/erro";
+$url = "localhost/central/erro";//url que vai fazer a requisição do cURL
 
 while(true){
     sleep(5);
@@ -16,6 +16,8 @@ while(true){
                 $numeroAtual++;
                 continue;
             }
+            //esse V no inicio e no final é a maneira que eu encontrei de mudar o log do apache separando por Vs
+            //Lembrar de colocar o código no documento do apache.
             $pos2 = strpos($linha, 'VcritV');
             $pos3 = strpos($linha,'VerrorV');
             if($pos2 !==false||$pos3!==false){
