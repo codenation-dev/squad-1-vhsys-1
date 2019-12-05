@@ -20,13 +20,13 @@ class Erro extends EntidadeBase
 
     /**
      * @ORM\Column(type="string")
-     */
-    public $codigo;
-    /**
-     * @ORM\Column(type="string")
      * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="erroCollection", cascade={"persist", "merge", "refresh"})
      */
     public $token;
+    /**
+     * @ORM\Column(type="string")
+     */
+    public $titulo;
     /**
      * @ORM\Column(type="string")
      */
@@ -42,7 +42,7 @@ class Erro extends EntidadeBase
     /**
      * @ORM\Column(type="string")
      */
-    public $titulo;
+    public $origem;
     /**
      * @ORM\Column(type="string")
      */
@@ -50,18 +50,9 @@ class Erro extends EntidadeBase
     /**
      * @ORM\Column(type="string")
      */
-    public $status;
-    /**
-     * @ORM\Column(type="string")
-     */
     public $ambiente;
-    /**
-     * @ORM\Column(type="string")
-     */
-    public $origem;
     /**
      * @ORM\Column(type="boolean")
      */
     public $arquivado;
 }
-

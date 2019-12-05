@@ -133,11 +133,10 @@
             <th data-field="data_hora" class="callB">data_hora</th>
             <th data-field="titulo" class="callB">titulo</th>
             <th data-field="detalhe" class="callB">detalhe</th>
-            <th data-field="status" class="callB">status</th>
             <th data-field="ambiente" class="callB">ambiente</th>
             <th data-field="origem" class="callB">origem</th>
             <th data-field="token" class="callB">token</th>
-            <th data-field="quantidade" class="callB">quantidade</th>
+            <th data-field="frequencia" class="callB">quantidade</th>
             <th data-field="id" class="callB">id</th>
             <th data-field="arquivado" class="callB">arquivado</th>
           </tr>

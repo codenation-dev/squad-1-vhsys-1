@@ -4,7 +4,9 @@ $('#voltar').click(function (e){
 
 
 window.onload = function() {
-    var log = this.JSON.parse(pjson);
+
+
+    var log = this.JSON.parse(decodeURIComponent(pjson));
     console.dir(log);
 
     $('#ip_data').html("Erro no "+ log.ip +" em "+ log.data_hora);

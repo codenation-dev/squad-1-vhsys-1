@@ -20,16 +20,14 @@ class CriarErro extends ActionBase
             $params = json_decode($data);
 
             $Erro = new Erro();
-            $Erro->codigo = $params->codigo;
-            $Erro->nivel = $params->nivel;
             $Erro->token = $token;
+            $Erro->titulo = $params->titulo;
+            $Erro->nivel = $params->nivel;
             $Erro->ip = $params->ip;
             $Erro->data_hora = $params->data_hora;
-            $Erro->titulo = $params->titulo;
-            $Erro->detalhe = $params->detalhe;
-            $Erro->status = $params->status;
-            $Erro->ambiente = $params->ambiente;
             $Erro->origem = $params->origem;
+            $Erro->detalhe = $params->detalhe;
+            $Erro->ambiente = $params->ambiente;
             $Erro->arquivado = false;
 
             /*

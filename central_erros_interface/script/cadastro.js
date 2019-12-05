@@ -1,16 +1,6 @@
 window.onload = function() {
     LimparMensagens();
 
-    if (atualziar === true) {
-      var inputemail = document.getElementById("email");
-      var inputSenha = document.getElementById("senha");
-      inputemail.value = pemail;
-      inputSenha.value = psenha;
-
-      var titulo = document.getElementById("tit");
-      titulo.innerText = "Atualziar Usuário";
-    }
-    
 
     $('#forme').submit(function (e){
         e.preventDefault();
