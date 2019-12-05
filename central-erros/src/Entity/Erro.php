@@ -24,6 +24,7 @@ class Erro extends EntidadeBase
     public $codigo;
     /**
      * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Usuario", inversedBy="erroCollection", cascade={"persist", "merge", "refresh"})
      */
     public $token;
     /**

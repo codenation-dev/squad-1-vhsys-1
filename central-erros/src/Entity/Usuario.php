@@ -19,6 +19,7 @@ class Usuario extends EntidadeBase
     public $id;
     /**
      * @ORM\Column(type="string", unique=true)
+     * @ORM\OneToMany(targetEntity="Erro", mappedBy="usuario", cascade={"all"}, orphanRemoval=true, fetch="LAZY")
      */
     public $token;
     /**

@@ -14,19 +14,10 @@ use Zend\Diactoros\Response;
 
 class RecuperarTodosUsuarios extends ActionBase
 {
-    private $entityManager;
-    private $usuarioDAO;
-
-
-    public function __construct(EntityManager $entityManager, UsuarioDAO $usuarioDAO)
-    {
-        $this->entityManager = $entityManager;
-        $this->usuarioDAO = $usuarioDAO;
-    }
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        $result = $this->usuarioDAO->recuperarTodosUsuarios();
+       //$result = $this->usuarioDAO->recuperarTodosUsuarios();
         $query = $this->entityManager->createQueryBuilder();
         $query->select('f')
             ->from(Usuario::class, 'f');
