@@ -1,0 +1,1 @@
+phpunit tests/CriarUsuarioTest.php --log-junit report.xml
