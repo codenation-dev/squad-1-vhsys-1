@@ -12,14 +12,22 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
-class AtualizarTokenUsuario extends ActionBase
+class AtualizarAutenticacaoUsuario extends ActionBase
 {
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();
         try {
             $params = json_decode($request->getBody()->getContents());
-            $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(array('email' => $params->email));
+
+            if ($params->token !== "") {
+                $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
+                    array('email' => $params->email,
+                        'token_recuperacao_senha' =>  $params->token));
+            } else {
+                $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
+                    array('email' => $params->email));
+            }
 
             if ($Usuario === null) {
                 return $response->withStatus(404, 'usuário não encontrado');
@@ -43,12 +51,12 @@ class AtualizarTokenUsuario extends ActionBase
             /*
              * aqui termina o trecho de codigo que deve ir para outra classe
              */
-            $Usuario->senha = $params->senha;
+            $Usuario->senha = md5($params->senha);
             $Usuario->token = $tokenNovo;
-            $this->entityManager->persist($Usuario);
-            $this->entityManager->flush();
+            $Usuario->token_recuperacao_senha = "";
+            $this->persistir($Usuario);
 
-            return $response->withStatus(200, 'token atualziado com sucesso');
+            return $response->withStatus(200, 'usuario atualizado com sucesso');
         }catch (\Throwable $exception){
             return $response->withStatus(500, $exception->getMessage());
         }

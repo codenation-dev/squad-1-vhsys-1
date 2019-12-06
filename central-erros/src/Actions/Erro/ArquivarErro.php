@@ -5,8 +5,6 @@ namespace Central\Actions\Erro;
 
 
 use Central\Actions\ActionBase;
-use Central\Entity\Erro;
-use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;

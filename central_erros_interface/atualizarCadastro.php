@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
     session_start();	
+    $p_token= (isset($_GET['token']))?$_GET['token']:''; 
     $p_email= (isset($_GET['email']))?$_GET['email']:''; 
     $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
@@ -15,7 +16,8 @@
     <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <script type="text/javascript">
+    <script type="text/javascript">    
+        var ptoken='<?php echo $p_token;?>';
         var pemail='<?php echo $p_email;?>';
         var psenha='<?php echo $p_senha;?>';
     </script>

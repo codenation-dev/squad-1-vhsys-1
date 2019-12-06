@@ -25,6 +25,10 @@ class Usuario extends EntidadeBase
     /**
      * @ORM\Column(type="string")
      */
+    public $token_recuperacao_senha;
+    /**
+     * @ORM\Column(type="string")
+     */
     public $senha;
     /**
      * @ORM\Column(type="string", unique=true)
@@ -58,6 +62,7 @@ class Usuario extends EntidadeBase
         $this->token = $token;
         $this->senha = $senha;
         $this->email = $email;
+        $this->token_recuperacao_senha = "";
     }
 
     public static function factory(
@@ -70,10 +75,5 @@ class Usuario extends EntidadeBase
             $token,
             $senha,
             $email);
-    }
-
-    public function __toString()
-    {
-        return json_encode($this);
     }
 }

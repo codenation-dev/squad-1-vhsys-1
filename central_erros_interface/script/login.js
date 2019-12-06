@@ -14,12 +14,10 @@ function Login(){
 
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
+    
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
     var url = "http://localhost/central/usuario/login";
-    var paramAtualiza = '?email='+inputemail.value+'&senha='+inputSenha.value;
- 
-    //alert(url);
-    
+     
     $.ajax({
         url: url,
         type: "POST",
@@ -87,7 +85,8 @@ function EsqueceuSenha(){
     LimparMensagens();
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
-    var dados = '{"email":"'+inputemail.value+'"}';
+    var email_usuario = inputemail.value;
+    var dados = '{"email":"'+email_usuario+'"}';
     var url = "http://localhost/central/usuario/esqueceu_senha";
 
  
@@ -105,8 +104,12 @@ function EsqueceuSenha(){
         data : dados, 
 
         success : function(data, textStatus, jqXHR ){
-            inputSenha.value = jqXHR.statusText;
-            ExibirMensagemSucesso("A senha: " + jqXHR.statusText + " deveria ter sido enviada para o e-mail cadastrado mas eu joguei ela direto para o campo Passsvord.");
+            //inputSenha.value = jqXHR.statusText;
+            //ExibirMensagemSucesso("A senha: " + jqXHR.statusText + " deveria ter sido enviada para o e-mail cadastrado mas eu joguei ela direto para o campo Passsvord.");
+
+            var paramAtualiza = '?email='+email_usuario+'&token='+jqXHR.statusText;
+            
+            window.location.href = "./atualizarCadastro.php"+paramAtualiza;
         },
         
         error: function(xhr, resp, text) {

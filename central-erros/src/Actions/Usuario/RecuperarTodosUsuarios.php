@@ -17,7 +17,6 @@ class RecuperarTodosUsuarios extends ActionBase
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-       //$result = $this->usuarioDAO->recuperarTodosUsuarios();
         $query = $this->entityManager->createQueryBuilder();
         $query->select('f')
             ->from(Usuario::class, 'f');

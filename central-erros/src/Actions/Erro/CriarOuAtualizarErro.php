@@ -17,10 +17,9 @@ class CriarOuAtualizarErro extends ActionBase
         try {
             $Erro = $this->entityManager->find(Erro::class, $args['id']);
 
-            $data = $request->getBody()->getContents();//file_get_contents('php://input');
+            $data = $request->getBody()->getContents();
             $params = json_decode($data);
 
-            //$Erro->titulo = $params->titulo;
             $this->persistir($Erro);
 
             return $response->withStatus(204);

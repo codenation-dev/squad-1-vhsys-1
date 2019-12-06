@@ -90,8 +90,8 @@ App::getContainer()->add(\Central\Actions\Usuario\AtualizarUsuario::class, funct
     );
 });
 
-App::getContainer()->add(\Central\Actions\Usuario\AtualizarTokenUsuario::class, function () {
-    return new \Central\Actions\Usuario\AtualizarTokenUsuario(
+App::getContainer()->add(\Central\Actions\Usuario\AtualizarAutenticacaoUsuario::class, function () {
+    return new \Central\Actions\Usuario\AtualizarAutenticacaoUsuario(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
     );
 });

@@ -20,16 +20,18 @@ class Login extends ActionBase
             if ($params->email == "") {
                 return $response->withStatus(500, "email em branco" + $params->email);
             }
+            if ($params->senha == "") {
+                return $response->withStatus(500, "senha em branco" + $params->senha);
+            }
 
             $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
                 array('email' => $params->email,
-                      'senha' =>  $params->senha));
+                      'senha' =>  md5($params->senha)));
 
             if ($Usuario === null) {
                 return $response->withStatus(500, "usuario nao existe, verifique email e/ou senha");
             }
 
-            //return $response->withStatus(200, $Usuario->getToken());
             return $response->withStatus(200, json_encode($Usuario));
         }catch (\Throwable $exception){
             return $response->withStatus(508, $exception->getMessage());

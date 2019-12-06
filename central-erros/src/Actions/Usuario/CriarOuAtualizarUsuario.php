@@ -18,7 +18,7 @@ class CriarOuAtualizarUsuario extends ActionBase
         try {
             $Usuario = $this->entityManager->find(Usuario::class, $args['id']);
 
-            $data = $request->getBody()->getContents();//file_get_contents('php://input');
+            $data = $request->getBody()->getContents();
             $params = json_decode($data);
 
             $Usuario->titulo = $params->titulo;

@@ -22,8 +22,6 @@ class Auth implements  MiddlewareInterface
     {
         // TODO: Implement process() method.
 
-        //return (new Response)->withStatus(403, 'expirado, por favor atualize seu cadastro');
-
         /*
          * Eu acho que esse tratamento é gambiarrrrrra, verificar melhor forma de tratar requisições que não enviam o tóquem
          */

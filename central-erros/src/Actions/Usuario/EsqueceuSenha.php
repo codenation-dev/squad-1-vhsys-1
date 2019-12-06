@@ -6,13 +6,14 @@ namespace Central\Actions\Usuario;
 
 use Central\Actions\ActionBase;
 use Central\Entity\Usuario;
+use Central\Framework\CentralToken;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
 class EsqueceuSenha extends ActionBase
 {
-    public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();
         try {
@@ -28,7 +29,12 @@ class EsqueceuSenha extends ActionBase
                 return $response->withStatus(500, "usuario nao existe");
             }
 
-            return $response->withStatus(200, $Usuario->getSenha());
+            $token_recuperacao_senha = CentralToken::obterToken();
+            $Usuario->token_recuperacao_senha = $token_recuperacao_senha;
+            $this->persistir($Usuario);
+
+            //$url_recuperacao_senha  = "http://tuaapp.com/recovery?token=$token_recuperacao_senha";
+            return $response->withStatus(200, $token_recuperacao_senha);
         }catch (\Throwable $exception){
             return $response->withStatus(508, $exception->getMessage());
         }

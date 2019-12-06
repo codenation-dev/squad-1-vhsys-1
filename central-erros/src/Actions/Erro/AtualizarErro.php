@@ -25,7 +25,7 @@ class AtualizarErro extends ActionBase
                 return $response->withStatus(404);
             }
 
-            $data = $request->getBody()->getContents();//file_get_contents('php://input');
+            $data = $request->getBody()->getContents();
             $params = json_decode($data);
 
             $this->persistir($Erro);

@@ -5,7 +5,6 @@ namespace Central\Actions\Usuario;
 
 use Central\Actions\ActionBase;
 use Central\Framework\CentralToken;
-use Doctrine\ORM\EntityManager;
 use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -25,6 +24,8 @@ class CriarUsuario extends ActionBase
         try{
             $params = json_decode($request->getBody()->getContents());
 
+
+
             if ($params->email == "") {
                 return $response->withStatus(500, "email em branco");
             }
@@ -39,11 +40,10 @@ class CriarUsuario extends ActionBase
 
             $Usuario = Usuario::factory(
                 CentralToken::obterToken(),
-                $params->senha,
+                md5($params->senha),
                 $params->email);
 
-            $this->entityManager->persist($Usuario);
-            $this->entityManager->flush();
+            $this->persistir($Usuario);
 
             return $response->withStatus(201, 'usuario cadastrado com sucesso');
         }catch (\Throwable $exception){
