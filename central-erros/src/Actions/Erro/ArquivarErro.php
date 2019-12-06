@@ -32,7 +32,7 @@ class ArquivarErro extends ActionBase
             }
 
             if (count($ids_nao_encontrados) > 0) {
-                return $response->withStatus(201, 'Os seguintes ids não foram encontrados. '.json_encode($ids_nao_encontrados));
+                return $response->withStatus(200, 'Os seguintes ids não foram encontrados. '.json_encode($ids_nao_encontrados));
             }
             return $response->withStatus(200, 'Erro arquivado com sucesso.');
         }catch (\Throwable $exception){

@@ -45,7 +45,7 @@ class CriarUsuario extends ActionBase
 
             $this->persistir($Usuario);
 
-            return $response->withStatus(201, 'usuario cadastrado com sucesso');
+            return $response->withStatus(200, 'usuario cadastrado com sucesso');
         }catch (\Throwable $exception){
             return $response->withStatus(501, "falha ao cadastrar usuario. $exception->getMessage()");
         }

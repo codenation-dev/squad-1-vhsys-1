@@ -13,8 +13,20 @@ function EnviarCadastro(){
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
-    var url = "http://localhost/central/criar_usuario";
+    var url = "criar_usuario";
  
+
+    //function execAjax(dst, dados = {}, method = "POST", asyncRequest = false) {
+
+    var minhaRequisicao = execAjax(
+        url,
+        dados, 
+        'POST',
+        ExibirMensagemSucesso,
+        ExibirMensagemFalha);
+
+        //console.dir(minhaRequisicao);
+/*
     $.ajax({
         url: url,
         type: "POST",
@@ -30,10 +42,10 @@ function EnviarCadastro(){
             console.dir(xhr);//"xhr: " + 
             console.dir("respXXX: " + resp);
             console.dir("textXXX: " + text);
-            */
+            * /
             ExibirMensagemFalha(xhr.statusText);
         }
-    });
+    });*/
 }    
 
 

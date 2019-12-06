@@ -28,8 +28,12 @@
     </style>
   </head>
   <body>
-    <div class="login-clean">
-
+    <!--<div>  <div class="container">
+  <div class="login-clean container text-center">    
+  -->
+  <div class="login-clean">
+    
+    
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
       <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
@@ -37,10 +41,30 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar"><br>
-      <input type="button" id="login" class="btn btn-primary btn-block" value="Login">
+      <!-- 
+
+      <div class="row" name="linha">
+	<div class="col-sm-4">
+  <input type="button" id="cadastro" class="btn btn-primary" value="Cadastrar">
+	</div>
+	<div class="col-sm-4">
+	<input type="button" id="login" class="btn btn-primary" value="Login">        
+	</div>
+</div>
+      
+      -->
+
+
+      <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar">
+      <input type="button" id="login" class="btn btn-primary btn-block" value="Login">  
 
     </div>
+      
+        
+      
+      
+
+    
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
