@@ -3,6 +3,7 @@
 
 namespace Central\Framework;
 
+use Central\Actions\Usuario\RecuperarUsuario;
 use Central\Entity\Usuario;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -36,14 +37,19 @@ class CentralToken
         /*
          * tirar esse trecho daqui e colocar no usuario
          */
-        $em = App::getContainer()->get(\Doctrine\ORM\EntityManager::class);
-        $Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
+        /*
+        $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
+        //$Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
+        $Usuario = $recuperarUsuario->obterUsuario($token);
+        dd($Usuario);
         if ($Usuario === null) {
             return 404;
             //return (new Response)->withStatus(404, 'nenhum usuário encontrado');
         }
+        */
         return 200;
     }
+
     public static function obterToken(): string
     {
         $time = time();

@@ -5,6 +5,7 @@ namespace Central\Actions\Erro;
 
 
 use Central\Actions\ActionBase;
+use Central\Entity\Erro;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
@@ -20,7 +21,8 @@ class ArquivarErro extends ActionBase
             $params = json_decode($data);
 
             foreach ($params as $id) {
-                $Erro = $this->entityManager->find(\Central\Entity\Erro::class, $id->id);
+                $Erro = $this->entityManager->find(Erro::class, $id->id);
+
                 if ($Erro === null) {
                     array_push($ids_nao_encontrados, $id->id);
                     continue;

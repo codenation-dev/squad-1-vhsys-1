@@ -18,12 +18,12 @@ class EsqueceuSenha extends ActionBase
         $response = new Response();
         try {
             $params = json_decode($request->getBody()->getContents());
-
             if ($params->email == "") {
                 return $response->withStatus(500, "email em branco" + $params->email);
             }
 
             $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(array('email' => $params->email));
+
 
             if ($Usuario === null) {
                 return $response->withStatus(500, "usuario nao existe");

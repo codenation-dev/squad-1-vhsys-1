@@ -11,7 +11,7 @@ use Zend\Diactoros\Response;
 
 class Login extends ActionBase
 {
-    public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
         $response = new Response();
         try {

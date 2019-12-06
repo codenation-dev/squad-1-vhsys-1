@@ -4,6 +4,7 @@
 namespace Central\Middleware;
 
 
+use Central\Actions\Usuario\RecuperarUsuario;
 use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -49,6 +50,13 @@ class Auth implements  MiddlewareInterface
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');
                 break;
         }
+
+        $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
+        $Usuario = $recuperarUsuario->obterUsuario($token);
+        if ($Usuario === null) {
+            return (new Response)->withStatus(404, 'nenhum usuário encontrado');
+        }
+
         return $handler->handle($request);
     }
 }

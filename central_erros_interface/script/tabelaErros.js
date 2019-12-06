@@ -9,6 +9,7 @@ var $table = $('#tabelaResultado');
 
   $(function() {
     $arquivar.click(function () {
+        console.log(JSON.stringify($table.bootstrapTable('getSelections')));
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));
         var url = 'http://localhost/central/erro_arquivar';
         ExecutarAcaoApagarArquivar(url, "PUT", objLinha);        
