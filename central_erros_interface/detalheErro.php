@@ -20,6 +20,7 @@
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
       var pjson='<?php echo $p_json;?>';
+      //alert(pjson);
     </script>
 
   </head>

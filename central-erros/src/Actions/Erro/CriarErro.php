@@ -25,20 +25,29 @@ class CriarErro extends ActionBase
             $Erro->nivel = $params->nivel;
             $Erro->ip = $params->ip;
             $Erro->data_hora = $params->data_hora;
-            $Erro->origem = $params->origem;
+
+            $origem_formatada = str_replace("\\", "/", $params->origem);
+            $origem_formatada = str_replace("\n", " ", $origem_formatada);
+            $origem_formatada = str_replace("\r", " ", $origem_formatada);
+            $origem_formatada = str_replace("#0", " ", $origem_formatada);
+            $origem_formatada = str_replace("'", " ", $origem_formatada);
+
+            $Erro->origem = $origem_formatada;
 
             $detalhe_formatado = str_replace("\n", " ", $params->detalhe);
             $detalhe_formatado = str_replace("#0", " ", $detalhe_formatado);
-            $detalhe_formatado = str_replace("\\", "\\\\", $detalhe_formatado);
-            
-            //dd($detalhe_formatado);
+            $detalhe_formatado = str_replace("\r", " ", $detalhe_formatado);
+            $detalhe_formatado = str_replace("\\", "/", $detalhe_formatado);
+            $detalhe_formatado = str_replace("'", "", $detalhe_formatado);
 
             $Erro->detalhe = $detalhe_formatado;
             $Erro->ambiente = $params->ambiente;
             $Erro->arquivado = false;
 
             $this->persistir($Erro);
-            return $response->withStatus(200, 'Erro cadastrado!');
+
+            $response->getBody()->write('Erro cadastrado!');
+            return $response->withStatus(200);
         }catch (\Throwable $exception){
             return $response->withStatus(500, $exception->getMessage());
         }

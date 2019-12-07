@@ -32,7 +32,8 @@ class Login extends ActionBase
                 return $response->withStatus(500, "usuario nao existe, verifique email e/ou senha");
             }
 
-            return $response->withStatus(200, json_encode($Usuario));
+            $response->getBody()->write(json_encode($Usuario));
+            return $response->withStatus(200);
         }catch (\Throwable $exception){
             return $response->withStatus(508, $exception->getMessage());
         }

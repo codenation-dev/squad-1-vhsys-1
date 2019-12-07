@@ -124,7 +124,7 @@ class CentralTest extends TestCase
         $request2 = new ServerRequest([], [], null, 'POST', $stream2);
         $Login = new Login($this->entityManager);
         $response = $Login($request2);
-        $u = json_decode($response->getReasonPhrase());
+        $u = json_decode($response->getBody());
 
         $this->assertSame($response->getStatusCode(), 200);
         $this->assertSame($u->email, $email);
@@ -200,7 +200,7 @@ class CentralTest extends TestCase
         $this->assertSame($erroCadastrado->ip, "127.0.0.1");
         $this->assertSame($erroCadastrado->data_hora, "05/12/2019 19:47:57");
         $this->assertSame($erroCadastrado->origem, "origem");
-        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php:12 Stack trace:   {main}   thrown in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php on line 12");
+        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:/xampp/htdocs/semana_2/index.php:12 Stack trace:   {main}   thrown in C:/xampp/htdocs/semana_2/index.php on line 12");
         $this->assertSame($erroCadastrado->ambiente, "dev");
         $this->assertSame($erroCadastrado->arquivado, false);;
     }
@@ -249,7 +249,7 @@ class CentralTest extends TestCase
         $this->assertSame($erroCadastrado->ip, "127.0.0.1");
         $this->assertSame($erroCadastrado->data_hora, "05/12/2019 19:47:57");
         $this->assertSame($erroCadastrado->origem, "origem");
-        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php:12 Stack trace:   {main}   thrown in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php on line 12");
+        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:/xampp/htdocs/semana_2/index.php:12 Stack trace:   {main}   thrown in C:/xampp/htdocs/semana_2/index.php on line 12");
         $this->assertSame($erroCadastrado->ambiente, "dev");
         $this->assertSame($erroCadastrado->arquivado, true);;
     }
@@ -319,20 +319,27 @@ class CentralTest extends TestCase
         $this->assertSame($CriarErro($request)->getStatusCode(), 200, 'Erro cadastrado!');
 
         $recurso = [
-            'buscarPor' => 'buscarPor',
-            'valor' => 'valor',
-            'ordenarPor' => 'ordenarPor'];
+            'buscarPor' => '',
+            'valor' => '',
+            'ordenarPor' => ''];
 
-        $request2 = new ServerRequest([], [], null, 'GET');
+        $stream2 = new Stream('php://memory', 'wb+');
+        $stream2->write(json_encode($recurso));
+        $stream2->rewind();
+        $request2 = new ServerRequest([], [], null, 'POST', $stream2);
 
         $RecuperarErros = new RecuperarErros($this->entityManager);
-        $this->assertSame($RecuperarErros($request2, $recurso)->getStatusCode(), 200, 'Erros obtidos!');
+        $this->assertSame($RecuperarErros($request2)->getStatusCode(), 200);
 
         $recurso2 = [
             'buscarPor' => 'nivel',
             'valor' => 'error',
-            'ordenarPor' => 'ordenarPor'];
-        $this->assertSame($RecuperarErros($request2, $recurso2)->getStatusCode(), 200, 'Erros obtidos!');
+            'ordenarPor' => ''];
+        $stream3 = new Stream('php://memory', 'wb+');
+        $stream3->write(json_encode($recurso));
+        $stream3->rewind();
+        $request3 = new ServerRequest([], [], null, 'POST', $stream3);
+        $this->assertSame($RecuperarErros($request3)->getStatusCode(), 200);
     }
 
     public function test_ObterErros()

@@ -14,9 +14,12 @@ $router->group('/central', function ($router) {
     $router->map('POST', '/usuario/login', \Central\Actions\Usuario\Login::class);
     $router->map('POST', '/criar_usuario', \Central\Actions\Usuario\CriarUsuario::class);
     $router->map('POST', '/atualizar_token_usuario', \Central\Actions\Usuario\AtualizarAutenticacaoUsuario::class);
-
+/*
     $router->map('GET', '/erro/{buscarPor}/{valor}/{ordenarPor}', \Central\Actions\Erro\RecuperarErros::class);
     $router->map('GET', '/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
+*/
+    $router->map('GET', '/erro', \Central\Actions\Erro\RecuperarTodosErros::class);
+    $router->map('POST', '/recuperar_erro', \Central\Actions\Erro\RecuperarErros::class);
     $router->map('GET', '/erro/{id}', \Central\Actions\Erro\RecuperarErro::class);
     $router->map('POST', '/erro', \Central\Actions\Erro\CriarErro::class);
     $router->map('DELETE', '/erro/apagar', \Central\Actions\Erro\DeletarErros::class);

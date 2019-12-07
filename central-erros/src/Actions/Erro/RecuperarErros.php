@@ -12,14 +12,22 @@ use Zend\Diactoros\Response;
 
 class RecuperarErros extends ActionBase
 {
-    public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
+    public function __invoke(ServerRequestInterface $request/*, array $args*/): ResponseInterface
     {
         $response = new Response();
         try {
             $tokenUsuario = $request->getHeaderLine('Authorization');
+
+            $params = json_decode($request->getBody()->getContents());
+            //dd($params);
+            /*
             $buscarPor = $args['buscarPor'];
             $valor = $args['valor'];
             $ordenarPor = $args['ordenarPor'];
+            */
+            $buscarPor = $params->buscarPor;
+            $valor = $params->valor;
+            $ordenarPor = $params->ordenarPor;
 
             $query = $this->entityManager->createQueryBuilder();
             $query->select('e.titulo,e.nivel,e.ip,e.data_hora,e.origem,e.detalhe,e.token,e.ambiente,e.arquivado,e.id')
@@ -30,6 +38,7 @@ class RecuperarErros extends ActionBase
                   ->andWhere("e.arquivado = :arquivado")
                   ->setParameter('arquivado', false);
 
+            /*
             if ($buscarPor !== "buscarPor") {
                 if ($valor === "valor") {
                     return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
@@ -37,8 +46,23 @@ class RecuperarErros extends ActionBase
                 $query->andWhere("e.$buscarPor LIKE :buscarPor")
                       ->setParameter('buscarPor', '%'.$valor.'%');
             }
+            */
+            if ($buscarPor !== "") {
+                if ($valor === "") {
+                    return $response->withStatus(500, "valor não pode estar em branco para este tipo de pesquisa.");
+                }
+                $query->andWhere("e.$buscarPor LIKE :buscarPor")
+                    ->setParameter('buscarPor', '%'.$valor.'%');
+            }
 
+            /*
             if ($ordenarPor !== "ordenarPor") {
+                if ($ordenarPor == "nivel") {
+                    $query->orderBy("e.$ordenarPor", 'ASC');
+                }
+            }
+            */
+            if ($ordenarPor !== "") {
                 if ($ordenarPor == "nivel") {
                     $query->orderBy("e.$ordenarPor", 'ASC');
                 }
