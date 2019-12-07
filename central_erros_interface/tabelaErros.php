@@ -11,7 +11,7 @@
   $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:'';
 ?>
 <head>
-    <title>Logues</title>
+    <title>Lista de Log</title>
     
     <meta charset="utf-8">
     <meta name="description" content="Projeto Final Squad 1.">
@@ -21,12 +21,14 @@
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">   
     <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
-    <link rel="stylesheet" href="./css/bootstrap-table.min.1.15.5.css">         
-    <script src="./script/jquery.min.3.4.1.js"></script>
-    <script src="./script/bootstrap-table.min.1.15.5.js"></script>    
-    <script src="./script/bootstrap.min.3.4.0.js"></script>
+    <link rel="stylesheet" href="./css/bootstrap-table.min.1.15.5.css">   
+    <link rel="stylesheet" href="./css/font-awesome.min.4.7.0.css">   
 
+    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
+    <script src="./script/terceiros/bootstrap-table.min.1.15.5.js"></script>    
+    <script src="./script/terceiros/bootstrap.min.3.4.0.js"></script>
     <!-- tem que deixar local
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"> -->
 
     <style type="text/css">
@@ -54,10 +56,14 @@
     
   </head>
   <body>
+    <header>
+      <span class="text-muted quebra">Bem vindo <?php echo $_SESSION['email']; ?>. Seu token é: <?php echo $_SESSION['token']; ?>.</span>
+    </header>
+
       <div class="container-fluid" style="height: 100%; overflow: auto;">
       
       <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
-      <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, proprietário do token: <?php echo $_SESSION['token']; ?>.</span>
+      
 
       <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
       <span class='msg-erro msg-falha'></span>
@@ -91,7 +97,11 @@
 
       <input type="text" name="pesq" id="valor" placeholder="search">
       <button type="button" class="btn btn-default" id="consultar">    
+        Lupa
+      <!--
+        <i class="fa fa-search"></i>
         <span class="glyphicon glyphicon-search"></span> 
+      -->
       </button>
       <button type="button" class="btn btn-default" id="limparPesquisa">Limpar pesquisa
       </button>
@@ -124,8 +134,8 @@
       </table>
     </div>
 
-    <script src="./script/requisicaoAjax.js"></script>
-    <script src="./script/comum.js"></script>
+    <script src="./script/comum/requisicaoAjax.js"></script>
+    <script src="./script/comum/comum.js"></script>
     <script src="./script/tabelaErros.js"></script>
   </body>
 </html>

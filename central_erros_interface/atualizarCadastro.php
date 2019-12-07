@@ -6,7 +6,6 @@
     $p_email= (isset($_GET['email']))?$_GET['email']:''; 
     $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
-
 <head>
     <!-- Required meta tags -->
     <title>Atualizar Cadastro</title>
@@ -22,19 +21,13 @@
         var psenha='<?php echo $p_senha;?>';
     </script>
 
-    <!-- Form CSS -->
-    <link rel="stylesheet" href="css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="css/styles.css">
-
-    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
+    <link rel="stylesheet" href="./css/Login-Form-Clean.css">
+    <link rel="stylesheet" href="./css/styles.css">  
+    
+    <!-- Bootstrap CSS
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <style type="text/css">
-        .msg-erro{ color: red; background-color: white; }
-        .msg-alerta{ background-color: yellow; }
-        .msg-exito{ color: green; background-color: white; }
-        .msg-processando{ color: DodgerBlue; background-color: white; }
-    </style>
+ -->
   </head>
   <body>
     <div class="login-clean">
@@ -56,11 +49,11 @@
         </form>
     </div>
 
-    <script src="./script/jquery.min.3.4.1.js"></script>
-    <script src="./script/popper.min.1.14.7.js"></script>
-    <script src="./script/bootstrap.min.4.3.1.js"></script>
-    <script src="./script/requisicaoAjax.js"></script>
-    <script src="./script/comum.js"></script>
+    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
+    <script src="./script/terceiros/popper.min.1.14.7.js"></script>
+    <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
+    <script src="./script/comum/requisicaoAjax.js"></script>
+    <script src="./script/comum/comum.js"></script>
     <script src="./script/atualizarCadastro.js"></script>
   </body>
 </html>

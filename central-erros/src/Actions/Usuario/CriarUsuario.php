@@ -24,8 +24,6 @@ class CriarUsuario extends ActionBase
         try{
             $params = json_decode($request->getBody()->getContents());
 
-
-
             if ($params->email == "") {
                 return $response->withStatus(500, "email em branco");
             }

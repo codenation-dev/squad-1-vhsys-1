@@ -200,7 +200,7 @@ class CentralTest extends TestCase
         $this->assertSame($erroCadastrado->ip, "127.0.0.1");
         $this->assertSame($erroCadastrado->data_hora, "05/12/2019 19:47:57");
         $this->assertSame($erroCadastrado->origem, "origem");
-        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\xampp\\htdocs\\semana_2\\index.php:12\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\semana_2\\index.php on line 12");
+        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php:12 Stack trace:   {main}   thrown in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php on line 12");
         $this->assertSame($erroCadastrado->ambiente, "dev");
         $this->assertSame($erroCadastrado->arquivado, false);;
     }
@@ -249,7 +249,7 @@ class CentralTest extends TestCase
         $this->assertSame($erroCadastrado->ip, "127.0.0.1");
         $this->assertSame($erroCadastrado->data_hora, "05/12/2019 19:47:57");
         $this->assertSame($erroCadastrado->origem, "origem");
-        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\xampp\\htdocs\\semana_2\\index.php:12\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\semana_2\\index.php on line 12");
+        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php:12 Stack trace:   {main}   thrown in C:\\\\xampp\\\\htdocs\\\\semana_2\\\\index.php on line 12");
         $this->assertSame($erroCadastrado->ambiente, "dev");
         $this->assertSame($erroCadastrado->arquivado, true);;
     }

@@ -38,11 +38,11 @@
       </form>
     </div>
     
-    <script src="./script/jquery.min.3.4.1.js"></script>
-    <script src="./script/popper.min.1.14.7.js"></script>
-    <script src="./script/bootstrap.min.4.3.1.js"></script>
-    <script src="./script/requisicaoAjax.js"></script>
-    <script src="./script/comum.js"></script>
+    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
+    <script src="./script/terceiros/popper.min.1.14.7.js"></script>
+    <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
+    <script src="./script/comum/requisicaoAjax.js"></script>
+    <script src="./script/comum/comum.js"></script>
     <script src="./script/login.js"></script>
     
   </body>

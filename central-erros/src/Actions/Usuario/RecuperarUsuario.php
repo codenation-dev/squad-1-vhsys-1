@@ -12,7 +12,7 @@ use Zend\Diactoros\Response;
 
 class RecuperarUsuario extends ActionBase
 {
-    public function obterUsuario(string $token): Usuario
+    public function obterUsuario(string $token)
     {
         return $this->entityManager->getRepository(Usuario::class)->findOneBy(array('token' => $token));
     }

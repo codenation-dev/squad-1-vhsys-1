@@ -24,37 +24,39 @@
 
   </head>
   <body>
-    <div class="container-fluid">
+    <header>
+      <span class="text-muted quebra">Bem vindo <?php echo $_SESSION['email']; ?>. Seu token é: <?php echo $_SESSION['token']; ?>.</span>
+    </header>
 
-      <span class="text-muted">bem vindo sr. <?php echo $_SESSION['email']; ?>, identificado pelo token: <?php echo $_SESSION['token']; ?>.</span>
+    <section>
+      <nav>
+        <label class="nivel" id="nivel"></label>
+        <br>
+        <h5 >Eventos</h5>
+        <p id="frequencia"></p>
+        <br>
+        <h5 >Coletado por</h5>
+        <p class="quebra" id="token"></p>
+      </nav>
 
-      <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
-      <span class='msg-erro msg-falha'></span>
-      <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
-      <span class='msg-alerta msg-warning'></span>
-      <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
-      <span class='msg-exito msg-sucesso'></span>
-      
-      <input type="button" id="voltar" class="btn btn-primary btn-block" value="Voltar">
+      <article>
 
-      <h1 class="text-center" id="ip_data"></h1>
+        <input type="button" id="voltar" class="btn" value="Voltar">
+        <h1 id="ip_data"></h1>
 
-      <h2 class="text-center">Título</h1>
-      <h3 class="text-center" id="titulo">"TITULO"</h1>
-      <br>
-      <br>
-      <h2 class="text-center">Detalhes</h1>
-      <h3 class="text-center" id="detalhe">"DETALHES"</h1>
-      <br>
-      <br>
+        <h4 >Título</h4>
+        <h5 id="titulo"></h5>
+        <br>
+        <h4 >Detalhes</h4>
+        <h5 class="quebra" id="detalhe"></h5>
+      </article>
+    </section>
 
-    </div>
-
-    <script src="./script/jquery.min.3.4.1.js"></script>
-    <script src="./script/popper.min.1.14.7.js"></script>
-    <script src="./script/bootstrap.min.4.3.1.js"></script>
-    <script src="./script/requisicaoAjax.js"></script>
-    <script src="./script/comum.js"></script>
+    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
+    <script src="./script/terceiros/popper.min.1.14.7.js"></script>
+    <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
+    <script src="./script/comum/requisicaoAjax.js"></script>
+    <script src="./script/comum/comum.js"></script>
     <script src="./script/detalheErro.js"></script>
   </body>
 </html>

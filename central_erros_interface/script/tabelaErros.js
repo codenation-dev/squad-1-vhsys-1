@@ -71,17 +71,23 @@ window.onload = function() {
     var url = 'erro';
     var paramAtualiza = '?email='+email_usuario;
 
+    var metodo = "GET";
+    var dados = "";
+
     if (((pbuscarPor !== "buscarPor") &&
          (pbuscarPor !== "")) ||
         ((pordenarPor !== "pordenarPor") &&
          (pordenarPor !== ""))) {
         url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
-    } 
-    
+        metodo = "POST";
+        dados = '{"buscarPor":"'+pbuscarPor+'", "valor":"'+pvalor+'", "ordenarPor":"'+pordenarPor+'"}';
+        url = 'recuperar_erro';
+    }        
+
     execAjax(
         url,
-        "", 
-        'GET',
+        dados, 
+        metodo,
         false,
         function(statusText, data) {
             console.dir(data);
@@ -90,7 +96,7 @@ window.onload = function() {
             
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: retorno});
-            console.dir($table);
+            //console.dir($table);
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
                 var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);

@@ -26,7 +26,14 @@ class CriarErro extends ActionBase
             $Erro->ip = $params->ip;
             $Erro->data_hora = $params->data_hora;
             $Erro->origem = $params->origem;
-            $Erro->detalhe = $params->detalhe;
+
+            $detalhe_formatado = str_replace("\n", " ", $params->detalhe);
+            $detalhe_formatado = str_replace("#0", " ", $detalhe_formatado);
+            $detalhe_formatado = str_replace("\\", "\\\\", $detalhe_formatado);
+            
+            //dd($detalhe_formatado);
+
+            $Erro->detalhe = $detalhe_formatado;
             $Erro->ambiente = $params->ambiente;
             $Erro->arquivado = false;
 
