@@ -36,10 +36,11 @@ function execAjax(
       /*
       return result
       console.log(result.statusText);
+      */
       console.dir(data);
       console.dir(textStatus);      
       console.dir(jqXHR);
-      */
+      
       funcaoSucesso(jqXHR.statusText, data);
     },    
     error: function(xhr, resp, text) {
