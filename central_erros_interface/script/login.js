@@ -24,8 +24,9 @@ function Login(){
         dados, 
         'POST',
         false,
-        function (statusText) {
-            var user = JSON.parse(statusText);
+        function (statusText, data) {
+            console.dir(data);
+            var user = JSON.parse(data);
             
             var paramSessao = '?email='+user.email+'&token='+user.token;
 
