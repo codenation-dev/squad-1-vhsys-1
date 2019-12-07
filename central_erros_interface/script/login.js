@@ -1,127 +1,74 @@
-$('#formLogin').submit(function (e){
-    e.preventDefault();
-    Login();
-});
+window.onload = function() {
+    $('#formLogin').submit(function (e){
+        e.preventDefault();
+        Login();
+    });
 
-$('#linkEsqueceuSenha').click(function (e){
-    e.preventDefault();
-    EsqueceuSenha();
-});
+    $('#linkEsqueceuSenha').click(function (e){
+        e.preventDefault();
+        EsqueceuSenha();
+    });
+}
 
 function Login(){
     
     LimparMensagens();
 
-    var inputemail = document.getElementById("email");
-    var inputSenha = document.getElementById("senha");
-    
-    var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
-    var url = "http://localhost/central/usuario/login";
-     
-    $.ajax({
-        url: url,
-        type: "POST",
-        async: false,
-        data : dados, 
-        success : function(data, textStatus, jqXHR ){
-            /*
-            */
-            console.dir(data);
-            console.dir(textStatus);
-            console.dir(jqXHR);
+    var email_usuario = $('#email').val();
+    var senha_usuario = $('#senha').val();
+    var dados = '{"email":"'+email_usuario+'", "senha":"'+senha_usuario+'"}';
+    var url = "usuario/login";
 
-            var user = JSON.parse(jqXHR.statusText);
-            //console.dir(user);
-            ExibirMensagemSucesso(jqXHR.statusText);
-           
-            var param = '?email='+user.email+'&token='+user.token;
+    execAjax(
+        url,
+        dados, 
+        'POST',
+        false,
+        function (statusText) {
+            var user = JSON.parse(statusText);
+            
+            var paramSessao = '?email='+user.email+'&token='+user.token;
 
-            console.dir(param);
-
-            $.ajax({
-                url: './session_write.php'+param,//?usuario=' + jqXHR.statusText,
-                type : "GET",
-                async: false,
-                success : function(result) {
-                    //console.log(result);
-                    ExibirMensagemSucesso(result);
+            execAjax(
+                './session_write.php'+paramSessao,
+                "", 
+                'GET',
+                false,
+                function (statusText) {
                     window.location.href = "./tabelaErros.php";
                 },
-                error: function(xhr, resp, text) {
-                    //console.log(xhr, resp, text);
-                    ExibirMensagemFalha(text);
-                    
-                }
-            });
-
-            //jQuery('#div_session_write').load('session_write.php?session_name=new_value');
-
-            //header('Location:./tabelaErros.php');
-
+                ExibirMensagemFalha,
+                false
+            );  
+        },
+        function(status, statusText) {
             
-        },       
-        
-        error: function(xhr, resp, text) {
-            console.dir(xhr);//"xhr: " + 
+            ExibirMensagemFalha(statusText);
 
-            ExibirMensagemFalha(xhr.statusText);
-
-            
-            console.dir("respXXX: " + resp);
-            console.dir("textXXX: " + text);
-
-            if (xhr.status === 402) {
+            if (status === 402) {
                 window.location.href = "./cadastro.php"+paramAtualiza;
             }
         }
-        
-    });
+    );
 }
-
-
-
 
 function EsqueceuSenha(){
     LimparMensagens();
-    var inputemail = document.getElementById("email");
-    var inputSenha = document.getElementById("senha");
-    var email_usuario = inputemail.value;
-    var dados = '{"email":"'+email_usuario+'"}';
-    var url = "http://localhost/central/usuario/esqueceu_senha";
-
- 
-    //alert(url);
     
-    $.ajax({
-        url: url,
-        type: "POST",
-        beforeSend: function(request) {
-          request.setRequestHeader(
-            "Authorization",
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.p2lc_NG5Xay_w5gny0zQgUZz3c3Bx_Zb7d2_sUPPs84");
-        }, 
-        contentType : 'application/json',
-        data : dados, 
+    var email_usuario = $('#email').val();
+    var senha_usuario = $('#senha').val();
+    var dados = '{"email":"'+email_usuario+'"}';
+    var url = "usuario/esqueceu_senha";
 
-        success : function(data, textStatus, jqXHR ){
-            //inputSenha.value = jqXHR.statusText;
-            //ExibirMensagemSucesso("A senha: " + jqXHR.statusText + " deveria ter sido enviada para o e-mail cadastrado mas eu joguei ela direto para o campo Passsvord.");
-
-            var paramAtualiza = '?email='+email_usuario+'&token='+jqXHR.statusText;
-            
+    execAjax(
+        url,
+        dados, 
+        'POST',
+        false,
+        function (statusText) {
+            var paramAtualiza = '?email='+email_usuario+'&token='+statusText;            
             window.location.href = "./atualizarCadastro.php"+paramAtualiza;
         },
-        
-        error: function(xhr, resp, text) {
-            console.dir(xhr);
-
-            inputSenha.value = xhr.statusText;
-            ExibirMensagemFalha(xhr.statusText);
-
-            console.dir("respXXX: " + resp);
-            console.dir("textXXX: " + text);
-        }        
-    });
-
-    return false;
+        ExibirMensagemFalha
+    );  
 }    

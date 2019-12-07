@@ -1,7 +1,6 @@
 window.onload = function() {
     LimparMensagens();
 
-
     $('#forme').submit(function (e){
         e.preventDefault();
         EnviarCadastro();
@@ -10,56 +9,19 @@ window.onload = function() {
 
 function EnviarCadastro(){
     LimparMensagens();
+
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'", "senha":"'+inputSenha.value+'"}';
     var url = "criar_usuario";
- 
 
-    //function execAjax(dst, dados = {}, method = "POST", asyncRequest = false) {
-
-    var minhaRequisicao = execAjax(
+    execAjax(
         url,
         dados, 
         'POST',
+        false,
         ExibirMensagemSucesso,
         ExibirMensagemFalha);
 
-        //console.dir(minhaRequisicao);
-/*
-    $.ajax({
-        url: url,
-        type: "POST",
-        data : dados, 
-        success : function(data, textStatus, jqXHR ){
-            //console.dir(data);
-            //console.dir(textStatus);
-            //console.dir(jqXHR.statusText);
-            ExibirMensagemSucesso(jqXHR.statusText);
-        },
-        error: function(xhr, resp, text) {
-            /*
-            console.dir(xhr);//"xhr: " + 
-            console.dir("respXXX: " + resp);
-            console.dir("textXXX: " + text);
-            * /
-            ExibirMensagemFalha(xhr.statusText);
-        }
-    });*/
+    //console.dir(minhaRequisicao);
 }    
-
-
-/*
-
-var parametros = {
-    email: "",
-    senha: ""
-}
-
-var form = document.getElementById("forme");
-
-form.addEventListener("submit", function(event){
-    event.preventDefault();		    
-    EnviarCadastro();
-});
-*/

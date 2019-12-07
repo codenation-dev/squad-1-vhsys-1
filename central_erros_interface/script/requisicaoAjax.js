@@ -3,32 +3,55 @@ var base_url = "http://localhost/central/";
 
 
 
-function execAjax(dst, dados = {}, method = "POST", asyncRequest = false, funcaoSucesso, funcaoErro) {
+function execAjax(
+  dst, 
+  dados = {}, 
+  method = "POST", 
+  asyncRequest = false,  
+  funcaoSucesso, 
+  funcaoErro,
+  usarBaseURL = true,
+  token = "",
+  contentType = "") {
+
+  urlDst = dst;
+  if (usarBaseURL === true) {
+    urlDst = base_url + dst;
+  }
 
   request = $.ajax({
     type: method,
     data: dados,
-    url: base_url + dst,
+    url: urlDst,
     async: asyncRequest,
+    contentType: contentType,
+    beforeSend: function(request) {
+      if (token !== "") {
+        request.setRequestHeader(
+          "Authorization",
+          token)
+      }      
+    }, 
     success: function(data, textStatus, jqXHR ){
-      //return result
-      //console.log(result.statusText);
-            console.dir(data);
-            console.dir(textStatus);
-            
-            console.dir(jqXHR);
-      funcaoSucesso(jqXHR.statusText);
-    },
-    error: function(result) {
-      if (result.responseText) {
-        funcaoErro(result.responseText);
-      }
-      return false;
+      /*
+      return result
+      console.log(result.statusText);
+      console.dir(data);
+      console.dir(textStatus);      
+      console.dir(jqXHR);
+      */
+      funcaoSucesso(jqXHR.statusText, data);
+    },    
+    error: function(xhr, resp, text) {
+      funcaoErro(xhr.status, xhr.statusText);      
     }
   });
 
+  /*
   if (request['status'] == 200) {
     return request['responseText'];
   }
-  return false;
+  */
+  return request['responseText'];
+  //return false;
 }

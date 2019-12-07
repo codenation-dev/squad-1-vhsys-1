@@ -11,7 +11,7 @@ var $table = $('#tabelaResultado');
     $arquivar.click(function () {
         console.log(JSON.stringify($table.bootstrapTable('getSelections')));
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));
-        var url = 'http://localhost/central/erro_arquivar';
+        var url = "erro_arquivar";
         ExecutarAcaoApagarArquivar(url, "PUT", objLinha);        
     })
   })
@@ -20,45 +20,26 @@ var $table = $('#tabelaResultado');
     $apagar.click(function () {
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
         //console.dir(token_session);
-        var url = 'http://localhost/central/erro/apagar';
+        var url = "erro/apagar";
         ExecutarAcaoApagarArquivar(url, "DELETE", objLinha);
     })
   })
 
   function ExecutarAcaoApagarArquivar(url, metodo, dados){
-    /*
-    console.dir(dados);
-    console.dir(JSON.stringify(dados));
-    */
-   //console.dir(JSON.stringify(dados));
     LimparMensagens();
+    
+    execAjax(
+        url,
+        JSON.stringify(dados), 
+        metodo,
+        false,
+        ExibirMensagemSucesso,
+        ExibirMensagemFalha,
+        true,
+        token_session
+    );
 
-    $.ajax({
-        url: url,
-        type: metodo,
-        beforeSend: function(request) {
-          request.setRequestHeader(
-            "Authorization",
-            token_session);
-        },     
-        data: JSON.stringify(dados),    
-        success : function(data, textStatus, jqXHR ){
-            //console.log("kkkkkkkkkkkkkkkkkkk: "  +result);
-            console.dir(data);
-            console.dir(textStatus);
-            console.dir(jqXHR.statusText);
-            ExibirMensagemSucesso(jqXHR.statusText);
-            //location.reload();
-        },
-        error: function(xhr, resp, text) {
-            console.dir(xhr);//"xhr: " + 
-
-            ExibirMensagemFalha(xhr.statusText);
-
-            console.dir("respXXX: " + resp);
-            console.dir("textXXX: " + text);
-        }
-    });
+    location.reload();
 }
 
 function LimparTabelaResultado() {
@@ -86,8 +67,9 @@ function ControlarVisibilidadeGrid() {
 
 window.onload = function() {
     ControlarVisibilidadeGrid();
-    var url = 'http://localhost/central/erro';
-    var paramAtualiza = '?email='+email_usuario;//+'&senha=';
+
+    var url = 'erro';
+    var paramAtualiza = '?email='+email_usuario;
 
     if (((pbuscarPor !== "buscarPor") &&
          (pbuscarPor !== "")) ||
@@ -96,22 +78,18 @@ window.onload = function() {
         url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
     } 
     
-    //alert(url);
-
-    $.ajax({
-        url: url,
-        type : "GET",
-        beforeSend: function(request) {
-          request.setRequestHeader(
-            "Authorization",
-            token_session)
-        }, 
-        success : function(result) {
-            data = JSON.parse(result);
+    execAjax(
+        url,
+        "", 
+        'GET',
+        false,
+        function(statusText, data) {
             console.dir(data);
+            retorno = JSON.parse(decodeURIComponent(data));
+            console.dir(retorno);
             
             var $table = $('#tabelaResultado');
-            $table.bootstrapTable({data: data});
+            $table.bootstrapTable({data: retorno});
             console.dir($table);
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
@@ -121,7 +99,7 @@ window.onload = function() {
             
             ControlarVisibilidadeGrid();
         },
-        error: function(xhr, resp, text) {
+        function(xhr, resp, text) {
             ExibirMensagemFalha(text);
 
             console.log(xhr, resp, text);
@@ -132,8 +110,10 @@ window.onload = function() {
                 alert("Por favor, atualize seu cadastro.")
                 window.location.href = "./atualizarCadastro.php"+paramAtualiza;
             }
-        }
-    });
+        },
+        true,
+        token_session
+    );
 };
 
 $('#consultar').click(function (e){
@@ -149,12 +129,6 @@ function Consultar(){
     var selectOrdenarPor = document.getElementById("ordenarPor"); 
     var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
     var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
-    /*
-    var urlBase = 'http://localhost/central/erro/';
-    var url = urlBase + buscarPor + '/' + inputValor.value + '/' + ordenarPor;
-    var dados = '{"buscarPor":"'+buscarPor+'","valor":"'+inputValor.value+'","ordenarPor":"'+ordenarPor+'"}';
-    */
-
     var valor = inputValor.value;
     if (buscarPor === "") {
         buscarPor = "buscarPor";

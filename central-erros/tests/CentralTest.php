@@ -1,6 +1,6 @@
 <?php
 
-namespace Test;
+namespace Teste;
 
 use Central\Actions\Erro\ArquivarErro;
 use Central\Actions\Erro\CriarErro;
@@ -10,7 +10,6 @@ use Central\Actions\Erro\RecuperarTodosErros;
 use Central\Actions\Usuario\CriarUsuario;
 use Central\Actions\Usuario\EsqueceuSenha;
 use Central\Actions\Usuario\Login;
-use Central\Actions\Usuario\RecuperarTodosUsuarios;
 use Central\Actions\Usuario\RecuperarUsuario;
 use Central\Entity\Erro;
 use Central\Entity\Usuario;
@@ -71,7 +70,7 @@ class CentralTest extends TestCase
         $request = new ServerRequest([], [], null, 'POST', $stream);
 
         $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 201, 'usuario cadastrado com sucesso');
+        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
         $this->assertSame($this->entityManager->find(Usuario::class, 1)->email, "teste@teste.com", 'o email cadastrado esta diferente do esperado');//
     }
 
@@ -96,7 +95,7 @@ class CentralTest extends TestCase
         $request2 = new ServerRequest([], [], null, 'POST', $stream2);
 
         $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 201, 'usuario cadastrado com sucesso');
+        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
         $this->assertSame($CriarUsuario($request2)->getStatusCode(), 500, 'ja existe usuario com este email');
     }
 
@@ -111,7 +110,7 @@ class CentralTest extends TestCase
         $stream->rewind();
         $request = new ServerRequest([], [], null, 'POST', $stream);
         $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 201, 'usuario cadastrado com sucesso');
+        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
 
         $senhaMd5 = md5("teste");
         $email = "teste@teste.com";
@@ -144,7 +143,7 @@ class CentralTest extends TestCase
         $stream->rewind();
         $request = new ServerRequest([], [], null, 'POST', $stream);
         $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 201, 'usuario cadastrado com sucesso');
+        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
 
         $Usuario2 = Usuario::factory(
             "",
