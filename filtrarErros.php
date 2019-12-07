@@ -3,7 +3,8 @@ ini_set('max_execution_time', 300);
 $newHashedFile = null;
 $numeroAntigo = -1;
 $url = "localhost/central/erro";//url que vai fazer a requisição do cURL
-//Mudar a configuração pra conseguir pegar o erro
+//Mudar a configuração pra conseguir pegar o erro escrever no httpd. conf do apache
+//ErrorLogFormat "%tV%lVpid %PV%F: %E: Vclient %aV%M"
 while(true){
     sleep(5);
     $hashedFile = md5_file('C:\xampp\apache\logs\error.log');
