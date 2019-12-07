@@ -7,6 +7,10 @@ $url = "localhost/central/erro";//url que vai fazer a requisição do cURL
 $ambiente = readline("Digite o seu ambiente. Dev/Homologação: ");
 $token = readline("\rDigite seu token: ");
 $caminho = readline("\rInforme o caminho do log: ");
+$file = fopen("C:\\xampp\apache\conf\httpd.conf","a");
+$content = str_replace("'",'"', "\nErrorLogFormat '%tV%lVpid %PV%F: %E: Vclient %aV%M'" );
+$escrever = fwrite($file,$content);
+fclose($file);
 while(true){
     sleep(5);
     $hashedFile = md5_file($caminho);
