@@ -28,7 +28,7 @@ class RecuperarErros extends ActionBase
             $query = $this->entityManager->createQueryBuilder();
             $query->select('e.titulo,e.nivel,e.ip,e.data_hora,e.origem,e.detalhe,e.token,e.ambiente,e.arquivado,e.id')
                   ->addSelect('CONCAT(e.detalhe,\' \',e.origem,\' \',e.data_hora) as ds_amigavel')
-                  ->addSelect('(select count(ee.id) as qnt from Central\Entity\Erro ee where e.titulo = ee.titulo and e.nivel = ee.nivel and e.ip = ee.ip and e.data_hora = ee.data_hora and e.origem = ee.origem and e.detalhe = ee.detalhe and e.token = ee.token and e.ambiente = ee.ambiente and e.arquivado = ee.arquivado) as frequencia')
+                  ->addSelect('(select count(ee.id) as qnt from Central\Entity\Erro ee where e.titulo = ee.titulo and e.nivel = ee.nivel and e.detalhe = ee.detalhe and e.token = ee.token and e.ambiente = ee.ambiente and e.arquivado = ee.arquivado) as frequencia')
                   ->from(Erro::class, 'e')
                   ->where('e.token = :token')
                   ->setParameter('token', $tokenUsuario)

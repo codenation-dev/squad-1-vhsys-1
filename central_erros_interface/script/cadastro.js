@@ -21,7 +21,9 @@ function EnviarCadastro(){
         'POST',
         false,
         ExibirMensagemSucesso,
-        ExibirMensagemFalha);
+        function(status, statusText) {
+            ExibirMensagemFalha(statusText);
+        });
 
     //console.dir(minhaRequisicao);
 }    

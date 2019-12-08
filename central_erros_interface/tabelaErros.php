@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="pt-br">
 <?php 	
-  session_start();	
+  include 'config.php';	 
   
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
   $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 

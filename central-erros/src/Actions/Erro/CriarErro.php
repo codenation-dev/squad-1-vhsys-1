@@ -41,7 +41,7 @@ class CriarErro extends ActionBase
             $detalhe_formatado = str_replace("'", "", $detalhe_formatado);
 
             $Erro->detalhe = $detalhe_formatado;
-            $Erro->ambiente = $params->ambiente;
+            $Erro->ambiente = strtolower($params->ambiente);
             $Erro->arquivado = false;
 
             $this->persistir($Erro);
