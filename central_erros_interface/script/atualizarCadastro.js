@@ -17,7 +17,7 @@ function AtualizaCadastro(){
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
     var dados = '{"email":"'+inputemail.value+'","senha":"'+inputSenha.value+'","token":"'+ptoken+'"}';
-    url = "http://localhost/central/atualizar_token_usuario";
+    url = "atualizar_token_usuario";
  
     $.ajax({
         url: url,

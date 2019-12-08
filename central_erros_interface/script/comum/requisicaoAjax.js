@@ -1,6 +1,5 @@
 // Informar servidor padrão
-var base_url = "http://localhost/central/";
-
+var base_url = "http://18.188.20.24/central/";
 
 
 function execAjax(
