@@ -1,0 +1,89 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 550px;
+  padding: 50px;
+  margin: 0 auto;
+  border-radius: 10px 10px 10px 10px;
+  -moz-border-radius: 10px 10px 10px 10px;
+  -webkit-border-radius: 10px 10px 10px 10px;
+  border: 0px solid #000000;
+  -webkit-box-shadow: 4px 4px 23px -4px rgba(0,0,0,0.56);
+  -moz-box-shadow: 4px 4px 23px -4px rgba(0,0,0,0.56);
+  box-shadow: 4px 4px 23px -4px rgba(0,0,0,0.56);
+  background-color: white;
+}
+.form-signin .text-center {
+  padding-left: 156px;
+  padding-right: 156px;
+  color: goldenrod;
+}
+.form-signin .btn-block {
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+.form-signin .response {
+  text-align: center;
+  color: red;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 2px 2px 15px -2px rgba(0,0,0,0.56);
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: 20px;
+  padding: 20px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.bg {
+  /* The image used */
+  background-image: url("../img/wallpapper.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.mb-4 {
+  margin-left: 190px;
+}
+.mt-5 {
+  margin-top: 20px;
+  margin-left: 155px;
+}
