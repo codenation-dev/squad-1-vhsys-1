@@ -1,4 +1,5 @@
 <?php
+//DESCONTINUADO. SCRIPT MUDA O CONFIG DO APACHE E NECESSITA DE RESET TODA HORA(NÃO USAR)
 ini_set('max_execution_time', 0);
 $newHashedFile = null;
 $numeroAntigo = -1;
