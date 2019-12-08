@@ -6,6 +6,7 @@
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
   $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
 
+  $p_ambiente= (isset($_GET['ambiente']))?$_GET['ambiente']:''; 
   $p_buscarPor= (isset($_GET['buscarPor']))?$_GET['buscarPor']:''; 
   $p_valor= (isset($_GET['valor']))?$_GET['valor']:''; 
   $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:'';
@@ -46,9 +47,10 @@
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
       var email_usuario='<?php echo $email_usu;?>';
-      /**if (token_session === "") {
+      if (token_session === "") {
         window.location.href = "./index.php";
-      }*/
+      }
+      var pambiente='<?php echo $p_ambiente;?>';
       var pbuscarPor='<?php echo $p_buscarPor;?>';
       var pvalor='<?php echo $p_valor;?>';
       var pordenarPor='<?php echo $p_ordenarPor;?>';
@@ -76,7 +78,8 @@
 
       <h1 class="text-center">Listar logs</h1>
 
-      <select>
+      <select id="ambiente">
+        <option value="">Ambiente</option>
         <option value="producao">Produção</option>
         <option value="homologacao">Homologação</option>
         <option value="dev">Dev</option>
@@ -116,19 +119,20 @@
         data-classes="table table-striped table-condensed"  >			
         <thead>
           <tr id="linhaCabecalho">
-            <th data-checkbox="true"></th>
-            <th data-field="codigo">codigo</th>
-            <th data-field="nivel">nivel</th>
-            <th data-field="ip">ip</th>
-            <th data-field="data_hora">data_hora</th>
-            <th data-field="titulo">titulo</th>
-            <th data-field="detalhe">detalhe</th>
-            <th data-field="ambiente">ambiente</th>
-            <th data-field="origem">origem</th>
-            <th data-field="token">token</th>
-            <th data-field="frequencia">quantidade</th>
-            <th data-field="id">id</th>
-            <th data-field="arquivado">arquivado</th>
+            <th data-checkbox="true" class="text-center"></th>
+            <th data-field="nivel" class="text-center">Level</th>
+            <th data-field="ds_amigavel" class="text-center">Log</th>
+            <th data-field="frequencia" class="text-center">Eventos</th>
+            <th data-field="id" class="text-center">id</th>
+            <!--
+            <th data-field="titulo" class="text-center">titulo</th>
+            <th data-field="ip" class="text-center">ip</th>
+            <th data-field="data_hora" class="text-center">data_hora</th>
+            <th data-field="ambiente" class="text-center">ambiente</th>
+            <th data-field="origem" class="text-center">origem</th>
+            <th data-field="token" class="text-center">token</th>
+            <th data-field="arquivado" class="text-center">arquivado</th>
+            -->
           </tr>
         </thead>
       </table>

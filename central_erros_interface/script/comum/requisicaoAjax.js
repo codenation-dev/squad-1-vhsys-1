@@ -1,5 +1,6 @@
 // Informar servidor padrão
 var base_url = "http://18.188.20.24/central/";
+//var base_url = "http://localhost/central/";
 
 
 function execAjax(
@@ -35,14 +36,15 @@ function execAjax(
       /*
       return result
       console.log(result.statusText);
-      */
       console.dir(data);
       console.dir(textStatus);      
       console.dir(jqXHR);
+      */
       
       funcaoSucesso(jqXHR.statusText, data);
     },    
-    error: function(xhr, resp, text) {
+    error: function(xhr, resp, text) {   
+      //console.dir(xhr);
       funcaoErro(xhr.status, xhr.statusText);      
     }
   });

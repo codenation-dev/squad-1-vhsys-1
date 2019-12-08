@@ -91,6 +91,11 @@
     
   }
   
+.fixed-table-body {
+	//overflow: scroll !important;
+	height: 100%;
+}
+
   /* Create two columns/boxes that floats next to each other */
   nav {
     float: right;

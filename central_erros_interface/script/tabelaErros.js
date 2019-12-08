@@ -74,32 +74,42 @@ window.onload = function() {
     var metodo = "GET";
     var dados = "";
 
-    if (((pbuscarPor !== "buscarPor") &&
-         (pbuscarPor !== "")) ||
-        ((pordenarPor !== "pordenarPor") &&
-         (pordenarPor !== ""))) {
-        url = url + '/' + pbuscarPor + '/' + pvalor + '/' + pordenarPor;
+    if ((pambiente !== "") ||
+        (pbuscarPor !== "") ||
+        (pvalor !== "") ||
+        (pordenarPor !== "")){        
         metodo = "POST";
-        dados = '{"buscarPor":"'+pbuscarPor+'", "valor":"'+pvalor+'", "ordenarPor":"'+pordenarPor+'"}';
+        dados = '{"ambiente":"'+pambiente+'", "buscarPor":"'+pbuscarPor+'", "valor":"'+pvalor+'", "ordenarPor":"'+pordenarPor+'"}';
         url = 'recuperar_erro';
+        console.dir(JSON.parse(dados));
     }        
+
+    
 
     execAjax(
         url,
         dados, 
         metodo,
-        false,
+        true,
         function(statusText, data) {
+            /*
             console.dir(data);
+            console.log(statusText);
+            */
             retorno = JSON.parse(decodeURIComponent(data));
-            console.dir(retorno);
+            //console.dir(retorno);
             
             var $table = $('#tabelaResultado');
             $table.bootstrapTable({data: retorno});
-            //console.dir($table);
+            
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
                 var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
+
+                /*
+                console.log(value);
+                console.dir(JSON.stringify(value));
+                */
                 window.location = urlDetalhe;    
               })
             
@@ -130,12 +140,20 @@ $('#consultar').click(function (e){
 function Consultar(){
     LimparMensagens();
     
+    var selectAmbiente = document.getElementById("ambiente");
     var selectBuscarPor = document.getElementById("buscarPor");
-    var inputValor = document.getElementById("valor");
+    var inputValor = document.getElementById("valor");    
     var selectOrdenarPor = document.getElementById("ordenarPor"); 
+
+    var ambiente = selectAmbiente.options[selectAmbiente.selectedIndex].value;
     var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
     var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
     var valor = inputValor.value;
+
+    /*
+    if (ambiente === "") {
+        ambiente = "ambiente";
+    }
     if (buscarPor === "") {
         buscarPor = "buscarPor";
     }
@@ -145,7 +163,8 @@ function Consultar(){
     if (ordenarPor === "") {
         ordenarPor = "ordenarPor";
     }
-    var url = "./tabelaErros.php?buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
+    */
+    var url = "./tabelaErros.php?ambiente="+ ambiente + "&buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
 
     window.location = url;    
 }

@@ -4,14 +4,16 @@ $('#voltar').click(function (e){
 
 
 window.onload = function() {
-    console.log(pjson);
-    /*
-    console.log(pjson);
     
+    
+    
+    /*
+    console.log(pjson);    
     var log = JSON.parse(pjson);
+    console.dir(log);
+    console.dir(decodeURIComponent(pjson));    
     */
     
-    //console.dir(log);
     var log = JSON.parse(decodeURIComponent(pjson));
     $('#ip_data').html("Erro no "+ log.ip +" em "+ log.data_hora);
     $('#titulo').html(log.titulo);
