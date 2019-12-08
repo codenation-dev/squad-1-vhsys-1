@@ -46,9 +46,9 @@
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
       var email_usuario='<?php echo $email_usu;?>';
-      if (token_session === "") {
+      /**if (token_session === "") {
         window.location.href = "./index.php";
-      }
+      }*/
       var pbuscarPor='<?php echo $p_buscarPor;?>';
       var pvalor='<?php echo $p_valor;?>';
       var pordenarPor='<?php echo $p_ordenarPor;?>';
