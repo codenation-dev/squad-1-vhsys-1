@@ -2,7 +2,6 @@
 
 namespace Teste;
 
-use Central\Actions\Erro\ArquivarErro;
 use Central\Actions\Erro\CriarErro;
 use Central\Actions\Erro\DeletarErros;
 use Central\Actions\Erro\RecuperarErros;
@@ -55,49 +54,6 @@ class CentralTest extends TestCase
         $this->assertTrue(class_exists(Auth::class), 'Nao foi criado o middleware de autenticação: Locadora\Middleware\Auth');
     }
 
-    public function test_CriarUsuario()
-    {
-        $Usuario = Usuario::factory(
-            "",
-            "teste",
-            "teste@teste.com");
-
-
-        $stream = new Stream('php://memory', 'wb+');
-        $stream->write(json_encode($Usuario));
-        $stream->rewind();
-
-        $request = new ServerRequest([], [], null, 'POST', $stream);
-
-        $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
-        $this->assertSame($this->entityManager->find(Usuario::class, 1)->email, "teste@teste.com", 'o email cadastrado esta diferente do esperado');//
-    }
-
-    public function test_CriarUsuarioComMesmoEmail()
-    {
-        $Usuario = Usuario::factory(
-            "",
-            "teste",
-            "teste@teste.com");
-        $stream = new Stream('php://memory', 'wb+');
-        $stream->write(json_encode($Usuario));
-        $stream->rewind();
-        $request = new ServerRequest([], [], null, 'POST', $stream);
-
-        $Usuario2 = Usuario::factory(
-            "",
-            "teste2",
-            "teste@teste.com");
-        $stream2 = new Stream('php://memory', 'wb+');
-        $stream2->write(json_encode($Usuario2));
-        $stream2->rewind();
-        $request2 = new ServerRequest([], [], null, 'POST', $stream2);
-
-        $CriarUsuario = new CriarUsuario($this->entityManager);
-        $this->assertSame($CriarUsuario($request)->getStatusCode(), 200, 'usuario cadastrado com sucesso');
-        $this->assertSame($CriarUsuario($request2)->getStatusCode(), 500, 'ja existe usuario com este email');
-    }
 
     public function test_Login()
     {
@@ -166,7 +122,6 @@ class CentralTest extends TestCase
         $this->assertNotNull($Usuario);
         $this->assertSame($Usuario->email, "teste@teste.com");
     }
-
     public function test_CriarErro()
     {
 
@@ -203,55 +158,6 @@ class CentralTest extends TestCase
         $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:/xampp/htdocs/semana_2/index.php:12 Stack trace:   {main}   thrown in C:/xampp/htdocs/semana_2/index.php on line 12");
         $this->assertSame($erroCadastrado->ambiente, "dev");
         $this->assertSame($erroCadastrado->arquivado, false);;
-    }
-
-    public function test_ArquivarErro()
-    {
-
-        $token = CentralToken::obterToken();
-
-        $Erro = new Erro();
-        $Erro->token = $token;
-        $Erro->titulo = "PHP Fatal error:  Uncaught";
-        $Erro->nivel = "error";
-        $Erro->ip = "127.0.0.1";
-        $Erro->data_hora = "05/12/2019 19:47:57";
-        $Erro->origem = "origem";
-        $Erro->detalhe = "Function name must be a string in C:\\xampp\\htdocs\\semana_2\\index.php:12\nStack trace:\n#0 {main}\n  thrown in C:\\xampp\\htdocs\\semana_2\\index.php on line 12";
-        $Erro->ambiente = "dev";
-        $Erro->arquivado = false;
-
-        $stream = new Stream('php://memory', 'wb+');
-        $stream->write(json_encode($Erro));
-        $stream->rewind();
-
-        $request = new ServerRequest([], [], null, 'POST', $stream, ['Authorization' => $token]);
-
-        $CriarErro = new CriarErro($this->entityManager);
-        $this->assertSame($CriarErro($request)->getStatusCode(), 200, 'Erro cadastrado!');
-
-        $recurso = [['id' => 1]];
-
-
-        $stream2 = new Stream('php://memory', 'wb+');
-        $stream2->write(json_encode($recurso));
-        $stream2->rewind();
-        $request2 = new ServerRequest([], [], null, 'PUT', $stream2);
-
-        $ArquivarErro = new ArquivarErro($this->entityManager);
-        $this->assertSame($ArquivarErro($request2)->getStatusCode(), 200, 'Erro arquivado com sucesso.');
-
-        $erroCadastrado = $this->entityManager->find(Erro::class, 1);
-
-        $this->assertSame($erroCadastrado->token, $token);
-        $this->assertSame($erroCadastrado->titulo, "PHP Fatal error:  Uncaught");
-        $this->assertSame($erroCadastrado->nivel, "error");
-        $this->assertSame($erroCadastrado->ip, "127.0.0.1");
-        $this->assertSame($erroCadastrado->data_hora, "05/12/2019 19:47:57");
-        $this->assertSame($erroCadastrado->origem, "origem");
-        $this->assertSame($erroCadastrado->detalhe, "Function name must be a string in C:/xampp/htdocs/semana_2/index.php:12 Stack trace:   {main}   thrown in C:/xampp/htdocs/semana_2/index.php on line 12");
-        $this->assertSame($erroCadastrado->ambiente, "dev");
-        $this->assertSame($erroCadastrado->arquivado, true);;
     }
 
     public function test_ApagarErro()
@@ -319,6 +225,7 @@ class CentralTest extends TestCase
         $this->assertSame($CriarErro($request)->getStatusCode(), 200, 'Erro cadastrado!');
 
         $recurso = [
+            'ambiente' => '',
             'buscarPor' => '',
             'valor' => '',
             'ordenarPor' => ''];

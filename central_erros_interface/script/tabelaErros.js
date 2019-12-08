@@ -82,9 +82,7 @@ window.onload = function() {
         dados = '{"ambiente":"'+pambiente+'", "buscarPor":"'+pbuscarPor+'", "valor":"'+pvalor+'", "ordenarPor":"'+pordenarPor+'"}';
         url = 'recuperar_erro';
         console.dir(JSON.parse(dados));
-    }        
-
-    
+    }    
 
     execAjax(
         url,
