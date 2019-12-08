@@ -1,4 +1,0 @@
-To use the filter you have to set your ErrorLogFormat to the default only this way the service can check your logs. Then it'll ask 
-to you what is your environment, then what is your token then what is the path to the error.log file. After this the service is going
-to check the last line of your error.log and everytime that the file changes it'll check again and upload the error/warning to our api
-on the Amazon Server. Any doubts, ask us! :D
