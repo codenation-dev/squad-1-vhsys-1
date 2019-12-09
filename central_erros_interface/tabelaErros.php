@@ -98,6 +98,13 @@
         <option value="origem">Origem</option>
       </select>
 
+      <select id="niveis">
+        <option value="error">Erro</option>
+        <option value="crit">Falha Crítica</option>
+        <option value="warn">Aviso</option>
+        <option value="notice">Informação</option>
+      </select>
+
       <input type="text" name="pesq" id="valor" placeholder="search">
       <button type="button" class="btn btn-default" id="consultar">    
         Lupa

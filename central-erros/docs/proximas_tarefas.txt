@@ -5,10 +5,6 @@
   - Auth.php
   ao invés de verificar a url criar um usuario master com um token infinito e obrigar a passar esse token para essas requisições
 
-- Garantir que o tráfego seja sempre JSON
-
-- Verificar combo Produção/Homologação/Dev
-
 
 
 

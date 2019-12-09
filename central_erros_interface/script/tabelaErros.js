@@ -3,6 +3,26 @@ $limparPesquisa.click(function () {
     window.location.href = "./tabelaErros.php";
 });
 
+
+$('#niveis').change(function () {
+    $('#valor').val($('#niveis').val());
+});
+
+var $buscarPor = $('#buscarPor');
+$buscarPor.change(function () {
+
+    var selectBuscarPor = document.getElementById("buscarPor");
+    var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
+    if (buscarPor === "nivel") {
+        $('#niveis').show();
+        $('#valor').hide();
+        $('#valor').val($('#niveis').val());
+    } else {
+        $('#niveis').hide();
+        $('#valor').show();
+    }
+});
+
 var $table = $('#tabelaResultado');
   var $arquivar = $('#arquivar');
   var $apagar = $('#apagar');
@@ -66,6 +86,7 @@ function ControlarVisibilidadeGrid() {
 }
 
 window.onload = function() {
+    $('#niveis').hide();
     ControlarVisibilidadeGrid();
 
     var url = 'erro';
