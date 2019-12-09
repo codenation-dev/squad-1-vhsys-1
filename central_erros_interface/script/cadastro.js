@@ -1,10 +1,20 @@
 window.onload = function() {
     LimparMensagens();
 
-    $('#forme').submit(function (e){
-        e.preventDefault();
-        EnviarCadastro();
-    });
+    if (token_session === "") {
+      
+      ExibirMensagemFalha("Não autenticado - Aguarde enquanto redirecionamos");
+      setTimeout(                
+        function (){
+            window.location.href = "./index.php";
+        },3000
+      );
+    } else {
+        $('#forme').submit(function (e){
+            e.preventDefault();
+            EnviarCadastro();
+        });
+    }
 };
 
 function EnviarCadastro(){
@@ -19,11 +29,18 @@ function EnviarCadastro(){
         url,
         dados, 
         'POST',
-        false,
-        ExibirMensagemSucesso,
+        true,
+        function (statusText, data) {
+            ExibirMensagemSucesso(statusText + " - Aguarde enquanto redirecionamos");
+            setTimeout(                
+                function (){                                        
+                    window.location.href = "./menu.php";
+                },3000);
+        },
         function(status, statusText) {
             ExibirMensagemFalha(statusText);
-        });
-
-    //console.dir(minhaRequisicao);
+        },
+        true,
+        token_session
+    );
 }    

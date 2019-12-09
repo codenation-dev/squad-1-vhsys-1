@@ -1,10 +1,17 @@
 
 
+
+
 - Verificar como 'desviar' da autenticação para métodos que podem não possuir um token.
   Exemplo Login, o user ainda vai entrar com o email e senha
   - Auth.php
   ao invés de verificar a url criar um usuario master com um token infinito e obrigar a passar esse token para essas requisições
+-------> terminar de implementar um usuario Master, tratar o token fixo na interface
 
 
 
 
+
+alterado para cadastrar usuarios apenas após o login
+
+no inicio do uso do sistema deveráexistir um user Master previamente cadastrado

@@ -1,5 +1,5 @@
 <?php
-	include 'config.php';
+  include 'config.php';
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -26,14 +26,15 @@
       <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
       <span class='msg-exito msg-sucesso'></span>
 
-      <!-- <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar"> -->
-      <input type="button" id="login" class="btn btn-primary btn-block" value="Login">  
+      <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
+      <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar Usuários">
+      <input type="button" id="listaErros" class="btn btn-primary btn-block" value="Listar Erros">  
     </div>
      
     <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
     <script src="./script/terceiros/popper.min.1.14.7.js"></script>
     <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>    
     <script src="./script/comum/comum.js"></script>
-    <script src="./script/index.js"></script>
+    <script src="./script/menu.js"></script>
   </body>
 </html>

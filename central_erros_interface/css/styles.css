@@ -77,11 +77,11 @@
     margin-top: 0;
     padding-left: 15px;
   }
-  footer {
+  .footer {
     position: fixed;
     bottom: 0;
-    height: 60px; 
-    line-height: 60px; 
+    height: 1px;  
+    line-height: 1px; 
     /*background-color: #f5f5f5;*/
     background-color: #EEE9E9;
     right: 15px;
@@ -92,15 +92,18 @@
   }
   
 .fixed-table-body {
-	//overflow: scroll !important;
 	height: 100%;
+}
+.fixed-table-container {
+	padding-bottom: 40px !important;
+	//clear: none;
 }
 
   /* Create two columns/boxes that floats next to each other */
-  nav {
+  .nav {
+    height: 100%;
     float: right;
     width: 30%;
-    height: auto; /* only for demonstration, should be removed */
     background: #ccc;
     padding: 20px;
   }
@@ -112,12 +115,12 @@
     word-wrap: break-word;
   }
   
-  article {
+  .article {
+    height: 100%;
     float: left;
-    padding: 20px;
     width: 70%;
     background-color: #f1f1f1;
-    height: auto; /* only for demonstration, should be removed */
+    padding: 20px;
   }
 .msg-erro{ color: red; background-color: white; }
 .msg-alerta{ background-color: yellow; }

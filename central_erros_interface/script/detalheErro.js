@@ -1,11 +1,4 @@
-$('#voltar').click(function (e){
-    window.history.back();
-});
-
-
 window.onload = function() {
-    
-    
     
     /*
     console.log(pjson);    

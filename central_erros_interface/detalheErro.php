@@ -1,10 +1,10 @@
-<!doctype html>
-<html lang="pt-br">
 <?php 	
-  session_start();	  
+  include 'config.php';
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
   $p_json= (isset($_GET['json']))?$_GET['json']:''; 
 ?>
+<!doctype html>
+<html lang="pt-br">
 <head>
     <title>Detalhe Log</title>
     
@@ -17,10 +17,19 @@
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">  
 
+    <style type="text/css">   
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+    </style>
+
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
       var pjson='<?php echo $p_json;?>';
     </script>
+
+
 
   </head>
   <body>
@@ -28,29 +37,33 @@
       <span class="text-muted quebra">Bem vindo <?php echo $_SESSION['email']; ?>. Seu token é: <?php echo $_SESSION['token']; ?>.</span>
     </header>
 
-    <section>
-      <nav>
-        <label class="nivel" id="nivel"></label>
-        <br>
-        <h5 >Eventos</h5>
-        <p id="frequencia"></p>
-        <br>
-        <h5 >Coletado por</h5>
-        <p class="quebra" id="token"></p>
-      </nav>
-
-      <article>
-
-        <input type="button" id="voltar" class="btn" value="Voltar">
+    
+    <div class="container-fluid">
+      <div>
+        <input type="button" id="voltar" class="btn" value="Voltar">         
         <h1 id="ip_data"></h1>
+      </div>
+      <div style="height:350px;overflow: auto;">
+       <div class="article">
+          <h4><b>Título</b></h4>
+          <h5 id="titulo"></h5>
+          <br>
+          <h4><b>Detalhes</b></h4>
+          <h5 class="quebra" id="detalhe"></h5>
+        </div>
+        <div class="nav">
+          <!--<label class="nivel" id="nivel"></label>-->
+          <h3><span class="label label-default" id="nivel"></span></h3>
+          <br>
+          <h5><b>Eventos</b></h5>
+          <p id="frequencia"></p>
+          <br>
+          <h5><b>Coletado por</b></h5>
+          <p class="quebra" id="token"></p>
+        </div>      
+      </div>    
+    </div>
 
-        <h4 >Título</h4>
-        <h5 id="titulo"></h5>
-        <br>
-        <h4 >Detalhes</h4>
-        <h5 class="quebra" id="detalhe"></h5>
-      </article>
-    </section>
 
     <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
     <script src="./script/terceiros/popper.min.1.14.7.js"></script>

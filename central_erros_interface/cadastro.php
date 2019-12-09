@@ -1,5 +1,5 @@
 <?php
-	session_start();	
+  include 'config.php';
   $p_email= (isset($_GET['email']))?$_GET['email']:''; 
   $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/signup.css">  
-   
-    <script type="text/javascript">
-      var pemail='<?php echo $p_email;?>';
-      var psenha='<?php echo $p_senha;?>';
-    </script>
 
   </head>
   <body class="text-center, bg">
@@ -32,6 +27,7 @@
         <label for="senha" class="sr-only">Password</label>
         <input type="password" name="senha" id="senha" class="form-control" placeholder="Password">
         <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+        <button class="btn btn-primary btn-block" type="button" id="voltar">Voltar</button>
         <a href="login.php" class="text-center">Já possuo Cadastro</a>
         <p class="mt-5 mb-3 text-muted">Squad-1-vhsys © 2019</p>
         <div class="response">
@@ -49,7 +45,13 @@
     <script src="./script/terceiros/popper.min.1.14.7.js"></script>
     <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
     <script src="./script/comum/requisicaoAjax.js"></script>
+   
     <script src="./script/comum/comum.js"></script>
+    <script type="text/javascript">
+      var token_session='<?php echo $token_session;?>';  
+      var pemail='<?php echo $p_email;?>';
+      var psenha='<?php echo $p_senha;?>';
+    </script>
     <script src="./script/cadastro.js"></script>
   </body>
 </html>

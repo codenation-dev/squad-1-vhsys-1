@@ -19,24 +19,27 @@ function AtualizaCadastro(){
     var dados = '{"email":"'+inputemail.value+'","senha":"'+inputSenha.value+'","token":"'+ptoken+'"}';
     url = "atualizar_token_usuario";
  
-    $.ajax({
-        url: url,
-        type: "POST",
-        data : dados, 
-        success : function(data, textStatus, jqXHR ){
-            //console.dir(data);
-            //console.dir(textStatus);
-            //console.dir(jqXHR.statusText);
-            ExibirMensagemSucesso(jqXHR.statusText);
+    execAjax(
+        url,
+        dados, 
+        'POST',
+        true,
+        function (statusText, data) {
+            ExibirMensagemSucesso(statusText + " - Aguarde enquanto redirecionamos");
+            setTimeout(                
+                function (){                    
+                    var email_usuario = $('#email').val();
+                    var senha_usuario = $('#senha').val();
+                    var param = '?email='+email_usuario+'&senha='+senha_usuario;            
+                    window.location.href = "./login.php"+param;                    
+                },3000
+            );
         },
-        error: function(xhr, resp, text) {
-            /*
-            console.dir(xhr);//"xhr: " + 
-            console.dir("respXXX: " + resp);
-            console.dir("textXXX: " + text);
-            */
-            ExibirMensagemFalha(xhr.statusText);
-        }
-    });
+        function(status, statusText) {
+            ExibirMensagemFalha(statusText);
+        },
+        true,
+        token_session
+    );
 }    
 

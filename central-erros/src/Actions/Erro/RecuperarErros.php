@@ -24,16 +24,18 @@ class RecuperarErros extends ActionBase
             $buscarPor = $params->buscarPor;
             $valor = $params->valor;
             $ordenarPor = $params->ordenarPor;
+            $ascDesc = strtoupper($params->ascDesc);
+            $arquivados = $params->arquivados;
 
             $query = $this->entityManager->createQueryBuilder();
             $query->select('e.titulo,e.nivel,e.ip,e.data_hora,e.origem,e.detalhe,e.token,e.ambiente,e.arquivado,e.id')
-                  ->addSelect('CONCAT(e.detalhe,\' \',e.origem,\' \',e.data_hora) as ds_amigavel')
                   ->addSelect('(select count(ee.id) as qnt from Central\Entity\Erro ee where e.titulo = ee.titulo and e.nivel = ee.nivel and e.detalhe = ee.detalhe and e.token = ee.token and e.ambiente = ee.ambiente and e.arquivado = ee.arquivado) as frequencia')
                   ->from(Erro::class, 'e')
                   ->where('e.token = :token')
                   ->setParameter('token', $tokenUsuario)
                   ->andWhere("e.arquivado = :arquivado")
-                  ->setParameter('arquivado', false);
+                  ->setParameter('arquivado', $arquivados);
+
 
             if ($ambiente !== "") {
                 $query->andWhere("e.ambiente = :ambiente")
@@ -46,14 +48,14 @@ class RecuperarErros extends ActionBase
                 }
                 $query->andWhere("e.$buscarPor LIKE :buscarPor")
                     ->setParameter('buscarPor', '%'.$valor.'%');
-
-
             }
 
             if ($ordenarPor !== "") {
+                $campo = $ordenarPor;
                 if ($ordenarPor === "nivel") {
-                    $query->orderBy("e.$ordenarPor", 'ASC');
+                    $campo = "e.$ordenarPor";
                 }
+                $query->orderBy($campo, $ascDesc);
             }
 
             $response->getBody()->write(

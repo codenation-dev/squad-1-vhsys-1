@@ -1,5 +1,7 @@
-<?php 	
-session_start();	
+<?php
+  include 'config.php';
+  $p_email= (isset($_GET['email']))?$_GET['email']:''; 
+  $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -14,6 +16,11 @@ session_start();
   <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
   <link rel="stylesheet" href="./css/Login-Form-Clean.css">
   <link rel="stylesheet" href="./css/signin.css">   
+   
+   <script type="text/javascript">    
+       var pemail='<?php echo $p_email;?>';
+       var psenha='<?php echo $p_senha;?>';
+   </script>
 
 </head>
 <body class="text-center, bg">
@@ -26,6 +33,7 @@ session_start();
     <label for="senha" class="sr-only">Password</label>
     <input type="password" name="senha" id="senha" class="form-control"  placeholder="Password">
     <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+        <button class="btn btn-primary btn-block" type="button" id="voltar">Voltar</button>
     <a href="#" id="linkEsqueceuSenha" class="text-center">Esqueci minha Senha</a>
     <p class="mt-5 mb-3 text-muted">Squad-1-vhsys © 2019</p>
     <div class="response">

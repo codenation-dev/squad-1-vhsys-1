@@ -1,6 +1,10 @@
+/*
+tem que tirar o token fixo
+*/
+//const token_padrao = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzYyMTA1NDQsImlhdCI6MTU3NTg1MDU0NH0.wZj1zZFl2tb0nfhPC6Oh5XeXW34YQZ0tIIq2sZpBHvk";
 // Informar servidor padrão
-var base_url = "http://18.188.20.24/central/";
-//var base_url = "http://localhost/central/";
+//var base_url = "http://18.188.20.24/central/";
+var base_url = "http://localhost/central/";
 
 
 function execAjax(
@@ -13,6 +17,16 @@ function execAjax(
   usarBaseURL = true,
   token = "",
   contentType = "") {
+/*
+  alert(
+    "dst ="+ dst +
+    "dados ="+ dados +
+    "method ="+ method +
+    "asyncRequest ="+ asyncRequest +
+    "usarBaseURL ="+ usarBaseURL +
+    "token ="+ token 
+  );
+*/
 
   urlDst = dst;
   if (usarBaseURL === true) {
@@ -34,8 +48,6 @@ function execAjax(
     }, 
     success: function(data, textStatus, jqXHR ){
       /*
-      return result
-      console.log(result.statusText);
       console.dir(data);
       console.dir(textStatus);      
       console.dir(jqXHR);
@@ -44,7 +56,7 @@ function execAjax(
       funcaoSucesso(jqXHR.statusText, data);
     },    
     error: function(xhr, resp, text) {   
-      //console.dir(xhr);
+      console.dir(xhr);
       funcaoErro(xhr.status, xhr.statusText);      
     }
   });

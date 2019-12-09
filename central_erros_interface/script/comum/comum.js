@@ -2,6 +2,9 @@ $('#sair').click(function (e){
     e.preventDefault();
     Sair();
 });
+$('#voltar').click(function (e){
+    window.history.back();
+});
 
 function Sair(){
 	$.ajax({
@@ -34,9 +37,6 @@ function ExibirMensagemSucesso(mensagem) {
 
 
 function ExibirMensagem(id, mensagem) {
-    
-    //console.log("mensagem " + mensagem);
-
 	LimparMensagens(id);
 	
 	var span_msg = document.querySelector('.msg-'+id);	

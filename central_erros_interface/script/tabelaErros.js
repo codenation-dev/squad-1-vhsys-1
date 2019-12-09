@@ -1,3 +1,15 @@
+function colunaNivel(value, row) {
+
+return '<h4><span class="label label-default" id="nivel">'+ value+'</span></h4>';
+}
+function colunaLog(value, row) {
+    var linha = JSON.stringify(row);
+    //alert(linha);
+    var objLinha = JSON.parse(linha);
+    //console.dir(objLinha);
+
+    return objLinha.detalhe+'<br>'+objLinha.ip+'<br>'+objLinha.data_hora;
+}
 var $limparPesquisa = $('#limparPesquisa');
 $limparPesquisa.click(function () {
     window.location.href = "./tabelaErros.php";
@@ -8,6 +20,23 @@ $('#niveis').change(function () {
     $('#valor').val($('#niveis').val());
 });
 
+var $ordenarPor = $('#ordenarPor');
+$ordenarPor.change(function () {
+
+    var selectOrdenarPor = document.getElementById("ordenarPor"); 
+    var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
+
+    if (ordenarPor !== "") {
+        $('#ascDesc').show();
+        $('#lblAscDesc').show();
+    } else {
+        $('#ascDesc').hide();
+        $('#lblAscDesc').hide();
+        $('#ascDesc').val("");
+    }
+});
+
+
 var $buscarPor = $('#buscarPor');
 $buscarPor.change(function () {
 
@@ -15,11 +44,20 @@ $buscarPor.change(function () {
     var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
     if (buscarPor === "nivel") {
         $('#niveis').show();
+        $('#lblNiveis').show();
+
+        $('#lblValor').hide();
         $('#valor').hide();
+
         $('#valor').val($('#niveis').val());
     } else {
+        
         $('#niveis').hide();
+        $('#lblNiveis').hide();
+
+        $('#valor').val("");
         $('#valor').show();
+        $('#lblValor').show();
     }
 });
 
@@ -29,7 +67,7 @@ var $table = $('#tabelaResultado');
 
   $(function() {
     $arquivar.click(function () {
-        console.log(JSON.stringify($table.bootstrapTable('getSelections')));
+        //console.log(JSON.stringify($table.bootstrapTable('getSelections')));
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));
         var url = "erro_arquivar";
         ExecutarAcaoApagarArquivar(url, "PUT", objLinha);        
@@ -38,8 +76,8 @@ var $table = $('#tabelaResultado');
 
   $(function() {
     $apagar.click(function () {
-        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
         //console.dir(token_session);
+        var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
         var url = "erro/apagar";
         ExecutarAcaoApagarArquivar(url, "DELETE", objLinha);
     })
@@ -52,7 +90,7 @@ var $table = $('#tabelaResultado');
         url,
         JSON.stringify(dados), 
         metodo,
-        false,
+        true,
         ExibirMensagemSucesso,
         ExibirMensagemFalha,
         true,
@@ -86,7 +124,11 @@ function ControlarVisibilidadeGrid() {
 }
 
 window.onload = function() {
+    
     $('#niveis').hide();
+    $('#lblNiveis').hide();
+    $('#ascDesc').hide();
+    $('#lblAscDesc').hide();
     ControlarVisibilidadeGrid();
 
     var url = 'erro';
@@ -94,22 +136,71 @@ window.onload = function() {
 
     var metodo = "GET";
     var dados = "";
+    var strAux = "";
 
     if ((pambiente !== "") ||
         (pbuscarPor !== "") ||
         (pvalor !== "") ||
-        (pordenarPor !== "")){        
+        (pordenarPor !== "") ||
+        (parquivados !== "")){        
         metodo = "POST";
-        dados = '{"ambiente":"'+pambiente+'", "buscarPor":"'+pbuscarPor+'", "valor":"'+pvalor+'", "ordenarPor":"'+pordenarPor+'"}';
+        dados = '{"ambiente":"'+pambiente+
+                '", "buscarPor":"'+pbuscarPor+
+                '", "valor":"'+pvalor+
+                '", "ordenarPor":"'+pordenarPor+
+                '", "ascDesc":"'+pascDesc+ 
+                '", "arquivados":'+parquivados+'}';
+
+        if (pambiente !== "") {
+            $('#ambiente').val(pambiente);
+        }
+        if (pbuscarPor !== "") {
+            
+            $('#buscarPor').val(pbuscarPor);
+            
+            if ($('#buscarPor').val() === "nivel") {
+                $('#niveis').show();
+                $('#valor').hide();
+                $('#valor').val($('#niveis').val());
+            } else {
+                $('#niveis').hide();
+                $('#valor').val("");
+                $('#valor').show();
+            }
+        }
+        if (pvalor !== "") {
+            $('#valor').val(pvalor);
+        }
+        if (pordenarPor !== "") {
+            if (pordenarPor !== "nivel") {
+                strAux = "Level";
+            } else if (pordenarPor !== "nivel") {
+                strAux = "Descrição";
+            } else if (pordenarPor !== "titulo") {
+                strAux = "Origem";
+            }
+
+            $('#ordenarPor').val(pordenarPor);
+        }
+        if (pascDesc !== "") {
+            if (pordenarPor !== "") {
+                $('#ascDesc').val(pascDesc);    
+                $('#ascDesc').show();
+            }           
+        }
+        if (parquivados !== "") {
+            document.getElementById("arquivados").checked = (parquivados === "true");
+        }
+        
         url = 'recuperar_erro';
-        console.dir(JSON.parse(dados));
+        //console.dir(JSON.parse(dados));
     }    
 
     execAjax(
         url,
         dados, 
         metodo,
-        true,
+        false,
         function(statusText, data) {
             /*
             console.dir(data);
@@ -119,16 +210,29 @@ window.onload = function() {
             //console.dir(retorno);
             
             var $table = $('#tabelaResultado');
-            $table.bootstrapTable({data: retorno});
+            
+            $('#tabelaResultado').bootstrapTable({        		
+            
+                height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true) - 5,
+                        
+                data: retorno		
+            });
+
             
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
-                var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
-
                 /*
-                console.log(value);
-                console.dir(JSON.stringify(value));
+                se quiser passar apenas o id e usar a rota de obter erro pelo id
+                var urlDetalhe = "./detalheErro.php?json="+value.id;
+                window.location = urlDetalhe;    
+
+                aí na pagina de detalhe tem que tratar
+
+                console.dir(value);
+                console.log(JSON.stringify(value));
                 */
+
+                var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
                 window.location = urlDetalhe;    
               })
             
@@ -137,7 +241,7 @@ window.onload = function() {
         function(xhr, resp, text) {
             ExibirMensagemFalha(text);
 
-            console.log(xhr, resp, text);
+            //console.log(xhr, resp, text);
 
             ControlarVisibilidadeGrid();
 
@@ -163,27 +267,20 @@ function Consultar(){
     var selectBuscarPor = document.getElementById("buscarPor");
     var inputValor = document.getElementById("valor");    
     var selectOrdenarPor = document.getElementById("ordenarPor"); 
+    var selectAscDesc = document.getElementById("ascDesc");
 
     var ambiente = selectAmbiente.options[selectAmbiente.selectedIndex].value;
     var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
     var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
     var valor = inputValor.value;
+    var ascDesc = selectAscDesc.options[selectAscDesc.selectedIndex].value;
 
-    /*
-    if (ambiente === "") {
-        ambiente = "ambiente";
-    }
-    if (buscarPor === "") {
-        buscarPor = "buscarPor";
-    }
-    if (valor === "") {
-        valor = "valor";
-    }
-    if (ordenarPor === "") {
-        ordenarPor = "ordenarPor";
-    }
-    */
-    var url = "./tabelaErros.php?ambiente="+ ambiente + "&buscarPor="+ buscarPor + "&valor=" + valor + "&ordenarPor=" + ordenarPor;
+    var url = "./tabelaErros.php?ambiente="+ ambiente + 
+                               "&buscarPor="+ buscarPor + 
+                               "&valor=" + valor + 
+                               "&ordenarPor=" + ordenarPor + 
+                               "&ascDesc=" + ascDesc + 
+                               "&arquivados=" + $('#arquivados').prop('checked');
 
     window.location = url;    
 }

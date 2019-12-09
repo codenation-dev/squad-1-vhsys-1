@@ -17,37 +17,41 @@ class CentralToken
 {
     public static function validarToken(string $token): int
     {
-        //$token = $request->getHeaderLine('Authorization');
-        $chave = 'Codenation';
-        //$chave = 'olarMundao';
-        $parser = new Parser();
-        $tokenParsed = $parser->parse($token);
-        $signer = new Sha256();
+        try{
+            //$token = $request->getHeaderLine('Authorization');
+            $chave = 'Codenation';
+            //$chave = 'olarMundao';
+            $parser = new Parser();
+            $tokenParsed = $parser->parse($token);
+            $signer = new Sha256();
 
-        if (!$tokenParsed->verify($signer, $chave)) {
-            return 402;
-            //return (new Response)->withStatus(402, 'autorização inválida');
-        }
+            if (!$tokenParsed->verify($signer, $chave)) {
+                return 402;
+                //return (new Response)->withStatus(402, 'autorização inválida');
+            }
 
-        if ($tokenParsed->isExpired()) {
-            return 403;
-            //return (new Response)->withStatus(402, 'expirado, por favor atualize seu cadastro');
-        }
+            if ($tokenParsed->isExpired()) {
+                return 403;
+                //return (new Response)->withStatus(402, 'expirado, por favor atualize seu cadastro');
+            }
 
-        /*
-         * tirar esse trecho daqui e colocar no usuario
-         */
-        /*
-        $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
-        //$Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
-        $Usuario = $recuperarUsuario->obterUsuario($token);
-        dd($Usuario);
-        if ($Usuario === null) {
-            return 404;
-            //return (new Response)->withStatus(404, 'nenhum usuário encontrado');
+            /*
+             * tirar esse trecho daqui e colocar no usuario
+             */
+            /*
+            $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
+            //$Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
+            $Usuario = $recuperarUsuario->obterUsuario($token);
+            dd($Usuario);
+            if ($Usuario === null) {
+                return 404;
+                //return (new Response)->withStatus(404, 'nenhum usuário encontrado');
+            }
+            */
+            return 200;
+        }catch (\Throwable $exception){
+            return 500;
         }
-        */
-        return 200;
     }
 
     public static function obterToken(): string

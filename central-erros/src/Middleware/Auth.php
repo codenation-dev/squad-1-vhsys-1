@@ -22,7 +22,7 @@ class Auth implements  MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         // TODO: Implement process() method.
-
+/*
         if (($request->getUri()->getPath() === "/central/criar_usuario") ||
             ($request->getUri()->getPath() === "/central/atualizar_token_usuario") ||
             ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha") ||
@@ -30,7 +30,7 @@ class Auth implements  MiddlewareInterface
             ($request->getUri()->getPath() === "/central/")) {
             return $handler->handle($request);
         }
-
+*/
         if (!$request->hasHeader('Authorization')){
             return (new Response)->withStatus(401);
         }
@@ -45,6 +45,9 @@ class Auth implements  MiddlewareInterface
                 break;
             case 404:
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');
+                break;
+            case 500:
+                return (new Response)->withStatus(500, 'token inválido');
                 break;
         }
 

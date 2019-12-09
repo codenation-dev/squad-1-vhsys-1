@@ -8,6 +8,9 @@ window.onload = function() {
         e.preventDefault();
         EsqueceuSenha();
     });
+
+    $('#email').val(pemail);
+    $('#senha').val(psenha);
 }
 
 function Login(){
@@ -23,9 +26,9 @@ function Login(){
         url,
         dados, 
         'POST',
-        false,
+        true,
         function (statusText, data) {
-            console.dir(data);
+            //console.dir(data);
             var user = JSON.parse(data);
             
             var paramSessao = '?email='+user.email+'&token='+user.token;
@@ -36,7 +39,7 @@ function Login(){
                 'GET',
                 false,
                 function (statusText) {
-                    window.location.href = "./tabelaErros.php";
+                    window.location.href = "./menu.php";
                 },
                 ExibirMensagemFalha,
                 false
@@ -65,10 +68,12 @@ function EsqueceuSenha(){
         url,
         dados, 
         'POST',
-        false,
-        function (statusText) {
-            var paramAtualiza = '?email='+email_usuario+'&token='+statusText;            
+        true,
+        function (statusText, data) {
+            console.dir(data);
+            /*var paramAtualiza = '?email='+email_usuario+'&token='+statusText;            
             window.location.href = "./atualizarCadastro.php"+paramAtualiza;
+            */
         },
         ExibirMensagemFalha
     );  
