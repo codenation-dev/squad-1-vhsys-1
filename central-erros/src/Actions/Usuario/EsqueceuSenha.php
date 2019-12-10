@@ -33,8 +33,10 @@ class EsqueceuSenha extends ActionBase
             $Usuario->token_recuperacao_senha = $token_recuperacao_senha;
             $this->persistir($Usuario);
 
-            //$url_recuperacao_senha  = "http://tuaapp.com/recovery?token=$token_recuperacao_senha";
-            return $response->withStatus(200, $token_recuperacao_senha);
+            $url_recuperacao_senha  = "http://localhost/central/recovery?token=$token_recuperacao_senha";
+            $response->getBody()->write("$url_recuperacao_senha");
+
+            return $response->withStatus(200);
         }catch (\Throwable $exception){
             return $response->withStatus(508, $exception->getMessage());
         }

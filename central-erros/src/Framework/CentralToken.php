@@ -35,19 +35,6 @@ class CentralToken
                 //return (new Response)->withStatus(402, 'expirado, por favor atualize seu cadastro');
             }
 
-            /*
-             * tirar esse trecho daqui e colocar no usuario
-             */
-            /*
-            $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
-            //$Usuario = $em->getRepository(Usuario::class)->findOneBy(array('token' => $token));
-            $Usuario = $recuperarUsuario->obterUsuario($token);
-            dd($Usuario);
-            if ($Usuario === null) {
-                return 404;
-                //return (new Response)->withStatus(404, 'nenhum usuário encontrado');
-            }
-            */
             return 200;
         }catch (\Throwable $exception){
             return 500;

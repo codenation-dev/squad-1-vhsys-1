@@ -3,13 +3,6 @@
   
   $token_session= (isset($_SESSION['token']))?$_SESSION['token']:''; 
   $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
-
-  $p_ambiente= (isset($_GET['ambiente']))?$_GET['ambiente']:''; 
-  $p_buscarPor= (isset($_GET['buscarPor']))?$_GET['buscarPor']:''; 
-  $p_valor= (isset($_GET['valor']))?$_GET['valor']:''; 
-  $p_ordenarPor= (isset($_GET['ordenarPor']))?$_GET['ordenarPor']:'';  
-  $p_ascDesc= (isset($_GET['ascDesc']))?$_GET['ascDesc']:'';
-  $p_arquivados= (isset($_GET['arquivados']))?$_GET['arquivados']:'';  
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -46,14 +39,7 @@
       if (token_session === "") {
         window.location.href = "./index.php";
       }
-      var pambiente='<?php echo $p_ambiente;?>';
-      var pbuscarPor='<?php echo $p_buscarPor;?>';
-      var pvalor='<?php echo $p_valor;?>';
-      var pordenarPor='<?php echo $p_ordenarPor;?>';
-      var pascDesc='<?php echo $p_ascDesc;?>';      
-      var parquivados='<?php echo $p_arquivados;?>';
-    </script>
-    
+    </script>    
   </head>
   <body>
     <header id="h">

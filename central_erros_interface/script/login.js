@@ -70,10 +70,20 @@ function EsqueceuSenha(){
         'POST',
         true,
         function (statusText, data) {
-            console.dir(data);
-            /*var paramAtualiza = '?email='+email_usuario+'&token='+statusText;            
-            window.location.href = "./atualizarCadastro.php"+paramAtualiza;
-            */
+            //console.log(data);
+            execAjax(
+                data,
+                dados, 
+                'GET',
+                false,
+                function (statusText, data) {
+                    var usuario = JSON.parse(data);
+                    var paramAtualiza = '?email='+usuario.email+'&token='+usuario.token;
+                    window.location.href = "./atualizarCadastro.php"+paramAtualiza;
+                },
+                ExibirMensagemFalha,
+                false
+            );  
         },
         ExibirMensagemFalha
     );  

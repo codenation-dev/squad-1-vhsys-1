@@ -16,6 +16,16 @@ class RecuperarUsuario extends ActionBase
     {
         return $this->entityManager->getRepository(Usuario::class)->findOneBy(array('token' => $token));
     }
+
+    public function login(string $email, string $senha)
+    {
+        return $this->entityManager->getRepository(Usuario::class)->findOneBy(
+            array('email' => $email,
+                'senha' =>  md5($senha)
+            )
+        );
+    }
+
     public function __invoke(ServerRequestInterface $request, array $args): ResponseInterface
     {
         $Usuario = $this->entityManager->find(Usuario::class, $args['id']);

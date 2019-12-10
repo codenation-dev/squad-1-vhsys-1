@@ -20,14 +20,8 @@ class AtualizarAutenticacaoUsuario extends ActionBase
         try {
             $params = json_decode($request->getBody()->getContents());
 
-            if ($params->token !== "") {
-                $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
-                    array('email' => $params->email,
-                        'token_recuperacao_senha' =>  $params->token));
-            } else {
-                $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
-                    array('email' => $params->email));
-            }
+            $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
+                array('email' => $params->email));
 
             if ($Usuario === null) {
                 return $response->withStatus(404, 'usuário não encontrado');

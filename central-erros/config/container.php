@@ -90,6 +90,12 @@ App::getContainer()->add(\Central\Actions\Usuario\AtualizarUsuario::class, funct
     );
 });
 
+App::getContainer()->add(\Central\Actions\Usuario\RecuperarSenha::class, function () {
+    return new \Central\Actions\Usuario\RecuperarSenha(
+        App::getContainer()->get(\Doctrine\ORM\EntityManager::class)
+    );
+});
+
 App::getContainer()->add(\Central\Actions\Usuario\AtualizarAutenticacaoUsuario::class, function () {
     return new \Central\Actions\Usuario\AtualizarAutenticacaoUsuario(
         App::getContainer()->get(\Doctrine\ORM\EntityManager::class)

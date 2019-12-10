@@ -22,19 +22,53 @@ class Auth implements  MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         // TODO: Implement process() method.
-/*
-        if (($request->getUri()->getPath() === "/central/criar_usuario") ||
-            ($request->getUri()->getPath() === "/central/atualizar_token_usuario") ||
-            ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha") ||
-            ($request->getUri()->getPath() === "/central/usuario/login") ||
-            ($request->getUri()->getPath() === "/central/")) {
-            return $handler->handle($request);
+        $token = "";
+
+        if ($request->getUri()->getPath() === "/central/usuario/login") {
+
+            $params = json_decode($request->getBody()->getContents());
+
+            $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
+            $Usuario = $recuperarUsuario->login(
+                $params->email,
+                $params->senha);
+
+            if ($Usuario === null) {
+                return (new Response)->withStatus(401);
+            }
+            $token = $Usuario->token;
+        } else if ($request->getUri()->getPath() === "/central/usuario/esqueceu_senha") {
+
+            $params = json_decode($request->getBody()->getContents());
+
+            $em = App::getContainer()->get(\Doctrine\ORM\EntityManager::class);
+            $Usuario = $em->getRepository(Usuario::class)->findOneBy(
+                array('email' => $params->email
+                )
+            );
+
+            if ($Usuario === null) {
+                return (new Response)->withStatus(401);
+            }
+            $token = $Usuario->token;
+
+        } else if (strpos($request->getUri()->getPath(), "/central/recovery") > -1) {
+
+            $queryParams = $request->getQueryParams();
+            $token = $queryParams['token'];
+
+            if ($token === "") {
+                return (new Response)->withStatus(401);
+            }
+
+        } else {
+            if (!$request->hasHeader('Authorization')){
+                return (new Response)->withStatus(401);
+            }
+            $token = $request->getHeaderLine('Authorization');
         }
-*/
-        if (!$request->hasHeader('Authorization')){
-            return (new Response)->withStatus(401);
-        }
-        $token = $request->getHeaderLine('Authorization');
+
+
         $ret = CentralToken::validarToken($token);
         switch ($ret) {
             case 402:
@@ -49,12 +83,6 @@ class Auth implements  MiddlewareInterface
             case 500:
                 return (new Response)->withStatus(500, 'token inválido');
                 break;
-        }
-
-        $recuperarUsuario = new RecuperarUsuario(App::getContainer()->get(\Doctrine\ORM\EntityManager::class));
-        $Usuario = $recuperarUsuario->obterUsuario($token);
-        if ($Usuario === null) {
-            return (new Response)->withStatus(404, 'nenhum usuário encontrado');
         }
 
         return $handler->handle($request);

@@ -1,3 +1,13 @@
+var parametrosFiltro;
+/*
+var parametrosFiltro.ambiente='';
+var parametrosFiltro.buscarPor='';
+var parametrosFiltro.valor='';
+var parametrosFiltro.ordenarPor='';
+var parametrosFiltro.ascDesc='';
+var parametrosFiltro.arquivados='';
+*/
+
 function colunaNivel(value, row) {
 
 return '<h4><span class="label label-default" id="nivel">'+ value+'</span></h4>';
@@ -123,8 +133,21 @@ function ControlarVisibilidadeGrid() {
 	}	
 }
 
+function carregarParametros() {
+    parametrosFiltro = JSON.parse(decodeURIComponent(window.location.search.substring(1).split("&")));
+    console.dir(parametrosFiltro);
+    /*
+    parametrosFiltro.ambiente
+    parametrosFiltro.buscarPor
+    parametrosFiltro.valor
+    parametrosFiltro.ordenarPor
+    parametrosFiltro.ascDesc
+    parametrosFiltro.arquivados 
+    */
+}
+
 window.onload = function() {
-    
+    carregarParametros();
     $('#niveis').hide();
     $('#lblNiveis').hide();
     $('#ascDesc').hide();
@@ -138,25 +161,25 @@ window.onload = function() {
     var dados = "";
     var strAux = "";
 
-    if ((pambiente !== "") ||
-        (pbuscarPor !== "") ||
-        (pvalor !== "") ||
-        (pordenarPor !== "") ||
-        (parquivados !== "")){        
+    if ((parametrosFiltro.ambiente !== "") ||
+        (parametrosFiltro.buscarPor !== "") ||
+        (parametrosFiltro.valor !== "") ||
+        (parametrosFiltro.ordenarPor !== "") ||
+        (parametrosFiltro.arquivados !== "")){        
         metodo = "POST";
-        dados = '{"ambiente":"'+pambiente+
-                '", "buscarPor":"'+pbuscarPor+
-                '", "valor":"'+pvalor+
-                '", "ordenarPor":"'+pordenarPor+
-                '", "ascDesc":"'+pascDesc+ 
-                '", "arquivados":'+parquivados+'}';
+        dados = '{"ambiente":"'+parametrosFiltro.ambiente+
+                '", "buscarPor":"'+parametrosFiltro.buscarPor+
+                '", "valor":"'+parametrosFiltro.valor+
+                '", "ordenarPor":"'+parametrosFiltro.ordenarPor+
+                '", "ascDesc":"'+parametrosFiltro.ascDesc+ 
+                '", "arquivados":'+parametrosFiltro.arquivados+'}';
 
-        if (pambiente !== "") {
-            $('#ambiente').val(pambiente);
+        if (parametrosFiltro.ambiente !== "") {
+            $('#ambiente').val(parametrosFiltro.ambiente);
         }
-        if (pbuscarPor !== "") {
+        if (parametrosFiltro.buscarPor !== "") {
             
-            $('#buscarPor').val(pbuscarPor);
+            $('#buscarPor').val(parametrosFiltro.buscarPor);
             
             if ($('#buscarPor').val() === "nivel") {
                 $('#niveis').show();
@@ -168,28 +191,28 @@ window.onload = function() {
                 $('#valor').show();
             }
         }
-        if (pvalor !== "") {
-            $('#valor').val(pvalor);
+        if (parametrosFiltro.valor !== "") {
+            $('#valor').val(parametrosFiltro.valor);
         }
-        if (pordenarPor !== "") {
-            if (pordenarPor !== "nivel") {
+        if (parametrosFiltro.ordenarPor !== "") {
+            if (parametrosFiltro.ordenarPor !== "nivel") {
                 strAux = "Level";
-            } else if (pordenarPor !== "nivel") {
+            } else if (parametrosFiltro.ordenarPor !== "nivel") {
                 strAux = "Descrição";
-            } else if (pordenarPor !== "titulo") {
+            } else if (parametrosFiltro.ordenarPor !== "titulo") {
                 strAux = "Origem";
             }
 
-            $('#ordenarPor').val(pordenarPor);
+            $('#ordenarPor').val(parametrosFiltro.ordenarPor);
         }
-        if (pascDesc !== "") {
-            if (pordenarPor !== "") {
-                $('#ascDesc').val(pascDesc);    
+        if (parametrosFiltro.ascDesc !== "") {
+            if (parametrosFiltro.ordenarPor !== "") {
+                $('#ascDesc').val(parametrosFiltro.ascDesc);    
                 $('#ascDesc').show();
             }           
         }
-        if (parquivados !== "") {
-            document.getElementById("arquivados").checked = (parquivados === "true");
+        if (parametrosFiltro.arquivados !== "") {
+            document.getElementById("arquivados").checked = (parametrosFiltro.arquivados === "true");
         }
         
         url = 'recuperar_erro';
@@ -274,13 +297,15 @@ function Consultar(){
     var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
     var valor = inputValor.value;
     var ascDesc = selectAscDesc.options[selectAscDesc.selectedIndex].value;
+    
+    dados = '{"ambiente":"'+ambiente+
+            '", "buscarPor":"'+buscarPor+
+            '", "valor":"'+valor+
+            '", "ordenarPor":"'+ordenarPor+
+            '", "ascDesc":"'+ascDesc+ 
+            '", "arquivados":'+$('#arquivados').prop('checked')+'}';
 
-    var url = "./tabelaErros.php?ambiente="+ ambiente + 
-                               "&buscarPor="+ buscarPor + 
-                               "&valor=" + valor + 
-                               "&ordenarPor=" + ordenarPor + 
-                               "&ascDesc=" + ascDesc + 
-                               "&arquivados=" + $('#arquivados').prop('checked');
+    var url = "./tabelaErros.php?"+dados;
 
     window.location = url;    
 }
