@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">  
+
+    <script type="text/javascript">
+      var token_session='<?php echo $token_session;?>';
+      var email_usuario='<?php echo $email_usu;?>';
+    </script>
     
   </head>
   <body>

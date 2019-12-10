@@ -12,6 +12,7 @@ window.onload = function() {
     var inputemail = document.getElementById("email");
     inputemail.value = parametrosGet.email;
     
+    
     $('#forme').submit(function (e){
         e.preventDefault();
         AtualizaCadastro();

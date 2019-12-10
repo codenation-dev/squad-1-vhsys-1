@@ -49,7 +49,7 @@
     </header>
       <div id="cabecalho">
         
-      <input type="button" id="voltar" class="btn btn-primary" value="Voltar">     
+        <input type="button" id="voltar" class="btn btn-primary" value="Voltar">     
         <input type="button" id="sair" class="btn btn-primary" value="Sair">
 
         <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
@@ -63,42 +63,38 @@
         
         <form class="form-inline" action="/action_page.php">
           <div class="form-group">
-            <label for="ambiente">Ambiente:</label>
-            <select id="ambiente">
-              <option value=""></option>
+            <select id="ambiente" class="form-control">
+              <option value="">Ambiente</option>
               <option value="producao">Produção</option>
               <option value="homologacao">Homologação</option>
               <option value="dev">Dev</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="ordenarPor">Ordenar por:</label>
-            <select id="ordenarPor">
-              <option value=""></option>
+            <select id="ordenarPor" class="form-control">
+              <option value="">Ordenar por</option>
               <option value="nivel">Level</option>
               <option value="frequencia">Frequência</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="ascDesc" id="lblAscDesc">Sentido ordenção:</label>
-            <select id="ascDesc">
-              <option value=""></option>
+            <select id="ascDesc" class="form-control">
+              <option value="">Sentido ordenção</option>
               <option value="asc">Crescente</option>
               <option value="desc">Decrescente</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="buscarPor">Buscar por:</label>
-            <select id="buscarPor">
-              <option value=""></option>
+            <select id="buscarPor" class="form-control">
+              <option value="">Buscar por</option>
               <option value="nivel">Level</option>
               <option value="titulo">Descrição</option>
               <option value="origem">Origem</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="niveis" id="lblNiveis">Níveis:</label>
-            <select id="niveis">
+            <select id="niveis" class="form-control">
+            <option value="">Níveis</option>
               <option value="error">Erro</option>
               <option value="crit">Falha Crítica</option>
               <option value="warn">Aviso</option>
@@ -106,14 +102,13 @@
             </select>
           </div>
           <div class="form-group" >
-            <label for="valor" id="lblValor">Valor:</label>
-            <input type="text" name="pesq" id="valor" placeholder="search">
+            <input class="form-control"type="text" name="pesq" id="valor" placeholder="search">
           </div>
           <div class="checkbox">
             <label><input type="checkbox" name="arquivados" id="arquivados"> Arquivados</label>
           </div>
 
-          <button type="submit" class="btn btn-default" id="consultar" width="20" height="20" >    
+          <button type="submit" class="btn btn-basic" id="consultar" width="20" height="20" >    
             <img  src="img/lupa.png" alt=""width="20" height="20"  >
           </button>
         <button id="limparPesquisa" class="btn btn-basic" type="reset">Limpar Pesquisa</button>

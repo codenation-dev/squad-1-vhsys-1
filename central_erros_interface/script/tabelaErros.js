@@ -167,7 +167,7 @@ window.onload = function() {
     LimparMensagens();
 
     parametrosGet = carregarParametros(parametrosGet);
-    console.dir(parametrosGet);
+    //console.dir(parametrosGet);
 
     ControlarVisibilidadeGrid();
     ControlarVisibilidadeSelects();
@@ -276,7 +276,8 @@ window.onload = function() {
                 console.log(JSON.stringify(value));
                 */
 
-                var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
+                
+                var urlDetalhe = "./detalheErro.php?"+JSON.stringify(value);
                 window.location = urlDetalhe;    
               })
 

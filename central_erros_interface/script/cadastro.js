@@ -6,7 +6,7 @@ window.onload = function() {
     LimparMensagens();
 
     parametrosGet = carregarParametros(parametrosGet);
-    console.dir(parametrosGet);
+    //console.dir(parametrosGet);
 
     if (token_session === "") {
       

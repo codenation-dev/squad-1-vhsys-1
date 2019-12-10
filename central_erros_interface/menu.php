@@ -16,13 +16,14 @@
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">  
    
-   <script type="text/javascript">    
-     var token_session='<?php echo $token_session;?>';
-     if (token_session === "") {
-       window.location.href = "./index.php";
-     }
-   </script>
-    
+    <script type="text/javascript">    
+      var token_session='<?php echo $token_session;?>';
+      var email_usuario='<?php echo $email_usu;?>';
+      if (token_session === "") {
+        window.location.href = "./index.php";
+      }
+    </script>
+        
   </head>
   <body>
     <div class="login-clean">

@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="./css/Login-Form-Clean.css">
   <link rel="stylesheet" href="./css/signin.css">   
 
+  <script type="text/javascript">
+    var token_session='<?php echo $token_session;?>';
+    var email_usuario='<?php echo $email_usu;?>';
+  </script>
+
 </head>
 <body class="text-center, bg">
 

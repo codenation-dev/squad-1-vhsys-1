@@ -7,7 +7,7 @@ window.onload = function() {
     LimparMensagens();
 
     parametrosGet = carregarParametros(parametrosGet);
-    console.dir(parametrosGet);
+    //console.dir(parametrosGet);
 
     $('#formLogin').submit(function (e){
         e.preventDefault();

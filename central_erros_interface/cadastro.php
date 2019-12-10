@@ -17,7 +17,9 @@
 
     <script type="text/javascript">
       var token_session='<?php echo $token_session;?>';  
+      var email_usuario='<?php echo $email_usu;?>';
     </script>
+
   </head>
   <body class="text-center, bg">
       <form action="" class="form-signin" method="post" id="forme" name="form">

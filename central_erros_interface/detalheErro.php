@@ -24,21 +24,21 @@
     </style>
 
     <script type="text/javascript">
-      var token_session='<?php echo $session_value;?>';
-      if (token_session === "") {
-        window.location.href = "./index.php";
-      }      
+      var token_session='<?php echo $token_session;?>';
+      var email_usuario='<?php echo $email_usu;?>';   
     </script>
   </head>
   <body>
-    <header>
-      <span class="text-muted quebra">Bem vindo <?php echo $_SESSION['email']; ?>. Seu token é: <?php echo $_SESSION['token']; ?>.</span>
-    </header>
-
     
     <div class="container-fluid">
+    <header>
+      <span class="text-muted quebra" id="identUser"></span>
+    </header>
+
       <div>
-        <input type="button" id="voltar" class="btn" value="Voltar">         
+        <input type="button" id="voltar" class="btn btn-primary" value="Voltar">     
+        <input type="button" id="sair" class="btn btn-primary" value="Sair">
+
         <h1 id="ip_data"></h1>
       </div>
       <div style="height:350px;overflow: auto;">
@@ -61,8 +61,19 @@
         </div>      
       </div>    
     </div>
+        <div class="response">
+          <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
+          <span class='msg-erro msg-falha'></span>
+          <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
+          <span class='msg-alerta msg-warning'></span>
+          <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
+          <span class='msg-exito msg-sucesso'></span>
+        </div>
 
 
+        <div style="height: 55px;">
+			</div>
+  
     <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
     <script src="./script/terceiros/popper.min.1.14.7.js"></script>
     <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
