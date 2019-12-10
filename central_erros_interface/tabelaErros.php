@@ -1,6 +1,5 @@
 <?php 	
-  include 'config.php';
-  
+  include 'config.php';  
   $token_session= (isset($_SESSION['token']))?$_SESSION['token']:''; 
   $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
 ?>
@@ -42,16 +41,16 @@
     </script>    
   </head>
   <body>
-    <header id="h">
-      <span class="text-muted quebra">Bem vindo <?php echo $_SESSION['email']; ?>. Seu token é: <?php echo $_SESSION['token']; ?>.</span>
-    </header>
 
       <div class="container-fluid" style="height: 100%">
       
+    <header id="h">
+      <span class="text-muted quebra" id="identUser"></span>
+    </header>
       <div id="cabecalho">
         
-        <input type="button" id="voltar" class="btn btn-primary btn-block" value="Voltar">     
-        <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
+      <input type="button" id="voltar" class="btn btn-primary" value="Voltar">     
+        <input type="button" id="sair" class="btn btn-primary" value="Sair">
 
         <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
         <span class='msg-erro msg-falha'></span>
@@ -64,7 +63,7 @@
         
         <form class="form-inline" action="/action_page.php">
           <div class="form-group">
-            <label for="ambiente">Ambiente:</label><br>
+            <label for="ambiente">Ambiente:</label>
             <select id="ambiente">
               <option value=""></option>
               <option value="producao">Produção</option>
@@ -73,7 +72,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="ordenarPor">Ordenar por:</label><br>
+            <label for="ordenarPor">Ordenar por:</label>
             <select id="ordenarPor">
               <option value=""></option>
               <option value="nivel">Level</option>
@@ -81,7 +80,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="ascDesc" id="lblAscDesc">Sentido ordenção:</label><br>
+            <label for="ascDesc" id="lblAscDesc">Sentido ordenção:</label>
             <select id="ascDesc">
               <option value=""></option>
               <option value="asc">Crescente</option>
@@ -89,7 +88,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="buscarPor">Buscar por:</label><br>
+            <label for="buscarPor">Buscar por:</label>
             <select id="buscarPor">
               <option value=""></option>
               <option value="nivel">Level</option>
@@ -98,7 +97,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="niveis" id="lblNiveis">Níveis:</label><br>
+            <label for="niveis" id="lblNiveis">Níveis:</label>
             <select id="niveis">
               <option value="error">Erro</option>
               <option value="crit">Falha Crítica</option>
@@ -107,7 +106,7 @@
             </select>
           </div>
           <div class="form-group" >
-            <label for="valor" id="lblValor">Valor:</label><br>
+            <label for="valor" id="lblValor">Valor:</label>
             <input type="text" name="pesq" id="valor" placeholder="search">
           </div>
           <div class="checkbox">
@@ -117,28 +116,30 @@
           <button type="submit" class="btn btn-default" id="consultar" width="20" height="20" >    
             <img  src="img/lupa.png" alt=""width="20" height="20"  >
           </button>
-          <button type="button" class="btn btn-default" id="limparPesquisa">
-            Limpar pesquisa
-          </button>
+        <button id="limparPesquisa" class="btn btn-basic" type="reset">Limpar Pesquisa</button>
         </form>
-
-        
-        <input type="button" id="arquivar" class="btn btn-primary btn-block" value="Arquivar">
-        <input type="button" id="apagar" class="btn btn-primary btn-block" value="Apagar">
      </div>
 
+      <div id="toolbar">
+        <button id="apagar" class="btn btn-basic" disabled>Apagar</button>
+        <button id="arquivar" class="btn btn-basic" disabled>Arquivar</button>
+      </div>
       <table 
         id="tabelaResultado"
-        data-classes="table table-striped table-condensed"  >			
+        
+        data-toolbar="#toolbar"
+        data-height="460"
+        data-sortable="true"
+        data-classes="table table-striped table-bordered"  >			
         <thead>
           <tr id="linhaCabecalho">
             <th data-checkbox="true" class="text-center"></th>
             <th data-field="nivel" class="text-center" data-formatter="colunaNivel">Level</th>
             <th data-field="ds_amigavel" class="text-center" data-formatter="colunaLog">Log</th>
-            <th data-field="frequencia" class="text-center">Eventos</th>
+            <th data-field="frequencia" class="text-center" data-sortable="true">Eventos</th>
+            <!--              
             <th data-field="id" class="text-center">id</th>
             <th data-field="arquivado" class="text-center">arquivado</th>
-            <!--              
             <th data-field="titulo" class="text-center">titulo</th>
             <th data-field="ip" class="text-center">ip</th>
             <th data-field="data_hora" class="text-center">data_hora</th>

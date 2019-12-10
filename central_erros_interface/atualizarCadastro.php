@@ -1,8 +1,7 @@
 <?php
   include 'config.php';
-  $p_token= (isset($_GET['token']))?$_GET['token']:''; 
-  $p_email= (isset($_GET['email']))?$_GET['email']:''; 
-  $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
+  $token_session= (isset($_SESSION['token']))?$_SESSION['token']:''; 
+  $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -19,9 +18,8 @@
     <link rel="stylesheet" href="./css/signup.css">  
    
     <script type="text/javascript">    
-        var ptoken='<?php echo $p_token;?>';
-        var pemail='<?php echo $p_email;?>';
-        var psenha='<?php echo $p_senha;?>';
+      var token_session='<?php echo $token_session;?>';
+      var email_usuario='<?php echo $email_usu;?>';
     </script>
 
   </head>
@@ -34,6 +32,7 @@
         <label for="senha" class="sr-only">Password</label>
         <input type="password" name="senha" id="senha" class="form-control" placeholder="Password">
         <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+        <button class="btn btn-primary btn-block" type="button" id="voltar">Voltar</button>
         <p class="mt-5 mb-3 text-muted">Squad-1-vhsys © 2019</p>
         <div class="response">
           <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->

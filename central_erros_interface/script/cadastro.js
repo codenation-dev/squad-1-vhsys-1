@@ -1,5 +1,12 @@
+var parametrosGet = {
+    email: "",
+    senha: ""
+}
 window.onload = function() {
     LimparMensagens();
+
+    parametrosGet = carregarParametros(parametrosGet);
+    console.dir(parametrosGet);
 
     if (token_session === "") {
       

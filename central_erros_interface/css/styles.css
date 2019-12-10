@@ -71,11 +71,11 @@
   header {	
     top: 0;	
     height: auto; 
-    line-height: 60px; 
+    line-height: 40px; 
     color: rgba(0,0,0,.87);
     z-index: 1030;
     margin-top: 0;
-    padding-left: 15px;
+    
   }
   .footer {
     position: fixed;
@@ -126,3 +126,14 @@
 .msg-alerta{ background-color: yellow; }
 .msg-exito{ color: green; background-color: white; }
 .msg-processando{ color: DodgerBlue; background-color: white; }
+
+
+.right {
+  float: right;
+  width: 30%;
+}
+
+.left {
+  float: left;
+  width: 65%;
+}

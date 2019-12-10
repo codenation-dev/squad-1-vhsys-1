@@ -1,4 +1,31 @@
-var parametrosFiltro = {
+
+
+  function operateFormatter(value, row, index) {
+    return [
+      '<a class="like" href="javascript:void(0)" title="Like">',
+      '<i class="fa fa-heart"></i>',
+      '</a>  ',
+      '<a class="apagar" href="javascript:void(0)" title="apagar">',
+      '<i class="fa fa-trash"></i>',
+      '</a>'
+    ].join('')
+  }
+
+  window.operateEvents = {
+    'click .like': function (e, value, row, index) {
+      alert('You click like action, row: ' + JSON.stringify(row))
+    },
+    'click .apagar': function (e, value, row, index) {
+      $table.bootstrapTable('apagar', {
+        field: 'id',
+        values: [row.id]
+      })
+    }
+  }
+
+var $apagar = $('#apagar')
+
+var parametrosGet = {
     ambiente: "",
     buscarPor: "",
     valor: "",
@@ -19,11 +46,6 @@ function colunaLog(value, row) {
 
     return objLinha.detalhe+'<br>'+objLinha.ip+'<br>'+objLinha.data_hora;
 }
-var $limparPesquisa = $('#limparPesquisa');
-$limparPesquisa.click(function () {
-    window.location.href = "./tabelaErros.php";
-});
-
 
 $('#niveis').change(function () {
     $('#valor').val($('#niveis').val());
@@ -43,6 +65,11 @@ $ordenarPor.change(function () {
         $('#lblAscDesc').hide();
         $('#ascDesc').val("");
     }
+});
+
+var $limparPesquisa = $('#limparPesquisa');
+$limparPesquisa.click(function () {
+    window.location.href = "./tabelaErros.php";
 });
 
 var $buscarPor = $('#buscarPor');
@@ -75,7 +102,6 @@ var $table = $('#tabelaResultado');
 
   $(function() {
     $arquivar.click(function () {
-        //console.log(JSON.stringify($table.bootstrapTable('getSelections')));
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));
         var url = "erro_arquivar";
         ExecutarAcaoApagarArquivar(url, "PUT", objLinha);        
@@ -84,7 +110,6 @@ var $table = $('#tabelaResultado');
 
   $(function() {
     $apagar.click(function () {
-        //console.dir(token_session);
         var objLinha = JSON.parse(JSON.stringify($table.bootstrapTable('getSelections')));      
         var url = "erro/apagar";
         ExecutarAcaoApagarArquivar(url, "DELETE", objLinha);
@@ -131,52 +156,47 @@ function ControlarVisibilidadeGrid() {
 	}	
 }
 
-function carregarParametros() {
-    //console.dir(window.location);
-
-    if (window.location.search === "") {
-        return;
-    }
-
-    parametrosFiltro = JSON.parse(decodeURIComponent(window.location.search.substring(1).split("&")));
-    
-    //console.dir(parametrosFiltro);
-}
-
-window.onload = function() {
-    carregarParametros();
+function ControlarVisibilidadeSelects() {
     $('#niveis').hide();
     $('#lblNiveis').hide();
     $('#ascDesc').hide();
     $('#lblAscDesc').hide();
+}
+
+window.onload = function() {
+    LimparMensagens();
+
+    parametrosGet = carregarParametros(parametrosGet);
+    console.dir(parametrosGet);
+
     ControlarVisibilidadeGrid();
+    ControlarVisibilidadeSelects();
 
     var url = 'erro';
     var paramAtualiza = '?email='+email_usuario;
 
     var metodo = "GET";
     var dados = "";
-    var strAux = "";
-
-    if ((parametrosFiltro.ambiente !== "") ||
-        (parametrosFiltro.buscarPor !== "") ||
-        (parametrosFiltro.valor !== "") ||
-        (parametrosFiltro.ordenarPor !== "") ||
-        (parametrosFiltro.arquivados !== "")){        
+    
+    if ((parametrosGet.ambiente !== "") ||
+        (parametrosGet.buscarPor !== "") ||
+        (parametrosGet.valor !== "") ||
+        (parametrosGet.ordenarPor !== "") ||
+        (parametrosGet.arquivados !== "")){        
         metodo = "POST";
-        dados = '{"ambiente":"'+parametrosFiltro.ambiente+
-                '", "buscarPor":"'+parametrosFiltro.buscarPor+
-                '", "valor":"'+parametrosFiltro.valor+
-                '", "ordenarPor":"'+parametrosFiltro.ordenarPor+
-                '", "ascDesc":"'+parametrosFiltro.ascDesc+ 
-                '", "arquivados":'+parametrosFiltro.arquivados+'}';
+        dados = '{"ambiente":"'+parametrosGet.ambiente+
+                '", "buscarPor":"'+parametrosGet.buscarPor+
+                '", "valor":"'+parametrosGet.valor+
+                '", "ordenarPor":"'+parametrosGet.ordenarPor+
+                '", "ascDesc":"'+parametrosGet.ascDesc+ 
+                '", "arquivados":'+parametrosGet.arquivados+'}';
 
-        if (parametrosFiltro.ambiente !== "") {
-            $('#ambiente').val(parametrosFiltro.ambiente);
+        if (parametrosGet.ambiente !== "") {
+            $('#ambiente').val(parametrosGet.ambiente);
         }
-        if (parametrosFiltro.buscarPor !== "") {
+        if (parametrosGet.buscarPor !== "") {
             
-            $('#buscarPor').val(parametrosFiltro.buscarPor);
+            $('#buscarPor').val(parametrosGet.buscarPor);
             
             if ($('#buscarPor').val() === "nivel") {
                 $('#niveis').show();
@@ -188,29 +208,28 @@ window.onload = function() {
                 $('#valor').show();
             }
         }
-        if (parametrosFiltro.valor !== "") {
-            $('#valor').val(parametrosFiltro.valor);
+        if (parametrosGet.valor !== "") {
+            $('#valor').val(parametrosGet.valor);
         }
-        if (parametrosFiltro.ordenarPor !== "") {
-            if (parametrosFiltro.ordenarPor !== "nivel") {
+        if (parametrosGet.ordenarPor !== "") {
+            if (parametrosGet.ordenarPor !== "nivel") {
                 strAux = "Level";
-            } else if (parametrosFiltro.ordenarPor !== "nivel") {
+            } else if (parametrosGet.ordenarPor !== "nivel") {
                 strAux = "Descrição";
-            } else if (parametrosFiltro.ordenarPor !== "titulo") {
+            } else if (parametrosGet.ordenarPor !== "titulo") {
                 strAux = "Origem";
             }
 
-            $('#ordenarPor').val(parametrosFiltro.ordenarPor);
+            $('#ordenarPor').val(parametrosGet.ordenarPor);
         }
-        if (parametrosFiltro.ascDesc !== "") {
-            if (parametrosFiltro.ordenarPor !== "") {
-                $('#ascDesc').val(parametrosFiltro.ascDesc);    
+        if (parametrosGet.ascDesc !== "") {
+            if (parametrosGet.ordenarPor !== "") {
+                $('#ascDesc').val(parametrosGet.ascDesc);    
                 $('#ascDesc').show();
             }           
         }
-        if (parametrosFiltro.arquivados !== "") {
-            document.getElementById("arquivados").checked = (parametrosFiltro.arquivados === "true");
-        }
+        
+        document.getElementById("arquivados").checked = (parametrosGet.arquivados === true);
         
         url = 'recuperar_erro';
     }    
@@ -230,13 +249,19 @@ window.onload = function() {
             
             var $table = $('#tabelaResultado');
             
+            //$table.bootstrapTable('destroy').bootstrapTable({
             $('#tabelaResultado').bootstrapTable({        		
-            
-                height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true) - 5,
-                        
+                theadClasses: 'thead-light',
+                height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true)- $('#toolbar').outerHeight(true) - 5,
+                
                 data: retorno		
             });
 
+            $(window).resize(function () {
+                $('#tabelaResultado').bootstrapTable('resetView', {			
+                    height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true)- $('#toolbar').outerHeight(true) - 5,
+                });
+            });
             
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {
 
@@ -254,6 +279,13 @@ window.onload = function() {
                 var urlDetalhe = "./detalheErro.php?json="+JSON.stringify(value);
                 window.location = urlDetalhe;    
               })
+
+              
+    $table.on('check.bs.table uncheck.bs.table ' +
+    'check-all.bs.table uncheck-all.bs.table',
+  function () {
+    $apagar.prop('disabled', !$table.bootstrapTable('getSelections').length)
+  })
             
             ControlarVisibilidadeGrid();
         },
@@ -285,43 +317,20 @@ function ObterValorSelect(identificador) {
     var selectValue = aaa.options[aaa.selectedIndex].value;
     //alert(selectValue);
     return selectValue;
-
-     //alert(ObterValorSelect('ambiente'));
-   dados = '{"ambiente":"'+ObterValorSelect('ambiente')+
-   '", "buscarPor":"'+ObterValorSelect('buscarPor')+
-   '", "valor":"'+ObterValorSelect('valor')+
-   '", "ordenarPor":"'+ObterValorSelect('ordenarPor')+
-   '", "ascDesc":"'+ObterValorSelect('ascDesc')+
-   '", "arquivados":'+$('#arquivados').prop('checked')+'}';    
+ 
 }
 
-function Consultar(){
-    LimparMensagens();
+function Consultar(){    
     
-    
-    var selectAmbiente = document.getElementById("ambiente");
-    var selectBuscarPor = document.getElementById("buscarPor");
     var inputValor = document.getElementById("valor");    
-    var selectOrdenarPor = document.getElementById("ordenarPor"); 
-    var selectAscDesc = document.getElementById("ascDesc");
 
-    var ambiente = selectAmbiente.options[selectAmbiente.selectedIndex].value;
-    var buscarPor = selectBuscarPor.options[selectBuscarPor.selectedIndex].value;
-    var ordenarPor = selectOrdenarPor.options[selectOrdenarPor.selectedIndex].value;
-    var valor = inputValor.value;
-    var ascDesc = selectAscDesc.options[selectAscDesc.selectedIndex].value;
-    
-    dados = '{"ambiente":"'+ambiente+
-            '", "buscarPor":"'+buscarPor+
-            '", "valor":"'+valor+
-            '", "ordenarPor":"'+ordenarPor+
-            '", "ascDesc":"'+ascDesc+ 
-            '", "arquivados":'+$('#arquivados').prop('checked')+'}';
-
-   
-
-   
+    var dados = '{"ambiente":"'+ObterValorSelect('ambiente')+
+                '", "buscarPor":"'+ObterValorSelect('buscarPor')+
+                '", "valor":"'+inputValor.value+
+                '", "ordenarPor":"'+ObterValorSelect('ordenarPor')+
+                '", "ascDesc":"'+ObterValorSelect('ascDesc')+
+                '", "arquivados":'+$('#arquivados').prop('checked')+'}';   
     var url = "./tabelaErros.php?"+dados;
-
+    
     window.location = url;    
 }

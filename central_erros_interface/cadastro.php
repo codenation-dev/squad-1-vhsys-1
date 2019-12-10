@@ -1,7 +1,5 @@
 <?php
   include 'config.php';
-  $p_email= (isset($_GET['email']))?$_GET['email']:''; 
-  $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,6 +15,9 @@
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/signup.css">  
 
+    <script type="text/javascript">
+      var token_session='<?php echo $token_session;?>';  
+    </script>
   </head>
   <body class="text-center, bg">
       <form action="" class="form-signin" method="post" id="forme" name="form">
@@ -47,11 +48,6 @@
     <script src="./script/comum/requisicaoAjax.js"></script>
    
     <script src="./script/comum/comum.js"></script>
-    <script type="text/javascript">
-      var token_session='<?php echo $token_session;?>';  
-      var pemail='<?php echo $p_email;?>';
-      var psenha='<?php echo $p_senha;?>';
-    </script>
     <script src="./script/cadastro.js"></script>
   </body>
 </html>

@@ -1,7 +1,6 @@
 <?php 	
   include 'config.php';
   $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
-  $p_json= (isset($_GET['json']))?$_GET['json']:''; 
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -26,11 +25,10 @@
 
     <script type="text/javascript">
       var token_session='<?php echo $session_value;?>';
-      var pjson='<?php echo $p_json;?>';
+      if (token_session === "") {
+        window.location.href = "./index.php";
+      }      
     </script>
-
-
-
   </head>
   <body>
     <header>

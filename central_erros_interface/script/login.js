@@ -1,4 +1,14 @@
+var parametrosGet = {
+    email: "",
+    senha: ""
+}
+
 window.onload = function() {
+    LimparMensagens();
+
+    parametrosGet = carregarParametros(parametrosGet);
+    console.dir(parametrosGet);
+
     $('#formLogin').submit(function (e){
         e.preventDefault();
         Login();
@@ -9,8 +19,8 @@ window.onload = function() {
         EsqueceuSenha();
     });
 
-    $('#email').val(pemail);
-    $('#senha').val(psenha);
+    $('#email').val(parametrosGet.email);
+    $('#senha').val(parametrosGet.senha);
 }
 
 function Login(){
@@ -78,7 +88,8 @@ function EsqueceuSenha(){
                 false,
                 function (statusText, data) {
                     var usuario = JSON.parse(data);
-                    var paramAtualiza = '?email='+usuario.email+'&token='+usuario.token;
+                    var paramAtualiza = '?{"email":"'+usuario.email+'", "token":"'+usuario.token+'"}';
+                    
                     window.location.href = "./atualizarCadastro.php"+paramAtualiza;
                 },
                 ExibirMensagemFalha,

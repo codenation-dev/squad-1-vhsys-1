@@ -1,10 +1,16 @@
+var parametrosGet = {
+    email: "",
+    token: ""
+}
+
 window.onload = function() {
     LimparMensagens();
+
+    parametrosGet = carregarParametros(parametrosGet);
+    //console.dir(parametrosGet);
     
     var inputemail = document.getElementById("email");
-    var inputSenha = document.getElementById("senha");
-    inputemail.value = pemail;
-    inputSenha.value = psenha;      
+    inputemail.value = parametrosGet.email;
     
     $('#forme').submit(function (e){
         e.preventDefault();
@@ -16,7 +22,7 @@ function AtualizaCadastro(){
     LimparMensagens();
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
-    //var dados = '{"email":"'+inputemail.value+'","senha":"'+inputSenha.value+'","token":"'+ptoken+'"}';
+    
     var dados = '{"email":"'+inputemail.value+'","senha":"'+inputSenha.value+'"}';
     url = "atualizar_token_usuario";
  
@@ -31,7 +37,8 @@ function AtualizaCadastro(){
                 function (){                    
                     var email_usuario = $('#email').val();
                     var senha_usuario = $('#senha').val();
-                    var param = '?email='+email_usuario+'&senha='+senha_usuario;
+                    
+                    var param = '?{"email":"'+email_usuario+'", "senha":"'+senha_usuario+'"}';
                     window.location.href = "./login.php"+param;                    
                 },3000
             );
@@ -40,7 +47,7 @@ function AtualizaCadastro(){
             ExibirMensagemFalha(statusText);
         },
         true,
-        ptoken
+        parametrosGet.token
     );
 }    
 

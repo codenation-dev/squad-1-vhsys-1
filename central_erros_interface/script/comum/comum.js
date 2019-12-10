@@ -1,3 +1,5 @@
+$('#identUser').text("Bem vindo "+email_usuario + ". Seu token é: " + token_session +".");
+
 $('#sair').click(function (e){
     e.preventDefault();
     Sair();
@@ -63,3 +65,16 @@ function LimparMensagem(id) {
 		span_msg.style.display = 'none';	
 	}
 }
+
+function carregarParametros(objParametros) {
+
+    if (window.location.search === "") {
+        return objParametros;
+	}
+	/*
+	console.log(window.location.search);
+	console.log(decodeURIComponent(window.location.search.substring(1).split("&")));
+	*/
+	return JSON.parse(decodeURIComponent(window.location.search.substring(1).split("&")));
+}
+

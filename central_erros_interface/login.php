@@ -1,7 +1,5 @@
 <?php
   include 'config.php';
-  $p_email= (isset($_GET['email']))?$_GET['email']:''; 
-  $p_senha= (isset($_GET['senha']))?$_GET['senha']:''; 
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -16,11 +14,6 @@
   <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
   <link rel="stylesheet" href="./css/Login-Form-Clean.css">
   <link rel="stylesheet" href="./css/signin.css">   
-   
-   <script type="text/javascript">    
-       var pemail='<?php echo $p_email;?>';
-       var psenha='<?php echo $p_senha;?>';
-   </script>
 
 </head>
 <body class="text-center, bg">

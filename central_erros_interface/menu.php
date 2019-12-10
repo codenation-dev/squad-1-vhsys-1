@@ -1,5 +1,6 @@
 <?php
   include 'config.php';
+  $token_session= (isset($_SESSION['token']))?$_SESSION['token']:''; 
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -14,6 +15,13 @@
     <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">  
+   
+   <script type="text/javascript">    
+     var token_session='<?php echo $token_session;?>';
+     if (token_session === "") {
+       window.location.href = "./index.php";
+     }
+   </script>
     
   </head>
   <body>

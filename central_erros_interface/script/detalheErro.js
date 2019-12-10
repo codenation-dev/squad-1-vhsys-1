@@ -1,4 +1,12 @@
+var parametrosGet = {
+    json: ""
+}
+
 window.onload = function() {
+    LimparMensagens();
+
+    parametrosGet = carregarParametros(parametrosGet);
+    console.dir(parametrosGet);
     
     /*
     console.log(pjson);    
@@ -7,7 +15,7 @@ window.onload = function() {
     console.dir(decodeURIComponent(pjson));    
     */
     
-    var log = JSON.parse(decodeURIComponent(pjson));
+    var log = JSON.parse(decodeURIComponent(parametrosGet.json));
     $('#ip_data').html("Erro no "+ log.ip +" em "+ log.data_hora);
     $('#titulo').html(log.titulo);
     $('#detalhe').html(log.detalhe);
