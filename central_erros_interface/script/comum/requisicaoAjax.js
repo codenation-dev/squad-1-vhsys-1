@@ -1,11 +1,5 @@
-/*
-tem que tirar o token fixo
-*/
-//const token_padrao = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzYyMTA1NDQsImlhdCI6MTU3NTg1MDU0NH0.wZj1zZFl2tb0nfhPC6Oh5XeXW34YQZ0tIIq2sZpBHvk";
-// Informar servidor padrão
-//var base_url = "http://18.188.20.24/central/";
-var base_url = "http://localhost/central/";
 
+var base_url = "http://" + window.location.host + "/central/";
 
 function execAjax(
   dst, 

@@ -1,12 +1,11 @@
-var parametrosFiltro;
-/*
-var parametrosFiltro.ambiente='';
-var parametrosFiltro.buscarPor='';
-var parametrosFiltro.valor='';
-var parametrosFiltro.ordenarPor='';
-var parametrosFiltro.ascDesc='';
-var parametrosFiltro.arquivados='';
-*/
+var parametrosFiltro = {
+    ambiente: "",
+    buscarPor: "",
+    valor: "",
+    ordenarPor: "",
+    ascDesc: "",
+    arquivados: ""
+}
 
 function colunaNivel(value, row) {
 
@@ -45,7 +44,6 @@ $ordenarPor.change(function () {
         $('#ascDesc').val("");
     }
 });
-
 
 var $buscarPor = $('#buscarPor');
 $buscarPor.change(function () {
@@ -134,16 +132,15 @@ function ControlarVisibilidadeGrid() {
 }
 
 function carregarParametros() {
+    //console.dir(window.location);
+
+    if (window.location.search === "") {
+        return;
+    }
+
     parametrosFiltro = JSON.parse(decodeURIComponent(window.location.search.substring(1).split("&")));
-    console.dir(parametrosFiltro);
-    /*
-    parametrosFiltro.ambiente
-    parametrosFiltro.buscarPor
-    parametrosFiltro.valor
-    parametrosFiltro.ordenarPor
-    parametrosFiltro.ascDesc
-    parametrosFiltro.arquivados 
-    */
+    
+    //console.dir(parametrosFiltro);
 }
 
 window.onload = function() {
@@ -216,7 +213,6 @@ window.onload = function() {
         }
         
         url = 'recuperar_erro';
-        //console.dir(JSON.parse(dados));
     }    
 
     execAjax(
@@ -283,8 +279,25 @@ $('#consultar').click(function (e){
     Consultar();
 })
 
+function ObterValorSelect(identificador) {
+    //alert(identificador);
+    var aaa = document.getElementById(identificador);
+    var selectValue = aaa.options[aaa.selectedIndex].value;
+    //alert(selectValue);
+    return selectValue;
+
+     //alert(ObterValorSelect('ambiente'));
+   dados = '{"ambiente":"'+ObterValorSelect('ambiente')+
+   '", "buscarPor":"'+ObterValorSelect('buscarPor')+
+   '", "valor":"'+ObterValorSelect('valor')+
+   '", "ordenarPor":"'+ObterValorSelect('ordenarPor')+
+   '", "ascDesc":"'+ObterValorSelect('ascDesc')+
+   '", "arquivados":'+$('#arquivados').prop('checked')+'}';    
+}
+
 function Consultar(){
     LimparMensagens();
+    
     
     var selectAmbiente = document.getElementById("ambiente");
     var selectBuscarPor = document.getElementById("buscarPor");
@@ -305,6 +318,9 @@ function Consultar(){
             '", "ascDesc":"'+ascDesc+ 
             '", "arquivados":'+$('#arquivados').prop('checked')+'}';
 
+   
+
+   
     var url = "./tabelaErros.php?"+dados;
 
     window.location = url;    
