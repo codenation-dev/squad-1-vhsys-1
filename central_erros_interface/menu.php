@@ -1,49 +1,95 @@
 <?php
-  include 'config.php';
-  $token_session= (isset($_SESSION['token']))?$_SESSION['token']:''; 
+    include 'config.php';
 ?>
-<!doctype html>
-<html lang="pt-br">
-<head>
-    <title>Inicio</title>
-    
-    <meta charset="utf-8">
-    <meta name="description" content="Projeto Final Squad 1.">
-    <meta name="author" content="Squad_1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+        <meta name="author" content="Coderthemes">
 
-    <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
-    <link rel="stylesheet" href="./css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="./css/styles.css">  
-   
-    <script type="text/javascript">    
-      var token_session='<?php echo $token_session;?>';
-      var email_usuario='<?php echo $email_usu;?>';
-      if (token_session === "") {
-        window.location.href = "./index.php";
-      }
-    </script>
+        <title>Menu Central</title>
+
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+
+        <script src="assets/js/modernizr.min.js"></script>
+        <script type="text/javascript">
+            var token_session='<?php echo $token_session;?>';
+            var email_usuario='<?php echo $email_usu;?>';
+            if (token_session === "") {
+            window.location.href = "./index.php";
+            }
+        </script>
         
-  </head>
-  <body>
-    <div class="login-clean">
+    </head>
+    <body>
 
-      <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
-      <span class='msg-erro msg-falha'></span>
-      <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
-      <span class='msg-alerta msg-warning'></span>
-      <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
-      <span class='msg-exito msg-sucesso'></span>
+        <div class="account-pages"></div>
+        <div class="clearfix"></div>
+        <div class="wrapper-page">
+        	<div class=" card-box">
+                <div class="panel-heading"> 
+                    <h3 class="text-center"> Menu <strong class="text-custom">CentError</strong> </h3>
+                </div> 
 
-      <input type="button" id="sair" class="btn btn-primary btn-block" value="Sair">
-      <input type="button" id="cadastro" class="btn btn-primary btn-block" value="Cadastrar Usuários">
-      <input type="button" id="listaErros" class="btn btn-primary btn-block" value="Listar Erros">  
-    </div>
-     
-    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
-    <script src="./script/terceiros/popper.min.1.14.7.js"></script>
-    <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>    
-    <script src="./script/comum/comum.js"></script>
-    <script src="./script/menu.js"></script>
-  </body>
+                <div class="panel-body">
+                    <div class="form-horizontal m-t-10">
+                        <button type="button" id="sair" class="btn btn-block btn--md btn-primary btn-warning waves-effect waves-light"><i class="glyphicon   glyphicon-log-out m-r-5"></i>Sair do Sistema</button>
+                        <button type="button" id="cadastro" class="btn btn-block btn--md btn-primary btn-success waves-effect waves-light"><i class="glyphicon glyphicon-user m-r-5"></i>Cadastrar Usuário</button>
+                        <button type="button" id="listaErros" class="btn btn-block btn--md btn-primary waves-effect waves-light"><i class="glyphicon glyphicon-warning-sign m-r-5"></i> Erros</button>
+                    </div>
+                </div>   
+        </div>
+        
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                    Squad-1-vhsys © 2019.
+                    </div>
+                </div>
+            </div>
+        </footer>  
+        
+        <div class="text-center m-t-10 m-b-0">
+          <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
+          <span class='text-warning msg-erro msg-falha'></span>
+          <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
+          <span class='text-warning msg-alerta msg-warning'></span>
+          <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
+          <span class='text-success msg-exito msg-sucesso'></span>
+        </div>
+        
+    	<script>
+            var resizefunc = [];
+        </script>
+
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/detect.js"></script>
+        <script src="assets/js/fastclick.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/jquery.blockUI.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/jquery.nicescroll.js"></script>
+        <script src="assets/js/jquery.scrollTo.min.js"></script>
+
+
+        <script src="assets/js/jquery.core.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+
+        <script src="./script/comum/comum.js"></script>
+        <script src="./script/menu.js"></script>
+	
+	</body>
 </html>
