@@ -7,7 +7,9 @@ namespace Central\Actions\Usuario;
 use Central\Actions\ActionBase;
 use Central\Entity\URL;
 use Central\Entity\Usuario;
+use Central\Framework\CentralMail;
 use Central\Framework\CentralToken;
+use Central\Middleware\Auth;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
@@ -35,6 +37,8 @@ class EsqueceuSenha extends ActionBase
             $this->persistir($Usuario);
 
             $url_recuperacao_senha  = "http://".$request->getHeaderLine('host')."/central/recovery?token=$token_recuperacao_senha";
+
+            CentralMail::enviarEmail($Usuario->email, $url_recuperacao_senha);
 
             $resp = new URL();
             $resp->url = $url_recuperacao_senha;

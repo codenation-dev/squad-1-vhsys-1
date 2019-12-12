@@ -88,8 +88,7 @@ function EsqueceuSenha(){
         function (statusText, data) {
             
             //console.log(data);
-            var url2 = JSON.parse(decodeURIComponent(data));
-            
+            var url2 = JSON.parse(decodeURIComponent(data));            
             
             execAjax(
                 url2.url,

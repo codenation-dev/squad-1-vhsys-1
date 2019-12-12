@@ -24,7 +24,8 @@
         "zendframework/zend-httphandlerrunner": "^1.1",
         "league/container": "^3.3",
         "lcobucci/jwt": "^3.3",
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^8.4",
+        "phpmailer/phpmailer": "^6.1"
     },
     "scripts": {
         "doctrine": "doctrine",		
