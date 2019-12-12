@@ -6,9 +6,11 @@ use Central\Actions\Erro\CriarErro;
 use Central\Actions\Erro\DeletarErros;
 use Central\Actions\Erro\RecuperarErros;
 use Central\Actions\Erro\RecuperarTodosErros;
+use Central\Actions\Usuario\AtualizarAutenticacaoUsuario;
 use Central\Actions\Usuario\CriarUsuario;
 use Central\Actions\Usuario\EsqueceuSenha;
 use Central\Actions\Usuario\Login;
+use Central\Actions\Usuario\RecuperarSenha;
 use Central\Actions\Usuario\RecuperarUsuario;
 use Central\Entity\Erro;
 use Central\Entity\Usuario;
@@ -112,15 +114,40 @@ class CentralTest extends TestCase
         $EsqueceuSenha = new EsqueceuSenha($this->entityManager);
         $response = $EsqueceuSenha($request2);
         $this->assertSame($response->getStatusCode(), 200);
-        $token_validar = $response->getReasonPhrase();
 
-        $ret = CentralToken::validarToken($token_validar);
-        $this->assertSame($ret, 200);
+        $url = json_decode($response->getBody());
 
-        $recuperarUsuario = new RecuperarUsuario($this->entityManager);
-        $Usuario = $recuperarUsuario->obterUsuario($token_validar);
-        $this->assertNotNull($Usuario);
-        $this->assertSame($Usuario->email, "teste@teste.com");
+
+        $url_validar = $url->url;
+
+        $parts = parse_url($url_validar);
+        parse_str($parts['query'], $query);
+
+        $RecuperarSenha = new RecuperarSenha($this->entityManager);
+        $request3 = new ServerRequest(
+            [],
+            [],
+            null,
+            'GET',
+            new Stream('php://memory', 'wb+'),
+            [],
+            [],
+            $query
+        );
+
+        $response3 = $RecuperarSenha($request3);
+        $this->assertSame($response3->getStatusCode(), 200);
+        $User = json_decode($response3->getBody());
+
+        $AtualizarAutenticacaoUsuario = new AtualizarAutenticacaoUsuario($this->entityManager);
+
+        $stream3 = new Stream('php://memory', 'wb+');
+        $stream3->write(json_encode($User));
+        $stream3->rewind();
+        $request4 = new ServerRequest([], [], null, 'POST', $stream3);
+
+        $response4 = $AtualizarAutenticacaoUsuario($request4);
+        $this->assertSame($response4->getStatusCode(), 200);
     }
     public function test_CriarErro()
     {

@@ -1,5 +1,5 @@
 <?php
-    include 'config.php';
+    include 'config.php';    
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,10 +25,9 @@
             var token_session='<?php echo $token_session;?>';
             var email_usuario='<?php echo $email_usu;?>';
         </script>
-        
+                
     </head>
     <body>
-
         <div class="account-pages"></div>
         <div class="clearfix"></div>
         <div class="wrapper-page">
@@ -55,7 +54,7 @@
                         <div class="form-group ">
                             <div class="col-xs-12">
                                 <div class="checkbox checkbox-primary">
-                                    <input id="checkbox-signup" type="checkbox">
+                                    <input id="lembrarDeMim" type="checkbox">
                                     <label for="checkbox-signup">
                                         Lembrar-me
                                     </label>

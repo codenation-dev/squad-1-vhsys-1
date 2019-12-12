@@ -7,7 +7,7 @@ window.onload = function() {
     LimparMensagens();
 
     parametrosGet = carregarParametros(parametrosGet);
-    //console.dir(parametrosGet);
+    console.dir(parametrosGet);
     
     var inputemail = document.getElementById("email");
     inputemail.value = parametrosGet.email;

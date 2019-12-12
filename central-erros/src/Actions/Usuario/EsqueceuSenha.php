@@ -5,6 +5,7 @@ namespace Central\Actions\Usuario;
 
 
 use Central\Actions\ActionBase;
+use Central\Entity\URL;
 use Central\Entity\Usuario;
 use Central\Framework\CentralToken;
 use Psr\Http\Message\ResponseInterface;
@@ -34,7 +35,11 @@ class EsqueceuSenha extends ActionBase
             $this->persistir($Usuario);
 
             $url_recuperacao_senha  = "http://localhost/central/recovery?token=$token_recuperacao_senha";
-            $response->getBody()->write("$url_recuperacao_senha");
+
+            $resp = new URL();
+            $resp->url = $url_recuperacao_senha;
+
+            $response->getBody()->write(json_encode($resp));
 
             return $response->withStatus(200);
         }catch (\Throwable $exception){

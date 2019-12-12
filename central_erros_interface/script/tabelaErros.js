@@ -10,7 +10,7 @@
       '</a>'
     ].join('')
   }
-
+/*
   window.operateEvents = {
     'click .like': function (e, value, row, index) {
       alert('You click like action, row: ' + JSON.stringify(row))
@@ -22,8 +22,9 @@
       })
     }
   }
-
-var $apagar = $('#apagar')
+*/
+var $apagar = $('#apagar');
+var $arquivar = $('#arquivar');
 
 var parametrosGet = {
     ambiente: "",
@@ -40,9 +41,7 @@ return '<h4><span class="label label-default" id="nivel">'+ value+'</span></h4>'
 }
 function colunaLog(value, row) {
     var linha = JSON.stringify(row);
-    //alert(linha);
     var objLinha = JSON.parse(linha);
-    //console.dir(objLinha);
 
     return objLinha.detalhe+'<br>'+objLinha.ip+'<br>'+objLinha.data_hora;
 }
@@ -285,7 +284,8 @@ window.onload = function() {
     $table.on('check.bs.table uncheck.bs.table ' +
     'check-all.bs.table uncheck-all.bs.table',
   function () {
-    $apagar.prop('disabled', !$table.bootstrapTable('getSelections').length)
+    $apagar.prop('disabled', !$table.bootstrapTable('getSelections').length);
+    $arquivar.prop('disabled', !$table.bootstrapTable('getSelections').length);
   })
             
             ControlarVisibilidadeGrid();
@@ -330,7 +330,7 @@ function Consultar(){
                 '", "valor":"'+inputValor.value+
                 '", "ordenarPor":"'+ObterValorSelect('ordenarPor')+
                 '", "ascDesc":"'+ObterValorSelect('ascDesc')+
-                '", "arquivados":'+$('#arquivados').prop('checked')+'}';   
+                '", "arquivados":'+$('#arquivados').prop('checked')+'}';
     var url = "./tabelaErros.php?"+dados;
     
     window.location = url;    

@@ -6,6 +6,10 @@ var parametrosGet = {
 window.onload = function() {
     LimparMensagens();
 
+    //alert(email_usuario);
+
+    $('#email').val(email_usuario);
+
     parametrosGet = carregarParametros(parametrosGet);
     //console.dir(parametrosGet);
 
@@ -41,14 +45,16 @@ function Login(){
             //console.dir(data);
             var user = JSON.parse(data);
             
-            var paramSessao = '?email='+user.email+'&token='+user.token;
-
+            var paramSessao = '?email='+user.email+'&token='+user.token+'&lembrarDeMim='+$('#lembrarDeMim').prop('checked');
+            
             execAjax(
                 './session_write.php'+paramSessao,
                 "", 
                 'GET',
                 false,
-                function (statusText) {
+                function (statusText, data) {
+                    //alert(data);
+                    
                     window.location.href = "./menu.php";
                 },
                 ExibirMensagemFalha,
@@ -81,18 +87,26 @@ function EsqueceuSenha(){
         true,
         function (statusText, data) {
             //console.log(data);
+
+            var url2 = JSON.parse(decodeURIComponent(data));
+            
             execAjax(
-                data,
-                dados, 
+                url2.url,
+                "", 
                 'GET',
                 false,
-                function (statusText, data) {
-                    var usuario = JSON.parse(data);
+                function (statusText, data2) {
+            
+                    var usuario = JSON.parse(data2);
+                    
                     var paramAtualiza = '?{"email":"'+usuario.email+'", "token":"'+usuario.token+'"}';
                     
-                    window.location.href = "./atualizarCadastro.php"+paramAtualiza;
+                    window.location.href = "./atualizarCadastro.php"+paramAtualiza;            
                 },
-                ExibirMensagemFalha,
+                function(status, statusText) {
+                    
+                    ExibirMensagemFalha(statusText);
+                },
                 false
             );  
         },
