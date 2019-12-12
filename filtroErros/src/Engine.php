@@ -55,7 +55,7 @@ class Engine
         $splitIpAndErrorBody = explode("] ",$splitedLine[3]);
         $splitTitleAndErrorBodyItself = explode(": ",$splitIpAndErrorBody[1]);
         $title = $splitTitleAndErrorBodyItself[0];
-        $errorBody = $splitTitleAndErrorBodyItself[1];
+        $errorBody = $splitIpAndErrorBody[1];
         $origem = explode(" in ", $errorBody);//Use the function end() as a param
         $ip = explode("client ",$splitIpAndErrorBody[0]);//Use this as a param with the index 1
         return $this->jsonMaker($date[1], $level[1], $errorBody, $ip[1], $title, $origem);
