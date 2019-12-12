@@ -24,8 +24,8 @@
 		<script src="assets/js/modernizr.min.js"></script>
 
 		<script type="text/javascript">
-		var token_session='<?php echo $token_session;?>';  
-		var email_usuario='<?php echo $email_usu;?>';
+			var token_session='<?php echo $token_session;?>';  
+			var email_usuario='<?php echo $email_usu;?>';
 		</script>
 
 	</head>
@@ -53,7 +53,7 @@
 								<input class="form-control" type="password" name="senha" id="senha" required="" placeholder="Senha">
 							</div>
 						</div>
-
+<!--
 						<div class="form-group">
 							<div class="col-xs-12">
 								<div class="checkbox checkbox-primary">
@@ -62,6 +62,7 @@
 								</div>
 							</div>
 						</div>
+-->
 
 						<div class="form-group text-center m-t-20">
 							<div class="col-xs-12">
@@ -73,7 +74,7 @@
 
 						<div class="form-group text-center m-t-10">
 							<div class="col-xs-12">
-								<button class="btn btn-primary text-uppercase waves-effect waves-light" type="button" id="voltar">Voltar</button>
+                                <button class="btn btn-inverse btn-block text-uppercase waves-effect waves-light" type="button" id="voltar">Voltar</button>
 							</div>
                 		</div>
 
@@ -94,7 +95,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-xs-12">
-					Squad-1-vhsys © 2019.
+						<span class="text-muted quebra" id="emailUser"></span>
+					</div>
+					<div class="col-xs-12">
+						Squad-1-vhsys © 2019.
 					</div>
 				</div>
 			</div>

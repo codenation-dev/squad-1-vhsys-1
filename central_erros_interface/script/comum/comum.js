@@ -1,5 +1,9 @@
 $('#identUser').text("Bem vindo "+email_usuario + ". Seu token é: " + token_session +".");
 
+
+$('#emailUser').text(email_usuario);
+
+
 $('#sair').click(function (e){
     e.preventDefault();
     Sair();

@@ -110,14 +110,15 @@ class CentralTest extends TestCase
         $stream2 = new Stream('php://memory', 'wb+');
         $stream2->write(json_encode($Usuario2));
         $stream2->rewind();
-        $request2 = new ServerRequest([], [], null, 'POST', $stream2);
+
+        $request2 = new ServerRequest([], [], 'http://localhost/central/usuario/esqueceu_senha', 'POST', $stream2);
+
         $EsqueceuSenha = new EsqueceuSenha($this->entityManager);
-        $response = $EsqueceuSenha($request2);
-        $this->assertSame($response->getStatusCode(), 200);
+        $response8 = $EsqueceuSenha($request2);
 
-        $url = json_decode($response->getBody());
+        $this->assertSame($response8->getStatusCode(), 200);
 
-
+        $url = json_decode($response8->getBody());
         $url_validar = $url->url;
 
         $parts = parse_url($url_validar);

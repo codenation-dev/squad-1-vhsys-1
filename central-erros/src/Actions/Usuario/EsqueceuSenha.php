@@ -34,7 +34,7 @@ class EsqueceuSenha extends ActionBase
             $Usuario->token_recuperacao_senha = $token_recuperacao_senha;
             $this->persistir($Usuario);
 
-            $url_recuperacao_senha  = "http://localhost/central/recovery?token=$token_recuperacao_senha";
+            $url_recuperacao_senha  = "http://".$request->getHeaderLine('host')."/central/recovery?token=$token_recuperacao_senha";
 
             $resp = new URL();
             $resp->url = $url_recuperacao_senha;
@@ -43,7 +43,7 @@ class EsqueceuSenha extends ActionBase
 
             return $response->withStatus(200);
         }catch (\Throwable $exception){
-            return $response->withStatus(508, $exception->getMessage());
+            return $response->withStatus(500, $exception->getMessage());
         }
     }
 }
