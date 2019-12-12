@@ -255,7 +255,9 @@ class CentralTest extends TestCase
             'ambiente' => '',
             'buscarPor' => '',
             'valor' => '',
-            'ordenarPor' => ''];
+            'ordenarPor' => '',
+            'ascDesc' => '',
+            'arquivados' => false];
 
         $stream2 = new Stream('php://memory', 'wb+');
         $stream2->write(json_encode($recurso));
@@ -266,14 +268,20 @@ class CentralTest extends TestCase
         $this->assertSame($RecuperarErros($request2)->getStatusCode(), 200);
 
         $recurso2 = [
+            'ambiente' => '',
             'buscarPor' => 'nivel',
             'valor' => 'error',
-            'ordenarPor' => ''];
+            'ordenarPor' => '',
+            'ascDesc' => '',
+            'arquivados' => false];
+
         $stream3 = new Stream('php://memory', 'wb+');
-        $stream3->write(json_encode($recurso));
+        $stream3->write(json_encode($recurso2));
         $stream3->rewind();
-        $request3 = new ServerRequest([], [], null, 'POST', $stream3);
-        $this->assertSame($RecuperarErros($request3)->getStatusCode(), 200);
+        $request3 = new ServerRequest([], [], null, 'POST', $stream3, ['Authorization' => $token]);
+        $response4 = $RecuperarErros($request3);
+        
+        $this->assertSame($response4->getStatusCode(), 200);
     }
 
     public function test_ObterErros()

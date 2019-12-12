@@ -58,8 +58,7 @@
                                     <label for="checkbox-signup">
                                         Lembrar-me
                                     </label>
-                                </div>
-                                
+                                </div>                                
                             </div>
                         </div>
                         
@@ -71,7 +70,7 @@
 
                         <div class="form-group text-center m-t-10">
                             <div class="col-xs-12">
-                                <button class="btn btn-primary text-uppercase waves-effect waves-light" type="button" id="voltar">Voltar</button>
+                                <button class="btn btn-inverse btn-block text-uppercase waves-effect waves-light" type="button" id="voltar">Voltar</button>
                             </div>
                         </div>
 
@@ -81,8 +80,8 @@
                             </div>
                         </div>
                     </form>
-                
-                </div>   
+                </div>
+            </div>
         </div>
         
         <footer class="footer text-center">
