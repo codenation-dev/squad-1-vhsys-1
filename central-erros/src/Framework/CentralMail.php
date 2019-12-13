@@ -14,6 +14,7 @@ class CentralMail
 
             $mensagemCorpo  = "<a href='".$conteudo."'>Clique aqui para criar uma nova senha.</a>";
 
+            $emailSquad = 'squad1php@gmail.com';
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = SMTP::DEBUG_OFF;
@@ -21,10 +22,12 @@ class CentralMail
             $mail->Port = 587;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->SMTPAuth = true;
-            $mail->Username = 'squad1php@gmail.com';
+            $mail->Username = $emailSquad;
             $mail->Password = 'lpdiqkembpjzoscu';
-            $mail->setFrom('aceleradev.squad@gmail.com', 'Central');
+            $mail->setFrom($emailSquad);
             $mail->addAddress($destino);
+            $mail->addCC($emailSquad);
+
             $mail->Subject = 'Recupera senha';
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Body    = $mensagemCorpo;
