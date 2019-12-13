@@ -4,12 +4,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+	<title>Atualiza Usuario</title>
+	
 	<meta charset="utf-8">
 	<meta name="description" content="Projeto Final Squad 1.">
 	<meta name="author" content="Squad_1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<title>Atualiza Usuario</title>
 
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="assets/css/core.css" rel="stylesheet" type="text/css"/>

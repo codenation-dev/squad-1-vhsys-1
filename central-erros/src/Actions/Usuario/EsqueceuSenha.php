@@ -32,7 +32,8 @@ class EsqueceuSenha extends ActionBase
                 return $response->withStatus(500, "usuario nao existe");
             }
 
-            $token_recuperacao_senha = CentralToken::obterToken();
+            //$token_recuperacao_senha = CentralToken::obterToken();
+            $token_recuperacao_senha = CentralToken::obterTokenProvisorio();
             $Usuario->token_recuperacao_senha = $token_recuperacao_senha;
             $this->persistir($Usuario);
 

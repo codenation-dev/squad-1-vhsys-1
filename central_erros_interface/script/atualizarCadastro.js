@@ -37,7 +37,9 @@ function AtualizaCadastro(){
             false,
             function (statusText, data2) {
                 
-                /*alert(data2);
+                
+
+                /*ExibirMensagemSucesso(data2);
                 var usuario = JSON.parse(data2);
                 var paramAtualiza = '?{"email":"'+usuario.email+'", "token":"'+usuario.token+'"}';
                 

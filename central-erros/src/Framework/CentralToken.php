@@ -20,7 +20,6 @@ class CentralToken
         try{
             //$token = $request->getHeaderLine('Authorization');
             $chave = 'Codenation';
-            //$chave = 'olarMundao';
             $parser = new Parser();
             $tokenParsed = $parser->parse($token);
             $signer = new Sha256();
@@ -45,12 +44,24 @@ class CentralToken
     {
         $time = time();
 
-        //$key = new Key('olarMundao');
         $key = new Key('Codenation');
 
         $signer = new Sha256;
         $token = new Builder();
         $token->expiresAt($time + 360000);
+        $token->issuedAt($time);
+        return $token->getToken($signer, $key)->__toString();;
+    }
+
+    public static function obterTokenProvisorio(): string
+    {
+        $time = time();
+
+        $key = new Key('Codenation');
+
+        $signer = new Sha256;
+        $token = new Builder();
+        $token->expiresAt($time + 180);//3min
         $token->issuedAt($time);
         return $token->getToken($signer, $key)->__toString();;
     }

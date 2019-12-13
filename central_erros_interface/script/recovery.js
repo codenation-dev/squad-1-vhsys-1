@@ -39,7 +39,7 @@ function RecuperarSenha(){
             setTimeout(                
                 function (){                                        
                     window.location.href = "./index.php";
-                },3000);
+                },5000);
         },
         ExibirMensagemFalha
     );  
