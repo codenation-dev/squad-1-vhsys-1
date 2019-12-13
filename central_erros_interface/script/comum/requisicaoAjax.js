@@ -42,15 +42,15 @@ function execAjax(
     }, 
     success: function(data, textStatus, jqXHR ){
       /*
-      */
       console.dir(data);
       console.dir(textStatus);      
       console.dir(jqXHR);
       
+      */
       funcaoSucesso(jqXHR.statusText, data);
     },    
     error: function(xhr, resp, text) {   
-      console.dir(xhr);
+      //console.dir(xhr);
       funcaoErro(xhr.status, xhr.statusText);      
     }
   });

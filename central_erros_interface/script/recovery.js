@@ -38,7 +38,7 @@ function RecuperarSenha(){
             ExibirMensagemSucesso(data + " - Aguarde enquanto redirecionamos");
             setTimeout(                
                 function (){                                        
-                    //window.location.href = "./index.php";
+                    window.location.href = "./index.php";
                 },3000);
         },
         ExibirMensagemFalha

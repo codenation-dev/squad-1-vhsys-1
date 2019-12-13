@@ -8,7 +8,7 @@ window.onload = function() {
     LimparMensagens();
 
     parametrosGet = carregarParametros(parametrosGet);
-    console.dir(parametrosGet);
+    //console.dir(parametrosGet);
     
     var inputemail = document.getElementById("email");
     inputemail.value = parametrosGet.email;
@@ -22,6 +22,41 @@ window.onload = function() {
 
 function AtualizaCadastro(){
     LimparMensagens();
+
+
+    if (parametrosGet.token_recuperacao_senha !== "") {
+
+        var base_url = "http://" + window.location.host + "/central/";
+        var urlTokenAuxiliar = base_url + "recovery?token=" + parametrosGet.token_recuperacao_senha;
+        var podeAtualizar = true;        
+
+        execAjax(
+            urlTokenAuxiliar,
+            "", 
+            'GET',
+            false,
+            function (statusText, data2) {
+                
+                /*alert(data2);
+                var usuario = JSON.parse(data2);
+                var paramAtualiza = '?{"email":"'+usuario.email+'", "token":"'+usuario.token+'"}';
+                
+                window.location.href = "./atualizarCadastro.php"+paramAtualiza;            
+                */
+            },
+            function(status, statusText) {
+                
+                ExibirMensagemFalha(statusText);
+                podeAtualizar = false;
+            },
+            false
+        );  
+    }
+
+    if (podeAtualizar === false) {
+        return;
+    }
+
     var inputemail = document.getElementById("email");
     var inputSenha = document.getElementById("senha");
     
