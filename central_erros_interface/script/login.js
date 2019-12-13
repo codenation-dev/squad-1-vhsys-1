@@ -61,14 +61,38 @@ function Login(){
                 false
             );  
         },
-        function(status, statusText) {
-            
-            ExibirMensagemFalha(statusText);
+        function(status, statusText, responseText) {
 
-            if (status === 402) {
-                window.location.href = "./cadastro.php"+paramAtualiza;
+
+            if (status === 401) {
+                ExibirMensagemFalha("Autenticação não encontrada, entre em contato com o adm.");
+            } else if (status === 402) {
+                ExibirMensagemFalha("Autenticação inválida, entre em contato com o adm.");
+            } else if (status === 403) {
+                ExibirMensagemFalha("Autenticação expirada, por favor atualize seu cadastro.");
+                
+                //EsqueceuSenha();
             }
-        }
+
+            /*
+            var tok = JSON.parse(responseText);
+            
+            var paramAtualiza = '?{"email":"'+email_usuario+'", "token":"'+tok.token+'"}';
+            console.dir(paramAtualiza);
+            ExibirMensagemFalha("AutenticaÃ§Ã£o expirada, por favor atualize seu cadastro.");
+
+            if (status === 403) {
+                
+                
+                setTimeout(                
+                    function (){
+                        
+                        window.location.href = "./atualizarCadastro.php"+paramAtualiza;
+                    },3000
+                  );
+            }
+            */
+         }
     );
 }
 

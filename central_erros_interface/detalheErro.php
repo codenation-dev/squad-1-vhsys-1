@@ -61,14 +61,12 @@
         </div>      
       </div>    
     </div>
-        <div class="response">
-          <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
-          <span class='msg-erro msg-falha'></span>
-          <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
-          <span class='msg-alerta msg-warning'></span>
-          <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
-          <span class='msg-exito msg-sucesso'></span>
-        </div>
+
+          <div class="text-center m-t-10 m-b-0">
+              <span class='text-danger msg-erro msg-falha'></span>
+              <span class='text-warning msg-alerta msg-warning'></span>
+              <span class='text-success msg-exito msg-sucesso'></span>
+          </div>
 
 
         <div style="height: 55px;">

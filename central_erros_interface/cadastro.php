@@ -87,31 +87,25 @@
 						</p>
 					</div>
 				</div>
+				
+				<div class="text-center m-t-10 m-b-0">
+					<span class='text-danger msg-erro msg-falha'></span>
+					<span class='text-warning msg-alerta msg-warning'></span>
+					<span class='text-success msg-exito msg-sucesso'></span>
+				</div>
 
 			</div>
 		</div>
-
-		<footer class="footer text-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-12">
-						<span class="text-muted quebra" id="emailUser"></span>
-					</div>
-					<div class="col-xs-12">
-						Squad-1-vhsys © 2019.
-					</div>
-				</div>
-			</div>
-		</footer> 
-
-		<div class="text-center m-t-10 m-b-0">
-          <!-- falhas em geral como as lanÃ§adas pelo serviÃ§o -->
-          <span class='text-warning msg-erro msg-falha'></span>
-          <!-- exemplo: completou algum processamento mas com alguma validaÃ§Ã£o nao obrigatoria -->
-          <span class='text-warning msg-alerta msg-warning'></span>
-          <!-- exemplos: cadastrado, alterado, excluido com sucesso -->
-          <span class='text-success msg-exito msg-sucesso'></span>
-        </div>
+        
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        Squad-1-vhsys Â© 2019.
+                    </div>                    
+                </div>
+            </div>
+        </footer>  
 
 		<script>
 			var resizefunc = [];
