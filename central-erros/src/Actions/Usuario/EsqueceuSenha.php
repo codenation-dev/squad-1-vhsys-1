@@ -42,7 +42,7 @@ class EsqueceuSenha extends ActionBase
             $url_base_interface = str_replace($baseN, "", $request->getHeaderLine('referer'));
 
             $parametrosURL = '?{"email":"'.$params->email.'", "token":"'.$Usuario->token.'", "token_recuperacao_senha":"'.$token_recuperacao_senha.'"}';
-            $url_recuperacao_senha  = "<a href='".$url_base_interface."atualizarCadastro.php".$parametrosURL.">Teste</a>";
+            $url_recuperacao_senha  = "<a href='".$url_base_interface."atualizarCadastro.php".$parametrosURL."'>Teste</a>";
 
             //$url_recuperacao_senha  = "<a href='http://".$request->getHeaderLine('host')."/central/recovery?token=$token_recuperacao_senha'>Teste</a>";
 
