@@ -36,14 +36,24 @@ class EsqueceuSenha extends ActionBase
             $Usuario->token_recuperacao_senha = $token_recuperacao_senha;
             $this->persistir($Usuario);
 
-            $url_recuperacao_senha  = "http://".$request->getHeaderLine('host')."/central/recovery?token=$token_recuperacao_senha";
+
+
+            $baseN = basename($request->getHeaderLine('referer'));
+            $url_base_interface = str_replace($baseN, "", $request->getHeaderLine('referer'));
+
+            $parametrosURL = '?{"email":"'.$params->email.'", "token":"'.$Usuario->token.'", "token_recuperacao_senha":"'.$token_recuperacao_senha.'"}';
+            $url_recuperacao_senha  = "<a href='".$url_base_interface."atualizarCadastro.php".$parametrosURL.">Teste</a>";
+
+            //$url_recuperacao_senha  = "<a href='http://".$request->getHeaderLine('host')."/central/recovery?token=$token_recuperacao_senha'>Teste</a>";
+
 
             CentralMail::enviarEmail($Usuario->email, $url_recuperacao_senha);
 
             $resp = new URL();
             $resp->url = $url_recuperacao_senha;
 
-            $response->getBody()->write(json_encode($resp));
+            //$response->getBody()->write(json_encode($resp));
+            $response->getBody()->write("Um link foi enviado para o e-mail cadastrado.");
 
             return $response->withStatus(200);
         }catch (\Throwable $exception){

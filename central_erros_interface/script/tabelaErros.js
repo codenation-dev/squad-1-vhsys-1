@@ -165,6 +165,15 @@ function ControlarVisibilidadeSelects() {
 window.onload = function() {
     LimparMensagens();
 
+    if (token_session === "") {      
+        ExibirMensagemFalha("Não autenticado - Aguarde enquanto redirecionamos");
+        setTimeout(                
+            function (){
+                window.location.href = "./index.php";
+            },3000
+        );
+    }
+
     parametrosGet = carregarParametros(parametrosGet);
     //console.dir(parametrosGet);
 
@@ -298,8 +307,8 @@ window.onload = function() {
             ControlarVisibilidadeGrid();
 
             if (xhr.status === 403) {
-                alert("Por favor, atualize seu cadastro.")
-                window.location.href = "./atualizarCadastro.php"+paramAtualiza;
+                //alert("Por favor, atualize seu cadastro.")
+                //window.location.href = "./atualizarCadastro.php"+paramAtualiza;
             }
         },
         true,

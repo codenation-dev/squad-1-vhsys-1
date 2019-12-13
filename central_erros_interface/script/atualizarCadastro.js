@@ -1,6 +1,7 @@
 var parametrosGet = {
     email: "",
-    token: ""
+    token: "",
+    token_recuperacao_senha: ""
 }
 
 window.onload = function() {

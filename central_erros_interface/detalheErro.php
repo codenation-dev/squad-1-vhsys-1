@@ -1,6 +1,5 @@
 <?php 	
   include 'config.php';
-  $session_value= (isset($_SESSION['token']))?$_SESSION['token']:''; 
 ?>
 <!doctype html>
 <html lang="pt-br">

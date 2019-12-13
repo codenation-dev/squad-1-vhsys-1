@@ -72,6 +72,8 @@ function Login(){
                 ExibirMensagemFalha("Autenticação expirada, por favor atualize seu cadastro.");
                 
                 //EsqueceuSenha();
+            } else {
+                ExibirMensagemFalha;
             }
 
             /*
@@ -99,6 +101,9 @@ function Login(){
 function EsqueceuSenha(){
     LimparMensagens();
     
+    window.location.href = "./recovery.php";
+
+    /*
     var email_usuario = $('#email').val();
     var senha_usuario = $('#senha').val();
     var dados = '{"email":"'+email_usuario+'"}';
@@ -136,4 +141,5 @@ function EsqueceuSenha(){
         },
         ExibirMensagemFalha
     );  
+    */
 }    

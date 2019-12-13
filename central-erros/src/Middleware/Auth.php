@@ -50,8 +50,13 @@ class Auth implements  MiddlewareInterface
             if ($Usuario === null) {
                 return (new Response)->withStatus(401);
             }
-            $token = $Usuario->token;
 
+            $ret = CentralToken::validarToken($Usuario->token);
+            if ($ret === 403) {
+                $token = CentralToken::obterToken();
+            } else {
+                $token = $Usuario->token;
+            }
         } else if (strpos($request->getUri()->getPath(), "/central/recovery") > -1) {
 
             $queryParams = $request->getQueryParams();
@@ -68,14 +73,19 @@ class Auth implements  MiddlewareInterface
             $token = $request->getHeaderLine('Authorization');
         }
 
-
         $ret = CentralToken::validarToken($token);
         switch ($ret) {
             case 402:
                 return (new Response)->withStatus(402, 'autorização inválida');
                 break;
             case 403:
-                return (new Response)->withStatus(403, 'expirado, por favor atualize seu cadastro');
+                $response = new Response();
+                $t = new Token();
+                $t->token = $token;
+
+                $response->getBody()->write(json_encode($t));
+
+                return $response->withStatus(403, 'expirado, por favor atualize seu cadastro');
                 break;
             case 404:
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');

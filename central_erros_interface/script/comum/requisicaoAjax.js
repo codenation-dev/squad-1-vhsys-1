@@ -42,10 +42,10 @@ function execAjax(
     }, 
     success: function(data, textStatus, jqXHR ){
       /*
+      */
       console.dir(data);
       console.dir(textStatus);      
       console.dir(jqXHR);
-      */
       
       funcaoSucesso(jqXHR.statusText, data);
     },    
