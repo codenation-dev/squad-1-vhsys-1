@@ -4,50 +4,110 @@
   $email_usu= (isset($_SESSION['email']))?$_SESSION['email']:''; 
 ?>
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <title>Atualizar Cadastro</title>
-    
-    <meta charset="utf-8">
-    <meta name="description" content="Projeto Final Squad 1.">
-    <meta name="author" content="Squad_1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+        <meta name="author" content="Coderthemes">
 
-    <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
-    <link rel="stylesheet" href="./css/Login-Form-Clean.css">
-    <link rel="stylesheet" href="./css/signup.css">  
-   
-    <script type="text/javascript">    
-      var token_session='<?php echo $token_session;?>';
-      var email_usuario='<?php echo $email_usu;?>';
-    </script>
+        <title>Cadastro Central</title>
 
-  </head>
-  <body class="text-center, bg">
-      <form action="" class="form-signin" method="post" id="forme" name="form">
-        <img class="mb-4" src="img/error-icon.png" alt="" width="72" height="72">
-        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Atualizar Usuário</h1>
-        <label for="email" class="sr-only">Email address</label>
-        <input type="email" name="email" id="email" class="form-control" placeholder="E-mail"><br>
-        <label for="senha" class="sr-only">Password</label>
-        <input type="password" name="senha" id="senha" class="form-control" placeholder="Password">
-        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
-        <button class="btn btn-primary btn-block" type="button" id="voltar">Voltar</button>
-        <p class="mt-5 mb-3 text-muted">Squad-1-vhsys © 2019</p>
+        <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/components.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
+        <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 
-        <div class="text-center m-t-10 m-b-0">
-            <span class='text-danger msg-erro msg-falha'></span>
-            <span class='text-warning msg-alerta msg-warning'></span>
-            <span class='text-success msg-exito msg-sucesso'></span>
+        <script src="assets/js/modernizr.min.js"></script>
+        <script type="text/javascript">    
+            var token_session='<?php echo $token_session;?>';
+            var email_usuario='<?php echo $email_usu;?>';
+        </script>
+                
+    </head>
+    <body>
+        <div class="account-pages"></div>
+        <div class="clearfix"></div>
+        <div class="wrapper-page">
+        	<div class=" card-box">
+                <div class="panel-heading"> 
+                    <h3 class="text-center"> Atualizar Cadastro <strong class="text-custom">CentError</strong> </h3>
+                </div> 
+
+                <div class="panel-body">
+                    <form class="form-horizontal m-t-10" action="" method="post" id="forme" name="form">
+                        
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" name="email" id="email" type="text" required="" placeholder="E-mail">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" name="senha" id="senha" type="password" required="" placeholder="Nova Senha">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center m-t-10">
+                            <div class="col-xs-12">
+                                <button class="btn btn-inverse btn-block text-uppercase waves-effect waves-light" type="submit">Enviar</button>
+                            </div>
+                        </div>
+
+                        <div class="form-group text-center m-t-10">
+                            <div class="col-xs-12">
+                                <button class="btn btn-inverse btn-block text-uppercase waves-effect waves-light" type="button" id="voltar">Voltar</button>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="text-center m-t-10 m-b-0">
+                        <span class='text-danger msg-erro msg-falha'></span>
+                        <span class='text-warning msg-alerta msg-warning'></span>
+                        <span class='text-success msg-exito msg-sucesso'></span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </form>
-    </div>
+        
+        <footer class="footer text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        Squad-1-vhsys © 2019.
+                    </div>                    
+                </div>
+            </div>
+        </footer>  
+        
+    	<script>
+            var resizefunc = [];
+        </script>
 
-    <script src="./script/terceiros/jquery.min.3.4.1.js"></script>
-    <script src="./script/terceiros/popper.min.1.14.7.js"></script>
-    <script src="./script/terceiros/bootstrap.min.4.3.1.js"></script>
-    <script src="./script/comum/requisicaoAjax.js"></script>
-    <script src="./script/comum/comum.js"></script>
-    <script src="./script/atualizarCadastro.js"></script>
-  </body>
+        <!-- jQuery  -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/detect.js"></script>
+        <script src="assets/js/fastclick.js"></script>
+        <script src="assets/js/jquery.slimscroll.js"></script>
+        <script src="assets/js/jquery.blockUI.js"></script>
+        <script src="assets/js/waves.js"></script>
+        <script src="assets/js/wow.min.js"></script>
+        <script src="assets/js/jquery.nicescroll.js"></script>
+        <script src="assets/js/jquery.scrollTo.min.js"></script>
+
+
+        <script src="assets/js/jquery.core.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+
+        <script src="./script/comum/requisicaoAjax.js"></script>
+        <script src="./script/comum/comum.js"></script>
+        <script src="./script/atualizarCadastro.js"></script>
+        
+	</body>
 </html>
