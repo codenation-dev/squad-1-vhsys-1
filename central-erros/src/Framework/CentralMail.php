@@ -11,6 +11,9 @@ class CentralMail
     public static function enviarEmail(string $destino, string $conteudo)
     {
         try {
+
+            $mensagemCorpo  = "<a href='".$conteudo."'>Clique aqui para criar uma nova senha.</a>";
+
             $mail = new PHPMailer;
             $mail->isSMTP();
             $mail->SMTPDebug = SMTP::DEBUG_OFF;
@@ -24,7 +27,7 @@ class CentralMail
             $mail->addAddress($destino);
             $mail->Subject = 'Recupera senha';
             $mail->isHTML(true);                                  // Set email format to HTML
-            $mail->Body    = $conteudo;
+            $mail->Body    = $mensagemCorpo;
             $mail->AltBody = 'teste';
 
             $mail->send();

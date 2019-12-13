@@ -5,6 +5,7 @@ namespace Central\Middleware;
 
 
 use Central\Actions\Usuario\RecuperarUsuario;
+use Central\Entity\Token;
 use Central\Entity\Usuario;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -57,15 +58,6 @@ class Auth implements  MiddlewareInterface
             } else {
                 $token = $Usuario->token;
             }
-        } else if (strpos($request->getUri()->getPath(), "/central/recovery") > -1) {
-
-            $queryParams = $request->getQueryParams();
-            $token = $queryParams['token'];
-
-            if ($token === "") {
-                return (new Response)->withStatus(401);
-            }
-
         } else {
             if (!$request->hasHeader('Authorization')){
                 return (new Response)->withStatus(401);
@@ -79,13 +71,16 @@ class Auth implements  MiddlewareInterface
                 return (new Response)->withStatus(402, 'autorização inválida');
                 break;
             case 403:
+/*
                 $response = new Response();
                 $t = new Token();
                 $t->token = $token;
 
                 $response->getBody()->write(json_encode($t));
+return $response->withStatus(403, 'expirado, por favor atualize seu cadastro');
+*/
 
-                return $response->withStatus(403, 'expirado, por favor atualize seu cadastro');
+                return (new Response)->withStatus(403, 'expirado, por favor atualize seu cadastro');
                 break;
             case 404:
                 return (new Response)->withStatus(404, 'nenhum usuário encontrado');

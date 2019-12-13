@@ -10,10 +10,8 @@ window.onload = function() {
     parametrosGet = carregarParametros(parametrosGet);
     //console.dir(parametrosGet);
     
-    var inputemail = document.getElementById("email");
-    inputemail.value = parametrosGet.email;
-    
-    
+    $('#email').val(parametrosGet.email);
+        
     $('#forme').submit(function (e){
         e.preventDefault();
         AtualizaCadastro();
@@ -25,11 +23,11 @@ function AtualizaCadastro(){
 
 
     if (parametrosGet.token_recuperacao_senha !== "") {
-
-        var base_url = "http://" + window.location.host + "/central/";
-        var urlTokenAuxiliar = base_url + "recovery?token=" + parametrosGet.token_recuperacao_senha;
-        var podeAtualizar = true;        
-
+        
+        var paramsTokenAux = JSON.stringify(parametrosGet);
+        var urlTokenAuxiliar = "recovery?token=" + paramsTokenAux;
+        
+        //console.log(urlTokenAuxiliar);
         execAjax(
             urlTokenAuxiliar,
             "", 
@@ -37,56 +35,42 @@ function AtualizaCadastro(){
             false,
             function (statusText, data2) {
                 
-                
+                //ExibirMensagemSucesso(data2);
 
-                /*ExibirMensagemSucesso(data2);
-                var usuario = JSON.parse(data2);
-                var paramAtualiza = '?{"email":"'+usuario.email+'", "token":"'+usuario.token+'"}';
-                
-                window.location.href = "./atualizarCadastro.php"+paramAtualiza;            
-                */
+                var dados = '{"email":"'+$('#email').val()+'","senha":"'+$('#senha').val()+'"}';
+                url = "atualizar_token_usuario";
+            
+                execAjax(
+                    url,
+                    dados, 
+                    'POST',
+                    true,
+                    function (statusText, data) {
+                        ExibirMensagemSucesso(data + " - Aguarde enquanto redirecionamos");
+                        setTimeout(                
+                            function (){                    
+                                /*
+                                var email_usuario = $('#email').val();
+                                var senha_usuario = $('#senha').val();                                
+                                var param = '?{"email":"'+email_usuario+'", "senha":"'+senha_usuario+'"}';
+                                */
+                                window.location.href = "./login.php?"+dados;                    
+                            },5000
+                        );
+                    },
+                    function(status, statusText) {
+                        ExibirMensagemFalha(statusText);
+                    },
+                    true,
+                    parametrosGet.token
+                );
             },
-            function(status, statusText) {
-                
-                ExibirMensagemFalha(statusText);
-                podeAtualizar = false;
+            function(status, statusText) {                
+                ExibirMensagemFalha(statusText);                
             },
-            false
+            true,
+            parametrosGet.token_recuperacao_senha
         );  
     }
-
-    if (podeAtualizar === false) {
-        return;
-    }
-
-    var inputemail = document.getElementById("email");
-    var inputSenha = document.getElementById("senha");
-    
-    var dados = '{"email":"'+inputemail.value+'","senha":"'+inputSenha.value+'"}';
-    url = "atualizar_token_usuario";
- 
-    execAjax(
-        url,
-        dados, 
-        'POST',
-        true,
-        function (statusText, data) {
-            ExibirMensagemSucesso(statusText + " - Aguarde enquanto redirecionamos");
-            setTimeout(                
-                function (){                    
-                    var email_usuario = $('#email').val();
-                    var senha_usuario = $('#senha').val();
-                    
-                    var param = '?{"email":"'+email_usuario+'", "senha":"'+senha_usuario+'"}';
-                    window.location.href = "./login.php"+param;                    
-                },3000
-            );
-        },
-        function(status, statusText) {
-            ExibirMensagemFalha(statusText);
-        },
-        true,
-        parametrosGet.token
-    );
 }    
 

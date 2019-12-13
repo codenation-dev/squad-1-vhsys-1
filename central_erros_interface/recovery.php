@@ -79,11 +79,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-					Squad-1-vhsys © 2019.
+					<span class="text-muted quebra" id="emailUser"></span>
 				</div>
+				<div class="col-xs-12">
+					Squad-1-vhsys © 2019.
+				</div>					
 			</div>
 		</div>
-	</footer> 
+	</footer>
 
 	<script>
 		var resizefunc = [];

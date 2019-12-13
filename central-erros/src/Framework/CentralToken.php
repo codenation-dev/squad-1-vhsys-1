@@ -61,7 +61,7 @@ class CentralToken
 
         $signer = new Sha256;
         $token = new Builder();
-        $token->expiresAt($time + 180);//3min
+        $token->expiresAt($time + 600);//30min
         $token->issuedAt($time);
         return $token->getToken($signer, $key)->__toString();;
     }

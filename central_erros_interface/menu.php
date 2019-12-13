@@ -2,7 +2,7 @@
     include 'config.php';
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 	<title>Menu Central</title>
 	
@@ -52,17 +52,19 @@
 			</div>
 		</div>
 	</div>
-	
-	
+		
 	<footer class="footer text-center">
 		<div class="container">
 			<div class="row">
 				<div class="col-xs-12">
-					Squad-1-vhsys Â© 2019.
-				</div>                    
+					<span class="text-muted quebra" id="emailUser"></span>
+				</div>
+				<div class="col-xs-12">
+					Squad-1-vhsys © 2019.
+				</div>					
 			</div>
 		</div>
-	</footer>  
+	</footer>
 	
 			
 

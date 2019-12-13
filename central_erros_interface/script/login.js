@@ -8,6 +8,16 @@ window.onload = function() {
 
     //alert(email_usuario);
 
+    if (token_session !== "") {
+      
+        
+        setTimeout(                
+          function (){
+              window.location.href = "./menu.php";
+          },250
+        );
+    } 
+
     $('#email').val(email_usuario);
 
     parametrosGet = carregarParametros(parametrosGet);
@@ -42,7 +52,9 @@ function Login(){
         'POST',
         true,
         function (statusText, data) {
-            //console.dir(data);
+        
+        
+            console.dir(data);
             var user = JSON.parse(data);
             
             var paramSessao = '?email='+user.email+'&token='+user.token+'&lembrarDeMim='+$('#lembrarDeMim').prop('checked');

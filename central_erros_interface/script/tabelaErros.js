@@ -1,4 +1,5 @@
-
+var Anterior = 0;
+var Atual = 0;
 
   function operateFormatter(value, row, index) {
     return [
@@ -264,11 +265,20 @@ window.onload = function() {
                 
                 data: retorno		
             });
-
+/*
+            */
             $(window).resize(function () {
-                $('#tabelaResultado').bootstrapTable('resetView', {			
-                    height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true)- $('#toolbar').outerHeight(true) - 5,
-                });
+                
+                var Atual = $(window).height();
+                if (Anterior === 0) {
+                    Anterior = Atual;
+                }
+                
+                if (Atual > Anterior) {
+                    $('#tabelaResultado').bootstrapTable('resetView', {			
+                        height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true)- $('#toolbar').outerHeight(true) - 5,
+                    });
+                }
             });
             
             $table.on('dbl-click-row.bs.table', function(e, value, row, index) {

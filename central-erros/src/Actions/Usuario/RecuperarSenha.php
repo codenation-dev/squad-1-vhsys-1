@@ -17,8 +17,13 @@ class RecuperarSenha extends ActionBase
     {
         $response = new Response();
         try {
+            //$queryParams = json_decode($request->getQueryParams());
+
             $queryParams = $request->getQueryParams();
-            $token = $queryParams['token'];
+            $tokenParams = json_decode($queryParams['token']);
+
+            $token = $tokenParams->token_recuperacao_senha;
+
 
             $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
                 array('token_recuperacao_senha' =>  $token)

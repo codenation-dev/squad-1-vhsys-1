@@ -50,7 +50,8 @@ class AtualizarAutenticacaoUsuario extends ActionBase
             $Usuario->token_recuperacao_senha = "";
             $this->persistir($Usuario);
 
-            return $response->withStatus(200, 'usuario atualizado com sucesso');
+            $response->getBody()->write("Usuário atualizado com sucesso.");
+            return $response->withStatus(200);
         }catch (\Throwable $exception){
             return $response->withStatus(500, $exception->getMessage());
         }

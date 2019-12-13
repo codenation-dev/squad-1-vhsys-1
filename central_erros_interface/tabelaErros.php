@@ -23,10 +23,16 @@ include 'config.php';
 
 	<style type="text/css">   
 		html, body {
-		position: relative;
-		min-height: 100%;
-		height: 100%;
-		overflow: hidden;
+			position: relative;
+			min-height: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		body {
+			position: relative;
+			min-height: 100%;
+			height: 100%;
+			overflow-y: scroll;
 		}
 	</style>
 

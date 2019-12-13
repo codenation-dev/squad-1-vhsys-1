@@ -111,7 +111,8 @@ class CentralTest extends TestCase
         $stream2->write(json_encode($Usuario2));
         $stream2->rewind();
 
-        $request2 = new ServerRequest([], [], 'http://localhost/central/usuario/esqueceu_senha', 'POST', $stream2);
+
+        $request2 = new ServerRequest([], [], 'http://localhost/central/usuario/esqueceu_senha', 'POST', $stream2, ['referer' => 'http://localhost/squad_1/squad-1-vhsys-1/central_erros_interface/recovery.php']);
 
         $EsqueceuSenha = new EsqueceuSenha($this->entityManager);
         $response8 = $EsqueceuSenha($request2);
@@ -119,10 +120,14 @@ class CentralTest extends TestCase
         $this->assertSame($response8->getStatusCode(), 200);
 
         $url = json_decode($response8->getBody());
+
         $url_validar = $url->url;
 
         $parts = parse_url($url_validar);
         parse_str($parts['query'], $query);
+
+
+
 
         $RecuperarSenha = new RecuperarSenha($this->entityManager);
         $request3 = new ServerRequest(

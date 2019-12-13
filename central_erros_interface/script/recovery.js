@@ -33,12 +33,16 @@ function RecuperarSenha(){
         url,
         dados, 
         'POST',
-        true,
-        function (statusText, data) {
-            ExibirMensagemSucesso(data + " - Aguarde enquanto redirecionamos");
+        false,
+        function (statusText, data) {            
+            
+            
+            var retorno = JSON.parse(decodeURIComponent(data));
+            /**/console.dir(retorno);
+            ExibirMensagemSucesso(retorno.mensagem + " - Aguarde enquanto redirecionamos");
             setTimeout(                
                 function (){                                        
-                    window.location.href = "./index.php";
+                    //window.location.href = "./index.php";
                 },5000);
         },
         ExibirMensagemFalha
