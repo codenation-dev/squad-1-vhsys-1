@@ -32,7 +32,7 @@ Siga os passos abaixo:
  ### Rotas da API
  
  #### Usuários
- - `central/criar_usuário` método: `POST` | Cria um novo usuário (apenas um usuário autenticado pode criar um novo usuário, exite um login master para este procedimento por questões de segurança).
+ - `central/criar_usuario` método: `POST` | Cria um novo usuário (apenas um usuário autenticado pode criar um novo usuário, exite um login master para este procedimento por questões de segurança).
  - `central/usuario/id` método: `PUT` | Cria um novo usuário ou atualiza um usuário já existente.
  - `central/usuario/id` método: `PATCH` | Atualiza um usuário já existente.
  - `central/usuario/id` método: `DELETE` | Deleta um usuário específico.
@@ -50,3 +50,28 @@ Siga os passos abaixo:
  - `central/erro` método `POST`
  - `central/erro/id` método `DELETE` | Deleta erro específico da base de dados.
  - `central/erro/apagar` método `DELETE` | Deleta todos os erros (vinculádos ao usuário da requisição) da base de dados.
+ 
+ ### Exemplos de requisições
+ 
+ Para criar um usuário, deve-se seguir os exemplos abaixo:
+ 
+ ##### HEADER da requisição:
+ ```
+ Content-type: application/json
+ Authorization: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1NzU1NzQ2NTUsImlhdCI6MTU3NTIxNDY1NX0.X1g59-Q8jKwmjPnk7RZxjXrhKp5kp7Kq8VPdENPe8Wc
+ ```
+ ###### Conteúdo a ser enviado e token para autentiação.
+ 
+ --------------------------------------------------------------------------------------------------------------------------------------
+ ##### BODY da requisição:
+ ```
+ {
+    "email":"teste@teste.com",
+    "senha":"teste"
+ }
+ ```
+ ###### E-mail e senha a serem cadastrados do novo usuário.
+ 
+ ---------------------------------------------------------------------------------------------------------------------------------------
+ 
+Todas as requisições devem conter o `HEADER` com as informações acima e o `BODY` com um `JSON` com os atributos necessários para cada tipo de requisição.
