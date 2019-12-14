@@ -43,25 +43,17 @@ Para executar o filtro-capturador, siga os passos abaixo:
  
  #### Usuários:
  - `central/criar_usuario` método: `POST` | Cria um novo usuário (apenas um usuário autenticado pode criar um novo usuário, exite um login master para este procedimento por questões de segurança).
- - `central/usuario/id` método: `PUT` | Cria um novo usuário ou atualiza um usuário já existente.
- - `central/usuario/id` método: `PATCH` | Atualiza um usuário já existente.
  - `central/usuario/id` método: `DELETE` | Deleta um usuário específico.
  - `central/usuario/login` método: `POST` | Login de usuário cadastrado.
  - `central/usuario/esqueceu_senha` método: `POST` | Recuperação de senha de usuário.
- - `central/usuario/id` método: `GET` | Recupera informações de um usuário específico.
- - `central/usuario` método: `GET` | Recupera informações de todos os usuários.
  - `central/usuario/atualizar_token_usuario` método: `POST` | Atualiza token do usuário, caso esteja expirado.
  
  ---------------------------------------------------------------------------------------------------------------------------------------
  
  #### Erros:
  - `central/erro` método `POST` | Cria erro gerado na aplicação.
- - `central/erro/id` método `PUT` | Cira ou atualiza erro.
- - `central/erro/id` método `PATCH` | Atualiza erro existente.
  - `central/erro_arquivar` método `PUT` | Arquiva erro na base de dados da API.
- - `central/erro` método `POST`
- - `central/erro/id` método `DELETE` | Deleta erro específico da base de dados.
- - `central/erro/apagar` método `DELETE` | Deleta todos os erros (vinculádos ao usuário da requisição) da base de dados.
+ - `central/erro/apagar` método `DELETE` | Deleta erros (vinculádos ao usuário da requisição) da base de dados.
  
  ### Exemplos de requisições
  
@@ -84,4 +76,17 @@ Para executar o filtro-capturador, siga os passos abaixo:
  ```
  ###### E-mail e senha a serem cadastrados do novo usuário.
  
-Todas as requisições devem conter o `HEADER` com as informações acima e o `BODY` com um `JSON` com os atributos necessários para cada tipo de requisição.
+Todas as requisições devem conter o `HEADER` com as key's acima e o `BODY` contendo um `JSON` com os atributos necessários para cada tipo de requisição.
+
+### Maiores informações e documentação completa
+
+Esta API é um projeto desenvolvido pelo Squad-1 do AceleraDev, um projeto da Codenation Dev, com foco em PHP, disponibilizado para a comunidade PHP.
+
+Membros:
+
+- Andre Nobre
+- Edgar Sovinski
+- Melchiades de Medeiros
+- Pedro Bruning
+
+Documentação via POSTMAN: https://documenter.getpostman.com/view/9201198/SWE55dsL?version=latest
