@@ -5,13 +5,23 @@
 
 Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em serviços ou microsserviços. Nestes ambientes complexos, erros podem surgir em diferentes camadas da aplicação (backend, frontend, mobile, desktop) e mesmo em serviços distintos. Desta forma, é muito importante que os desenvolvedores possam centralizar todos os registros de erros em um local, de onde podem monitorar e tomar decisões mais acertadas. Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações.
 
-### Instalação
+### Instalação Back-End
 
 Siga os passos abaixo:
  - Baixe o repositório em seu ambiente utilizando: `git clone https://github.com/codenation-dev/squad-1-vhsys-1.git`
- - Execute o comando: composer install.
+ - Renomear a pasta do back-end de `central-erros` para `central`
+ - Dentro do diretório, execute o comando: `composer install`
  - Crie a base `Central` em seu banco de dados.
  - Execute o comando: `composer doctrine orm:schema-tool:create`
+ 
+### Execução do Filtro de Erros
+
+Para executar o filtro-capturador, siga os passos abaixo:
+- Após baixar o diretório, conforme acima, dentro do diretório `filtroErros` execute o comando `php service.php`
+- Informe o ambiente da aplicação que deseja monitorar, ex: `Dev`, `Homologação` ou `Produção`
+- Informe o seu token de usuário.
+- informe o caminho do log de erros do apache da aplicação.
+
 
 ### Especificações do Back-End `central-erros`:
 
@@ -36,8 +46,8 @@ Siga os passos abaixo:
  - `central/usuario/id` método: `PUT` | Cria um novo usuário ou atualiza um usuário já existente.
  - `central/usuario/id` método: `PATCH` | Atualiza um usuário já existente.
  - `central/usuario/id` método: `DELETE` | Deleta um usuário específico.
- - `centraç/usuario/login` método: `POST` | Login de usuário cadastrado.
- - `centraç/usuario/esqueceu_senha` método: `POST` | Recuperação de senha de usuário.
+ - `central/usuario/login` método: `POST` | Login de usuário cadastrado.
+ - `central/usuario/esqueceu_senha` método: `POST` | Recuperação de senha de usuário.
  - `central/usuario/id` método: `GET` | Recupera informações de um usuário específico.
  - `central/usuario` método: `GET` | Recupera informações de todos os usuários.
  - `central/usuario/atualizar_token_usuario` método: `POST` | Atualiza token do usuário, caso esteja expirado.
