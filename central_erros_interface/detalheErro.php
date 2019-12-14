@@ -11,6 +11,7 @@
     <meta name="author" content="Squad_1">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <link rel="shortcut icon" href="assets/images/favicon_1.ico">
     <link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
     <link rel="stylesheet" href="./css/Login-Form-Clean.css">
     <link rel="stylesheet" href="./css/styles.css">  

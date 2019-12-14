@@ -11,6 +11,7 @@
 	<meta name="author" content="Squad_1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+	<link rel="shortcut icon" href="assets/images/favicon_1.ico">
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/core.css" rel="stylesheet" type="text/css" />
 	<link href="assets/css/components.css" rel="stylesheet" type="text/css" />

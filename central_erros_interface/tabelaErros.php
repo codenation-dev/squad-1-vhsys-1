@@ -10,13 +10,23 @@ include 'config.php';
 	<meta name="description" content="Projeto Final Squad 1.">
 	<meta name="author" content="Squad_1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+	
+	<link rel="shortcut icon" href="assets/images/favicon_1.ico">
 	<link rel="stylesheet" href="./css/Login-Form-Clean.css">
 	<link rel="stylesheet" href="./css/bootstrap.min.3.4.0.css"> 
 	<link rel="stylesheet" href="./css/bootstrap-table.min.1.15.5.css">   
 	<link rel="stylesheet" href="./css/font-awesome.min.4.7.0.css">   
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+	<link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/core.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/components.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
+	<link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
  
 
 	<script src="./script/terceiros/jquery.min.3.4.1.js"></script>
@@ -113,7 +123,7 @@ include 'config.php';
 				</div>
 
 				<button type="submit" class="btn btn-basic" id="consultar" width="20" height="20" >    
-					<img  src="img/lupa.png" alt=""width="20" height="20"  >
+					<i class="glyphicon  glyphicon-search"></i>
 				</button>
 <!--
 				<input type="text" name="pesq" id="pesq" placeholder="search">
