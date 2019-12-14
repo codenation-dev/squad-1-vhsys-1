@@ -1,7 +1,5 @@
 var parametrosGet = {
-    email: "",
-    senha: "",
-    token: ""
+    email: ""
 }
 
 window.onload = function() {

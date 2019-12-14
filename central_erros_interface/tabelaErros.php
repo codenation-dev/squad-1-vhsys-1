@@ -16,6 +16,9 @@ include 'config.php';
 	<link rel="stylesheet" href="./css/bootstrap-table.min.1.15.5.css">   
 	<link rel="stylesheet" href="./css/font-awesome.min.4.7.0.css">   
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ 
+
 	<script src="./script/terceiros/jquery.min.3.4.1.js"></script>
 	<script src="./script/terceiros/bootstrap-table.min.1.15.5.js"></script>    
 	<script src="./script/terceiros/bootstrap.min.3.4.0.js"></script>
@@ -112,6 +115,13 @@ include 'config.php';
 				<button type="submit" class="btn btn-basic" id="consultar" width="20" height="20" >    
 					<img  src="img/lupa.png" alt=""width="20" height="20"  >
 				</button>
+<!--
+				<input type="text" name="pesq" id="pesq" placeholder="search">
+				<button type="button" class="btn btn-default">    
+					<span class="glyphicon glyphicon-search"></span> 
+				</button>
+
+-->
 				<button id="limparPesquisa" class="btn btn-basic" type="reset">Limpar Pesquisa</button>
 			</form>
 		</div>

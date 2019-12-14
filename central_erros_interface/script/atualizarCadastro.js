@@ -62,7 +62,7 @@ function AtualizaCadastro(){
                         ExibirMensagemFalha(statusText);
                     },
                     true,
-                    parametrosGet.token
+                    parametrosGet.token_recuperacao_senha
                 );
             },
             function(status, statusText) {                

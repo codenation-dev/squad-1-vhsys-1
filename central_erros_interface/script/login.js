@@ -114,7 +114,9 @@ function Login(){
 function EsqueceuSenha(){
     LimparMensagens();
     
-    window.location.href = "./recovery.php";
+    var dados = '?{"email":"'+$('#email').val()+'"}';
+
+    window.location.href = "./recovery.php"+dados;
 
     /*
     var email_usuario = $('#email').val();

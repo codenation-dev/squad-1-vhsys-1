@@ -67,14 +67,6 @@
 
 				</form>
 			</div>
-
-			<div class="form-group text-center m-t-10 m-b-0">
-				<div class="col-sm-12">
-					<p><i class="fa fa-user m-r-5">
-					</i>Já possui Cadastro?<a href="login.php" class="text-primary m-l-5"><b>Entrar</b></a>
-					</p>
-				</div>
-			</div>
 			
 			<div class="text-center m-t-10 m-b-0">
 				<span class='text-danger msg-erro msg-falha'></span>
