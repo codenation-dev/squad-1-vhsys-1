@@ -270,11 +270,9 @@ window.onload = function() {
             $(window).resize(function () {
                 
                 var Atual = $(window).height();
-                if (Anterior === 0) {
+                if ((Atual > Anterior) ||
+                    (Anterior === 0)) {
                     Anterior = Atual;
-                }
-                
-                if (Atual > Anterior) {
                     $('#tabelaResultado').bootstrapTable('resetView', {			
                         height: $(window).height() - ($('#h').outerHeight(true))- $('#cabecalho').outerHeight(true)- $('#toolbar').outerHeight(true) - 5,
                     });
