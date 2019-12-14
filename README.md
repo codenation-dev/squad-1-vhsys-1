@@ -31,7 +31,7 @@ Siga os passos abaixo:
  
  ### Rotas da API
  
- #### Usuários
+ #### Usuários:
  - `central/criar_usuario` método: `POST` | Cria um novo usuário (apenas um usuário autenticado pode criar um novo usuário, exite um login master para este procedimento por questões de segurança).
  - `central/usuario/id` método: `PUT` | Cria um novo usuário ou atualiza um usuário já existente.
  - `central/usuario/id` método: `PATCH` | Atualiza um usuário já existente.
@@ -42,7 +42,9 @@ Siga os passos abaixo:
  - `central/usuario` método: `GET` | Recupera informações de todos os usuários.
  - `central/usuario/atualizar_token_usuario` método: `POST` | Atualiza token do usuário, caso esteja expirado.
  
- #### Erros
+ ---------------------------------------------------------------------------------------------------------------------------------------
+ 
+ #### Erros:
  - `central/erro` método `POST` | Cria erro gerado na aplicação.
  - `central/erro/id` método `PUT` | Cira ou atualiza erro.
  - `central/erro/id` método `PATCH` | Atualiza erro existente.
@@ -71,7 +73,5 @@ Siga os passos abaixo:
  }
  ```
  ###### E-mail e senha a serem cadastrados do novo usuário.
- 
- ---------------------------------------------------------------------------------------------------------------------------------------
  
 Todas as requisições devem conter o `HEADER` com as informações acima e o `BODY` com um `JSON` com os atributos necessários para cada tipo de requisição.
