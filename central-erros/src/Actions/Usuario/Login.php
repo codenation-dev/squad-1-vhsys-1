@@ -18,10 +18,12 @@ class Login extends ActionBase
             $params = json_decode($request->getBody()->getContents());
 
             if ($params->email == "") {
-                return $response->withStatus(500, "email em branco" + $params->email);
+                $response->getBody()->write("email em branco");
+                return $response->withStatus(500);
             }
             if ($params->senha == "") {
-                return $response->withStatus(500, "senha em branco" + $params->senha);
+                $response->getBody()->write("senha em branco");
+                return $response->withStatus(500);
             }
 
             $Usuario = $this->entityManager->getRepository(Usuario::class)->findOneBy(
@@ -31,7 +33,8 @@ class Login extends ActionBase
             );
 
             if ($Usuario === null) {
-                return $response->withStatus(500, "usuario nao existe, verifique email e/ou senha");
+                $response->getBody()->write("usuario nao existe, verifique email e/ou senha");
+                return $response->withStatus(500);
             }
 
             $response->getBody()->write(json_encode($Usuario));

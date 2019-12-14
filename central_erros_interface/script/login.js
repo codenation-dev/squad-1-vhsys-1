@@ -43,9 +43,10 @@ function Login(){
 
     var email_usuario = $('#email').val();
     var senha_usuario = $('#senha').val();
-    var dados = '{"email":"'+email_usuario+'", "senha":"'+senha_usuario+'"}';
+    var dados = '{"email":"'+email_usuario+'","senha":"'+senha_usuario+'"}';
     var url = "usuario/login";
 
+    //console.log(dados);
     execAjax(
         url,
         dados, 
@@ -54,7 +55,7 @@ function Login(){
         function (statusText, data) {
         
         
-            console.dir(data);
+            //console.dir(data);
             var user = JSON.parse(data);
             
             var paramSessao = '?email='+user.email+'&token='+user.token+'&lembrarDeMim='+$('#lembrarDeMim').prop('checked');
